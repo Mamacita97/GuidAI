@@ -1,0 +1,122 @@
+<!-- 个人中心 · 换绑手机/邮箱（分步验证） -->
+<div id="profile-bind-drawer" class="profile-bind-drawer" aria-hidden="true">
+  <div class="profile-bind-drawer-backdrop" onclick="closeProfileBindDrawer()"></div>
+  <div class="profile-bind-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="profile-bind-drawer-title">
+    <header class="profile-bind-drawer-head">
+      <button type="button" class="profile-bind-drawer-back" id="profile-bind-drawer-back" onclick="profileBindDrawerBack()" aria-label="返回" style="display:none">←</button>
+      <h2 id="profile-bind-drawer-title" class="profile-bind-drawer-title">修改手机号</h2>
+      <button type="button" class="profile-bind-drawer-close" onclick="closeProfileBindDrawer()" aria-label="关闭">×</button>
+    </header>
+    <div class="profile-bind-drawer-steps" id="profile-bind-step-dots" aria-hidden="true">
+      <span class="profile-bind-dot is-active" data-step-dot="1"></span>
+      <span class="profile-bind-dot" data-step-dot="2"></span>
+    </div>
+    <div class="profile-bind-drawer-body">
+
+      <!-- 手机 · 第一步：验证原手机号 -->
+      <div class="profile-bind-step" id="phone-bind-step-1" data-bind-flow="phone" data-step="1" hidden>
+        <p class="profile-bind-security-tip">🔒 为了账户安全，换绑前须先验证当前绑定手机，不支持免验证直接修改。</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label">当前手机号</label>
+          <div class="profile-bind-readonly" id="phone-bind-old-display">+86 138****1234</div>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="phone-old-code">短信验证码</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="phone-old-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+            <button type="button" class="profile-bind-code-btn" id="phone-old-code-btn" onclick="profileBindSendCode('phone-old')">获取验证码</button>
+          </div>
+        </div>
+        <div class="profile-bind-foot">
+          <p class="profile-bind-hint" id="phone-step1-hint">为了账户安全，请先验证当前手机</p>
+          <button type="button" class="profile-bind-primary" id="phone-step1-next" disabled onclick="profileBindPhoneStep1Next()">下一步（验证身份）</button>
+        </div>
+      </div>
+
+      <!-- 手机 · 第二步：绑定新手机号 -->
+      <div class="profile-bind-step" id="phone-bind-step-2" data-bind-flow="phone" data-step="2" hidden>
+        <p class="profile-bind-step-desc">身份已验证，请绑定新的手机号。</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="phone-new-number">新手机号</label>
+          <div class="profile-bind-phone-row">
+            <span class="profile-bind-prefix">+86</span>
+            <input type="tel" id="phone-new-number" class="profile-bind-input" placeholder="请输入新手机号" maxlength="11" inputmode="numeric" autocomplete="tel">
+          </div>
+          <p class="profile-bind-error" id="phone-new-same-error" hidden>新手机号不能与当前相同</p>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="phone-new-code">短信验证码</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="phone-new-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric">
+            <button type="button" class="profile-bind-code-btn" id="phone-new-code-btn" onclick="profileBindSendCode('phone-new')" disabled>获取验证码</button>
+          </div>
+        </div>
+        <div class="profile-bind-foot">
+          <button type="button" class="profile-bind-primary" id="phone-step2-submit" disabled onclick="profileBindConfirmPhone()">确认换绑</button>
+        </div>
+      </div>
+
+      <!-- 邮箱 · 第一步：验证原邮箱 -->
+      <div class="profile-bind-step" id="email-bind-step-1" data-bind-flow="email" data-step="1" hidden>
+        <p class="profile-bind-security-tip">🔒 为了账户安全，换绑前须先验证当前绑定邮箱，不支持免验证直接修改。</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label">当前邮箱</label>
+          <div class="profile-bind-readonly" id="email-bind-old-display">u****er@example.com</div>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="email-old-code">邮箱验证码</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="email-old-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+            <button type="button" class="profile-bind-code-btn" id="email-old-code-btn" onclick="profileBindSendCode('email-old')">发送验证码</button>
+          </div>
+          <p class="profile-bind-hint profile-bind-hint-block" id="email-old-sent-hint">验证码将发送至当前邮箱，请注意查收（包括垃圾箱）。</p>
+        </div>
+        <div class="profile-bind-foot">
+          <button type="button" class="profile-bind-primary" id="email-step1-next" disabled onclick="profileBindEmailStep1Next()">下一步（验证身份）</button>
+          <button type="button" class="profile-bind-appeal-link" onclick="openProfileBindAppeal()">无法接收验证码？人工申诉换绑</button>
+        </div>
+      </div>
+
+      <!-- 邮箱 · 第二步：绑定新邮箱 -->
+      <div class="profile-bind-step" id="email-bind-step-2" data-bind-flow="email" data-step="2" hidden>
+        <p class="profile-bind-step-desc">身份已验证，请绑定新的邮箱地址。</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="email-new-address">新邮箱</label>
+          <input type="email" id="email-new-address" class="profile-bind-input profile-bind-input-block" placeholder="请输入新邮箱地址" autocomplete="email">
+          <p class="profile-bind-error" id="email-new-same-error" hidden>新邮箱不能与当前相同</p>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="email-new-code">邮箱验证码</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="email-new-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric">
+            <button type="button" class="profile-bind-code-btn" id="email-new-code-btn" onclick="profileBindSendCode('email-new')" disabled>发送验证码</button>
+          </div>
+        </div>
+        <div class="profile-bind-foot">
+          <button type="button" class="profile-bind-primary" id="email-step2-submit" disabled onclick="profileBindConfirmEmail()">确认换绑</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 人工申诉（邮箱丢失等） -->
+<div class="modal-overlay" id="profile-bind-appeal-modal">
+  <div class="modal-content p-5" style="max-width:440px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📋 人工申诉换绑</span>
+      <button type="button" onclick="closeModal('profile-bind-appeal-modal')" class="text-gray-400 text-xl leading-none">×</button>
+    </div>
+    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">若无法访问原邮箱，请勿尝试免验证换绑。请提交购买记录、身份信息等材料，由客服人工审核后处理。</p>
+    <ul class="text-xs text-gray-600 dark:text-gray-300 space-y-2 mb-4 list-disc pl-4">
+      <li>注册手机号与近期登录记录</li>
+      <li>充值/购买订单截图</li>
+      <li>身份证明（如需）</li>
+    </ul>
+    <div class="flex gap-2 justify-end">
+      <button type="button" onclick="closeModal('profile-bind-appeal-modal')" class="text-xs px-4 py-2 border rounded-lg">取消</button>
+      <button type="button" onclick="closeModal('profile-bind-appeal-modal');openModal('service-modal')" class="text-xs px-4 py-2 bg-blue-500 text-white rounded-lg">联系客服申诉</button>
+    </div>
+  </div>
+</div>

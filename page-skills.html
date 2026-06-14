@@ -1,0 +1,148 @@
+<section id="page-skills" class="page-section skills-page">
+  <div class="skills-inner">
+    <header class="skills-header">
+      <div class="skills-header-main">
+        <h2 class="skills-title">🔌 Skills</h2>
+        <p class="skills-desc">将 GUID.AI 连接到 AI Agent，在对话中直接生成图片、视频与音频</p>
+      </div>
+      <div class="skills-header-actions">
+        <button type="button" class="connect-btn skills-btn skills-btn--primary">开始连接</button>
+        <button type="button" class="docs-btn skills-btn skills-btn--outline">查看文档</button>
+      </div>
+    </header>
+
+    <div class="skills-steps skills-card">
+      <div class="skills-step">
+        <span class="skills-step-badge">1</span>
+        <div class="skills-step-body">
+          <div class="skills-step-title">📥 添加 Skills</div>
+          <div class="skills-step-desc">一条命令拉取技能到 Agent</div>
+        </div>
+      </div>
+      <div class="skills-step">
+        <span class="skills-step-badge">2</span>
+        <div class="skills-step-body">
+          <div class="skills-step-title">🔑 创建 API Key</div>
+          <div class="skills-step-desc">在「我的」→ 密钥管理中创建密钥，写入 MCP 配置的 Authorization 头</div>
+          <button type="button" class="skills-step-key-btn skills-btn skills-btn--outline skills-btn--sm" style="margin-top:8px">前往密钥管理</button>
+        </div>
+      </div>
+      <div class="skills-step">
+        <span class="skills-step-badge">3</span>
+        <div class="skills-step-body">
+          <div class="skills-step-title">💬 对话中调用</div>
+          <div class="skills-step-desc">说「用 GUID 生成一张图片」即可</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skills-card skills-agents">
+        <div class="skills-card-title">🤖 支持的 Agent</div>
+        <div class="skills-agent-grid">
+          <div class="skills-agent-chip"><span>🤖</span>Claude</div>
+          <div class="skills-agent-chip"><span>🖥️</span>Cursor</div>
+          <div class="skills-agent-chip"><span>💻</span>Codex</div>
+          <div class="skills-agent-chip"><span>🐾</span>OpenClaw</div>
+          <div class="skills-agent-chip"><span>🧙</span>Hermes</div>
+          <div class="skills-agent-chip"><span>🦥</span>NemoClaw</div>
+        </div>
+        <p class="skills-tip skills-tip--ok">✅ 任何支持 MCP 协议的客户端均可连接</p>
+      </div>
+
+      <div class="skills-card skills-mcp" id="skills-mcp-section">
+        <div class="skills-mcp-head">
+          <span class="skills-card-title">🔧 MCP 服务器配置</span>
+          <button type="button" class="copy-config skills-btn skills-btn--primary skills-btn--sm">📋 复制配置</button>
+        </div>
+        <div class="skills-code bg-gray-900 dark:bg-gray-950">
+          <pre class="skills-code-pre">{
+  "mcpServers": {
+    "guid": {
+      "url": "https://api.guid.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}</pre>
+        </div>
+        <p class="skills-tip skills-tip--info">💡 将以上配置添加到 MCP 客户端配置文件中</p>
+      </div>
+    </div>
+
+    <div class="skills-grid skills-grid--2">
+      <div class="skills-card skills-models">
+        <div class="skills-card-title">🎨 支持的模型</div>
+        <ul class="skills-model-list">
+          <li><strong>图片</strong>Nano Banana Pro、Midjourney、GPT Image 2、Seedream</li>
+          <li><strong>视频</strong>VIDU、Sora-2、grok-video-3、即梦 3.5 Pro、Veo</li>
+          <li><strong>音频</strong>海螺语音克隆、海螺音乐生成</li>
+          <li><strong>对话</strong>GPT-5.4、Gemini 3.1 Pro、grok-4.3、Claude、DeepSeek</li>
+        </ul>
+      </div>
+
+      <div class="skills-card skills-demo">
+        <div class="skills-card-title">💬 使用示例</div>
+        <div class="skills-chat">
+          <div class="skills-chat-line"><span class="skills-chat-role skills-chat-role--user">用户</span>用 GUID 生成赛博朋克城市夜景</div>
+          <div class="skills-chat-line"><span class="skills-chat-role skills-chat-role--agent">Agent</span>正在调用 GUID.AI 生成图片…</div>
+          <div class="skills-chat-preview">[ 生成的图片 ]</div>
+          <div class="skills-chat-line"><span class="skills-chat-role skills-chat-role--agent">Agent</span>已生成，使用 Nano Banana Pro。需要调整风格吗？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-card skills-faq">
+      <div class="skills-card-title">❓ 常见问题</div>
+      <div class="skills-faq-list">
+        <div class="faq-item skills-faq-item">
+          <div class="faq-header skills-faq-header" onclick="toggleFaq(this)">
+            <span>如何连接到 GUID.AI？</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-body hidden skills-faq-body">
+            GUID.AI 使用 MCP 开放标准。在「我的」→ 密钥管理中创建 API Key → 写入 MCP 配置 → 在对话中调用即可。
+            <a href="#" onclick="showPage('api');showToast('🔑 跳转密钥管理');return false" class="text-blue-500 hover:underline">前往密钥管理</a>
+          </div>
+        </div>
+        <div class="faq-item skills-faq-item">
+          <div class="faq-header skills-faq-header" onclick="toggleFaq(this)">
+            <span>哪些 Agent 支持？</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-body hidden skills-faq-body">
+            Claude Web / Code、Cursor、Codex、OpenClaw、Hermes、NemoClaw，及所有支持 MCP 的客户端。
+          </div>
+        </div>
+        <div class="faq-item skills-faq-item">
+          <div class="faq-header skills-faq-header" onclick="toggleFaq(this)">
+            <span>费用如何计算？</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-body hidden skills-faq-body">
+            与平台共用 ⚡ 算力：图片 ⚡0.06–0.24/次，视频 ⚡0.35–2.80/次，对话按 token 计费。
+          </div>
+        </div>
+        <div class="faq-item skills-faq-item">
+          <div class="faq-header skills-faq-header" onclick="toggleFaq(this)">
+            <span>生成需要多长时间？</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-body hidden skills-faq-body">
+            图片约 5–30 秒，视频约 1–5 分钟，音频约 10–60 秒，视负载而定。
+          </div>
+        </div>
+        <div class="faq-item skills-faq-item">
+          <div class="faq-header skills-faq-header" onclick="toggleFaq(this)">
+            <span>需要 API 密钥吗？</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-body hidden skills-faq-body">
+            需要。在<a href="#" onclick="showPage('api');showToast('📄 跳转API令牌页面')" class="text-blue-500 hover:underline">API 令牌页面</a>创建后填入 MCP 配置。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

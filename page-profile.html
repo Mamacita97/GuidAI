@@ -1,0 +1,266 @@
+<section id="page-profile" class="page-section profile-page">
+
+  <div class="profile-page-inner">
+
+    <header class="profile-hero">
+
+      <div class="profile-hero-main">
+
+        <div class="profile-avatar-wrap">
+
+          <div class="profile-avatar">B</div>
+
+          <button type="button" class="profile-avatar-edit" onclick="showToast('✏️ 更换头像')" aria-label="编辑头像">✎</button>
+
+        </div>
+
+        <div class="profile-hero-info">
+
+          <div class="profile-name-row">
+
+            <h1 class="profile-name">青铜娃娃</h1>
+
+            <span class="profile-badge">普通用户</span>
+
+          </div>
+
+          <div class="profile-meta-line">
+
+            <span>ID 9477238</span>
+
+            <button type="button" class="profile-link-btn copy-id">复制</button>
+
+            <span class="profile-meta-dot">·</span>
+
+            <span>注册 2026-05-18</span>
+
+          </div>
+
+          <div class="profile-meta-line">
+
+            <span id="profile-display-phone">138****1234</span>
+
+            <button type="button" class="profile-link-btn" onclick="openProfileChangePhone()">更换</button>
+
+            <span class="profile-meta-dot">·</span>
+
+            <span id="profile-display-email">user@example.com</span>
+
+            <button type="button" class="profile-link-btn" onclick="openProfileChangeEmail()">更换</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="profile-stat-strip">
+
+        <button type="button" class="profile-stat-item" onclick="showPage('wallet')">
+
+          <span class="profile-stat-label">算力余额</span>
+
+          <span class="profile-stat-value profile-stat-balance">⚡ 12.50</span>
+
+        </button>
+
+        <button type="button" class="profile-stat-item" onclick="showToast('💰 查看收益明细')">
+
+          <span class="profile-stat-label">累计收益</span>
+
+          <span class="profile-stat-value">1,456</span>
+
+        </button>
+
+        <button type="button" class="profile-stat-item" onclick="showPage('myassets')">
+
+          <span class="profile-stat-label">作品</span>
+
+          <span class="profile-stat-value">23</span>
+
+        </button>
+
+      </div>
+
+    </header>
+
+
+
+    <section class="profile-panel">
+
+      <h2 class="profile-panel-title">账户设置</h2>
+
+      <div class="profile-list">
+
+        <button type="button" class="profile-list-row profile-list-row-link" onclick="showPage('api')">
+
+          <span class="profile-list-label">🔑 API 密钥管理</span>
+
+          <span class="profile-list-chevron" aria-hidden="true">›</span>
+
+        </button>
+
+        <button type="button" class="profile-list-row profile-list-row-link" onclick="openProfilePasswordDrawer()">
+
+          <span class="profile-list-label">🔒 密码管理</span>
+
+          <span class="profile-list-end profile-password-list-end">
+
+            <span class="profile-password-initial-hint" id="profile-password-initial-hint">你的初始密码是 <strong id="profile-password-initial-value">K9m3x7P2</strong></span>
+
+            <span class="profile-list-muted" id="profile-password-status">已设置</span>
+
+            <span class="profile-list-chevron" aria-hidden="true">›</span>
+
+          </span>
+
+        </button>
+
+        <div class="profile-list-row profile-list-row-stack">
+
+          <span class="profile-list-label">界面语言</span>
+
+          <div class="profile-segmented profile-segmented-wrap">
+
+            <label class="profile-segment"><input type="radio" name="lang" checked> 中文</label>
+
+            <label class="profile-segment"><input type="radio" name="lang"> EN</label>
+
+            <label class="profile-segment"><input type="radio" name="lang"> 日本語</label>
+
+          </div>
+
+        </div>
+
+        <div class="profile-list-row profile-list-row-stack">
+
+          <span class="profile-list-label">主题模式</span>
+
+          <div class="profile-segmented">
+
+            <label class="profile-segment"><input type="radio" name="theme"> 浅色</label>
+
+            <label class="profile-segment"><input type="radio" name="theme"> 深色</label>
+
+            <label class="profile-segment"><input type="radio" name="theme" checked> 跟随系统</label>
+
+          </div>
+
+        </div>
+
+        <div class="profile-list-row profile-list-row-stack profile-notif-block" id="profile-notif-prefs">
+          <div class="notif-prefs-form">
+            <div class="notif-prefs-field">
+              <div class="notif-prefs-label">通知方式 <span class="notif-prefs-required" aria-hidden="true">*</span></div>
+              <div class="notif-prefs-radio-group" role="radiogroup" aria-label="通知方式">
+                <label class="notif-prefs-radio"><input type="radio" name="notif-method" value="email" checked> 邮件通知</label>
+                <label class="notif-prefs-radio"><input type="radio" name="notif-method" value="webhook"> Webhook通知</label>
+                <label class="notif-prefs-radio"><input type="radio" name="notif-method" value="bark"> Bark通知</label>
+                <label class="notif-prefs-radio"><input type="radio" name="notif-method" value="gotify"> Gotify通知</label>
+              </div>
+            </div>
+            <div class="notif-prefs-field">
+              <div class="notif-prefs-label">
+                额度预警阈值
+                <span class="notif-prefs-equiv">等价金额: <span class="notif-quota-usd">$1.00</span></span>
+                <span class="notif-prefs-required" aria-hidden="true">*</span>
+              </div>
+              <div class="notif-prefs-input-wrap">
+                <svg class="notif-prefs-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                <input type="number" class="notif-prefs-input notif-quota-threshold" value="500000" min="0" step="1" inputmode="numeric" aria-label="额度预警阈值">
+              </div>
+              <p class="notif-prefs-hint">当钱包或订阅剩余额度低于此数值时，系统将通过选择的方式发送通知</p>
+            </div>
+            <div class="notif-prefs-field">
+              <div class="notif-prefs-check-list">
+                <label class="notif-prefs-check-row">
+                  <span>创意被引用</span>
+                  <input type="checkbox" class="notif-prefs-toggle" data-notif-key="citeCreative" checked>
+                </label>
+                <label class="notif-prefs-check-row">
+                  <span>邀请朋友成功</span>
+                  <input type="checkbox" class="notif-prefs-toggle" data-notif-key="inviteSuccess" checked>
+                </label>
+              </div>
+              <p class="notif-prefs-hint">满足条件时，将通过已选通知方式提醒你</p>
+            </div>
+            <div class="notif-prefs-field notif-prefs-email-field">
+              <div class="notif-prefs-label">通知邮箱</div>
+              <div class="notif-prefs-input-wrap">
+                <svg class="notif-prefs-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" class="notif-prefs-input notif-notify-email" placeholder="留空则使用账号绑定的邮箱" autocomplete="email" aria-label="通知邮箱">
+              </div>
+              <p class="notif-prefs-hint">设置用于接收额度预警的邮箱地址，不填则使用账号绑定的邮箱</p>
+            </div>
+            <div class="notif-prefs-actions">
+              <button type="button" class="notif-prefs-save-btn" onclick="saveProfileNotifSettings()">保存设置</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="profile-panel profile-invite-panel">
+
+      <div class="profile-invite-head">
+
+        <h2 class="profile-panel-title">邀请好友</h2>
+
+        <button type="button" class="profile-invite-btn" onclick="openModal('invite-modal')">立即邀请</button>
+
+      </div>
+
+      <p class="profile-invite-desc">邀请注册得 ⚡ 奖励，好友充值双方同享</p>
+
+      <div class="profile-invite-stats">
+
+        <div><b>23</b><span>已邀请</span></div>
+
+        <div><b>18</b><span>已注册</span></div>
+
+        <div><b>8</b><span>已充值</span></div>
+
+        <div><b>⚡45.6</b><span>累计奖励</span></div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="profile-panel">
+
+      <h2 class="profile-panel-title">帮助与支持</h2>
+
+      <div class="profile-support-row">
+
+        <button type="button" onclick="showPage('help')">帮助中心</button>
+
+        <button type="button" onclick="openModal('service-modal')">联系客服</button>
+
+        <button type="button" onclick="openModal('feedback-modal')">意见反馈</button>
+
+        <button type="button" onclick="showPage('about')">关于我们</button>
+
+      </div>
+
+    </section>
+
+
+
+    <footer class="profile-footer">
+
+      <button type="button" class="profile-footer-btn logout-btn" onclick="handleLogoutClick(this)">退出登录</button>
+
+      <button type="button" class="profile-footer-btn profile-footer-danger" onclick="showToast('⚠️ 确认注销账户？')">注销账户</button>
+
+    </footer>
+
+  </div>
+
+</section>
+

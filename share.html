@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>分享 · GUID.AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="share.css">
+</head>
+<body>
+  <div class="share-page">
+    <header class="share-header">
+      <a href="index.html" class="share-brand" target="_top">GUID<span>.AI</span></a>
+      <p class="share-header-sub">分享 AI 应用</p>
+    </header>
+
+    <article class="share-card" id="share-card">
+      <div class="share-card-cover" id="share-cover">
+        <span class="share-card-emoji" id="share-icon" aria-hidden="true">🖼️</span>
+      </div>
+      <div class="share-card-body">
+        <span class="share-card-cat" id="share-cat">图像</span>
+        <h1 class="share-card-title" id="share-title">应用名称</h1>
+        <p class="share-card-desc" id="share-desc">应用描述</p>
+      </div>
+    </article>
+
+    <section class="share-link-block">
+      <label class="share-label" for="share-url-input">分享链接</label>
+      <div class="share-link-row">
+        <input id="share-url-input" type="text" readonly>
+        <button type="button" class="share-btn-primary" id="share-copy-btn">复制</button>
+      </div>
+    </section>
+
+    <section class="share-qr-block">
+      <div class="share-qr-box" id="share-qr" aria-hidden="true">
+        <div class="share-qr-pattern"></div>
+        <span class="share-qr-logo">G</span>
+      </div>
+      <p class="share-qr-hint">扫码或复制链接分享给好友</p>
+    </section>
+
+    <section class="share-channels">
+      <h2 class="share-section-title">分享到</h2>
+      <div class="share-channel-grid">
+        <button type="button" class="share-channel" data-channel="wechat">
+          <span class="share-channel-icon wechat">💬</span>
+          <span>微信</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="moments">
+          <span class="share-channel-icon wechat">🟢</span>
+          <span>朋友圈</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="x">
+          <span class="share-channel-icon x">𝕏</span>
+          <span>X</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="weibo">
+          <span class="share-channel-icon weibo">微</span>
+          <span>微博</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="qq">
+          <span class="share-channel-icon qq">Q</span>
+          <span>QQ</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="link">
+          <span class="share-channel-icon link">🔗</span>
+          <span>复制链接</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="embed">
+          <span class="share-channel-icon embed">💻</span>
+          <span>嵌入</span>
+        </button>
+        <button type="button" class="share-channel" data-channel="poster">
+          <span class="share-channel-icon poster">🖼️</span>
+          <span>生成海报</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="share-actions">
+      <a class="share-open-app" id="share-open-app" href="index.html#page-apps" target="_top">打开应用</a>
+      <button type="button" class="share-btn-ghost" id="share-close-btn">关闭</button>
+    </div>
+  </div>
+
+  <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
+  <script src="share.js"></script>
+</body>
+</html>

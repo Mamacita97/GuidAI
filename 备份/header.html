@@ -1,0 +1,97 @@
+<header class="glass border-b border-gray-100 dark:border-gray-800">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Homepage nav (未登录态) -->
+    <div id="nav-home" class="flex items-center justify-between h-14 gap-2 min-w-0">
+      <div class="flex items-center gap-2.5 cursor-pointer shrink-0 min-w-0" onclick="showPage('homepage')">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-md shrink-0">G</div>
+        <span class="font-bold tracking-tight text-sm truncate">GUID.AI</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-0.5 flex-1 min-w-0 ml-6">
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('inspiration')">✨灵感</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('model-hub')">🤖模型</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('chat')">💬文字</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('image')">🖼️图片</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('video')">🎬视频</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('audio')">🎵音频</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('3dgs')">3DGS</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('apps')">🎮Apps</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('myassets')">💎我的产品</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap hover:text-blue-500 cursor-pointer" onclick="showPage('skills')">🔌Skills</span>
+      </nav>
+      <div class="header-nav-actions flex items-center gap-1 sm:gap-2 shrink-0">
+        <button type="button" id="header-menu-btn" class="header-menu-toggle md:hidden" onclick="toggleHeaderMobileMenu()" aria-label="打开菜单" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path class="hm-line hm-line-top" d="M4 6h16"/><path class="hm-line hm-line-mid" d="M4 12h16"/><path class="hm-line hm-line-bot" d="M4 18h16"/></svg>
+        </button>
+        <div class="relative lang-wrap">
+          <button id="lang-btn" class="lang-btn flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">🌐 <span id="current-lang">中文</span> ▼</button>
+          <div id="lang-dropdown" class="lang-dropdown hidden absolute right-0 top-full mt-1 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-50 overflow-hidden">
+            <div class="p-1">
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇨🇳 简体中文">🇨🇳 简体中文</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇭🇰 繁體中文">🇭🇰 繁體中文</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇺🇸 English">🇺🇸 English</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇯🇵 日本語">🇯🇵 日本語</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇰🇷 한국어">🇰🇷 한국어</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇫🇷 Français">🇫🇷 Français</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇩🇪 Deutsch">🇩🇪 Deutsch</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇪🇸 Español">🇪🇸 Español</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇵🇹 Português">🇵🇹 Português</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇮🇹 Italiano">🇮🇹 Italiano</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇷🇺 Русский">🇷🇺 Русский</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇸🇦 العربية">🇸🇦 العربية</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇮🇳 हिन्दी">🇮🇳 हिन्दी</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇹🇭 ไทย">🇹🇭 ไทย</div>
+              <div class="lang-option flex items-center gap-2 px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-lang="🇻🇳 Tiếng Việt">🇻🇳 Tiếng Việt</div>
+            </div>
+          </div>
+        </div>
+        <button class="login-btn px-4 py-1.5 bg-blue-500 text-white text-xs font-semibold rounded-lg hover:bg-blue-600 transition" onclick="openModal('login-modal')">登录</button>
+      </div>
+    </div>
+    <!-- App nav (登录态) -->
+    <div id="nav-app" class="flex items-center justify-between h-14 gap-2 min-w-0" style="display:none">
+      <div class="flex items-center gap-2.5 shrink-0 min-w-0 cursor-pointer" onclick="showPage('homepage')">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-md shrink-0">G</div>
+        <span class="font-bold tracking-tight text-sm truncate">GUID.AI</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-0.5 flex-1 min-w-0 ml-4">
+        <span class="nav-item active px-2.5 py-2 text-xs font-medium whitespace-nowrap cursor-pointer" data-page="inspiration" onclick="showPage(this.dataset.page)">✨灵感</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="model-hub" onclick="showPage(this.dataset.page)">🤖模型</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="chat" onclick="showPage(this.dataset.page)">💬文字</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="image" onclick="showPage(this.dataset.page)">🖼️图片</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="video" onclick="showPage(this.dataset.page)">🎬视频</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="audio" onclick="showPage(this.dataset.page)">🎵音频</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="3dgs" onclick="showPage(this.dataset.page)">3DGS</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="apps" onclick="showPage(this.dataset.page)">🎮Apps</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="myassets" onclick="showPage(this.dataset.page)">💎我的产品</span>
+        <span class="nav-item px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="skills" onclick="showPage(this.dataset.page)">🔌Skills</span>
+      </nav>
+      <div class="header-nav-actions flex items-center gap-1 sm:gap-2 shrink-0">
+        <button type="button" id="header-menu-btn-app" class="header-menu-toggle md:hidden" onclick="toggleHeaderMobileMenu()" aria-label="打开菜单" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path class="hm-line hm-line-top" d="M4 6h16"/><path class="hm-line hm-line-mid" d="M4 12h16"/><path class="hm-line hm-line-bot" d="M4 18h16"/></svg>
+        </button>
+        <div class="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-full px-2.5 py-1.5 cursor-pointer shrink-0" onclick="pressAnim(this);showPage('wallet');showToast('💰 跳转钱包管理')"><span class="text-yellow-500 text-xs">⚡</span><span class="text-xs font-semibold">12.50</span></div>
+        <span class="nav-item hidden sm:inline-flex px-2.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap cursor-pointer" data-page="profile" onclick="showPage(this.dataset.page)">👤</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 顶栏手机端侧滑菜单（未登录 / 已登录共用） -->
+<div id="header-mobile-menu" class="header-mobile-menu hidden" aria-hidden="true">
+  <div class="header-mobile-menu-backdrop" onclick="closeHeaderMobileMenu()"></div>
+  <aside class="header-mobile-menu-panel" role="dialog" aria-modal="true" aria-labelledby="header-mobile-menu-title">
+    <div class="header-mobile-menu-head">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-md shrink-0">G</div>
+        <span id="header-mobile-menu-title" class="font-bold text-sm truncate">GUID.AI</span>
+      </div>
+      <button type="button" class="header-mobile-menu-close" onclick="closeHeaderMobileMenu()" aria-label="关闭">&times;</button>
+    </div>
+    <nav class="header-mobile-menu-body" id="header-mobile-menu-nav" aria-label="主导航"></nav>
+    <div class="header-mobile-menu-foot" id="header-mobile-menu-foot"></div>
+  </aside>
+</div>
+
+<main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
+
+<!-- ============ PAGE: 官网首页(未登录) - V19.0 Landing Page ============ -->

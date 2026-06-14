@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Apps · GUID.AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="apps.css">
+</head>
+<body>
+  <div class="apps-root">
+    <div class="container-mag">
+      <header class="apps-hero">
+        <h1>Apps</h1>
+        <p>精选文档、图像、视频与音频工具，一键开启创作。</p>
+        <div class="apps-search-row">
+          <label class="apps-search" for="apps-search-input">
+            <svg width="16" height="16" viewBox="0 0 17 17" fill="none" aria-hidden="true"><path d="M16.5 16.5L12.68 12.68M14.72 7.61C14.72 11.54 11.54 14.72 7.61 14.72C3.68 14.72 0.5 11.54 0.5 7.61C0.5 3.68 3.68 0.5 7.61 0.5C11.54 0.5 14.72 3.68 14.72 7.61Z" stroke="currentColor" stroke-linecap="round"/></svg>
+            <input id="apps-search-input" type="search" placeholder="搜索应用（换脸 / 换装 / 超分…）" autocomplete="off">
+          </label>
+        </div>
+      </header>
+
+      <nav class="apps-tabs" aria-label="应用分类">
+        <button type="button" class="tab-chip active" data-tab="all">全部</button>
+        <button type="button" class="tab-chip" data-tab="image">图像</button>
+        <button type="button" class="tab-chip" data-tab="video">视频</button>
+        <button type="button" class="tab-chip" data-tab="doc">文档</button>
+        <button type="button" class="tab-chip" data-tab="audio">音频</button>
+      </nav>
+
+      <section aria-labelledby="featured-title">
+        <div class="section-head">
+          <h2 id="featured-title" class="section-title">精选应用</h2>
+          <button type="button" class="section-more" id="section-more-featured">查看全部 →</button>
+        </div>
+        <div id="featured-grid" class="featured-grid"></div>
+      </section>
+
+      <div class="curated-zones">
+        <section class="curated-zone" aria-labelledby="zone-media-title">
+          <div class="section-head">
+            <h2 id="zone-media-title" class="section-title">精选影音</h2>
+            <button type="button" class="section-more" data-zone-tab="video">查看更多 →</button>
+          </div>
+          <div id="zone-media-grid" class="curated-grid"></div>
+        </section>
+
+        <section class="curated-zone" aria-labelledby="zone-image-title">
+          <div class="section-head">
+            <h2 id="zone-image-title" class="section-title">精选图片</h2>
+            <button type="button" class="section-more" data-zone-tab="image">查看更多 →</button>
+          </div>
+          <div id="zone-image-grid" class="curated-grid"></div>
+        </section>
+
+        <section class="curated-zone" aria-labelledby="zone-copy-title">
+          <div class="section-head">
+            <h2 id="zone-copy-title" class="section-title">精选文案</h2>
+            <button type="button" class="section-more" data-zone-tab="doc">查看更多 →</button>
+          </div>
+          <div id="zone-copy-grid" class="curated-grid"></div>
+        </section>
+      </div>
+
+      <section class="bento-section" aria-labelledby="bento-title">
+        <div class="section-head">
+          <h2 id="bento-title" class="section-title">精选工具</h2>
+        </div>
+        <div id="bento-grid" class="bento-grid"></div>
+      </section>
+
+      <section class="explore-section" id="apps-explore" aria-labelledby="explore-title">
+        <div class="works-square-header">
+          <h2 id="explore-title" class="works-square-title">探索</h2>
+          <div id="explore-filters" class="explore-filters" role="tablist" aria-label="探索筛选"></div>
+        </div>
+        <div id="explore-masonry" class="explore-masonry"></div>
+      </section>
+    </div>
+  </div>
+
+  <div id="apps-toast" class="apps-toast" role="status" aria-live="polite"></div>
+  <script src="apps.js"></script>
+</body>
+</html>

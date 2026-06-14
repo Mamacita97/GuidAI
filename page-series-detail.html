@@ -1,0 +1,39 @@
+<section id="page-series-detail" class="page-section">
+  <!-- 返回按钮 -->
+  <button onclick="showPage('inspiration')" class="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 mb-4 transition">
+    <span>←</span> 返回灵感广场
+  </button>
+
+  <!-- 系列头部 (由 JS 动态渲染) -->
+  <div id="series-header" class="rounded-2xl p-5 mb-5 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700"></div>
+
+  <!-- ═══ 作品筛选Tab ═══ -->
+  <div class="mb-4">
+    <div class="flex items-center gap-2 mb-3"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">作品筛选</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+    <div class="flex items-center gap-2 overflow-x-auto pb-1">
+      <span class="series-tab text-[11px] px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 cursor-pointer">🔥 本周热门</span>
+      <span class="series-tab text-[11px] px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">🆕 最新发布</span>
+      <span class="series-tab text-[11px] px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">🏆 最受欢迎</span>
+      <span class="series-tab text-[11px] px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">📖 编辑推荐</span>
+    </div>
+  </div>
+
+  <!-- ═══ 作品列表（灵感卡片网格） ═══ -->
+  <div class="mb-4">
+    <div class="flex items-center gap-2 mb-3"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">作品列表</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3" id="series-work-grid">
+      <!-- 由 JS 动态渲染 -->
+    </div>
+    <button class="series-load-more w-full py-2 text-xs text-blue-600 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">🔄 加载更多</button>
+  </div>
+
+  <!-- ═══ 系列活动/赛事 ═══ -->
+  <div>
+    <div class="flex items-center gap-2 mb-3"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">系列活动/赛事</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+    <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 border border-amber-200 dark:border-amber-800/30">
+      <div class="text-sm font-bold mb-1">🏆 「GUID.AI漫剧创作大赛」进行中</div>
+      <div class="text-[11px] text-gray-500 mb-2">投稿截止：2026-06-30 ｜ 一等奖：⚡1000 + 官方推荐位</div>
+      <button class="text-[11px] px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition">立即参与 →</button>
+    </div>
+  </div>
+</section>

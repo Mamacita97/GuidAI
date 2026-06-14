@@ -1,0 +1,26 @@
+<section id="page-announcements" class="page-section">
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6"></div>
+  <div class="text-center mb-6">
+    <h2 class="text-lg font-bold">📢 平台公告</h2>
+    <p class="text-xs text-gray-400 mt-1">系统公告、更新通知、活动信息</p>
+  </div>
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-6"></div>
+  <div class="flex items-center gap-2 mb-4">
+    <div class="flex-1 relative">
+      <input class="announce-search w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 pl-8 bg-white dark:bg-gray-800 focus:outline-none focus:border-blue-500" placeholder="🔍 搜索公告...">
+    </div>
+    <button onclick="searchAnnouncements()" class="px-4 py-2 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">搜索</button>
+  </div>
+  <div class="flex gap-1.5 mb-4 flex-wrap">
+    <span class="announce-tab active px-3 py-1.5 bg-blue-500 text-white text-[10px] rounded-lg cursor-pointer transition" data-cat="all">📢 全部</span>
+    <span class="announce-tab px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-cat="更新">🚀 更新</span>
+    <span class="announce-tab px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-cat="活动">🎉 活动</span>
+    <span class="announce-tab px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-cat="新模型">💎 新模型</span>
+    <span class="announce-tab px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-cat="系统">⚙️ 系统</span>
+  </div>
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+  <div class="space-y-3 mb-6" id="announce-list"></div>
+  <div class="text-center mb-6">
+    <button onclick="loadMoreAnnounce()" class="load-more-announce px-6 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">🔄 加载更多</button>
+  </div>
+</section>

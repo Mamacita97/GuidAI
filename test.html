@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Test: GUID.AI Module Loader</title>
+<style>
+body { font-family: monospace; padding: 20px; }
+#log { background: #f5f5f5; padding: 10px; border-radius: 8px; max-height: 400px; overflow: auto; }
+.log-entry { padding: 2px 0; border-bottom: 1px solid #eee; font-size: 12px; }
+.error { color: red; }
+.success { color: green; }
+</style>
+</head>
+<body>
+<h2>GUID.AI 模块加载诊断</h2>
+<div id="log"></div>
+<script>
+(function() {
+  var logEl = document.getElementById('log');
+  function log(msg, type) {
+    var entry = document.createElement('div');
+    entry.className = 'log-entry' + (type ? ' ' + type : '');
+    entry.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+    logEl.appendChild(entry);
+  }
+
+  log('开始诊断...');
+  log('fetch header.html...');
+
+  fetch('header.html')
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      log('header.html loaded: ' + r.headers.get('content-length') + ' bytes', 'success');
+      return r.text();
+    })
+    .then(function(html) {
+      log('header.html content length: ' + html.length);
+      // 检查是否包含关键元素
+      if (html.indexOf('showPage') !== -1) log('header.html contains showPage references', 'success');
+      if (html.indexOf('page-section') !== -1) log('header.html contains page-section refs');
+      
+      log('fetch page-homepage.html...');
+      return fetch('page-homepage.html');
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      log('page-homepage.html loaded: ' + r.headers.get('content-length') + ' bytes', 'success');
+      return r.text();
+    })
+    .then(function(html) {
+      if (html.indexOf('<section id="page-homepage') !== -1) log('page-homepage section found', 'success');
+      
+      log('fetch script.js (this may take a moment)...');
+      return fetch('script.js');
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      log('script.js loaded: ' + r.headers.get('content-length') + ' bytes', 'success');
+      return r.text();
+    })
+    .then(function(js) {
+      log('script.js content length: ' + js.length);
+      if (js.indexOf('window.showPage') !== -1) log('showPage function found in script.js', 'success');
+      else log('ERROR: showPage NOT found in script.js!', 'error');
+      
+      log('');
+      log('=== 所有文件可正常加载 ===', 'success');
+      log('检查 index.html 加载器的 fetch 路径...');
+      
+      // 模拟加载流程
+      return fetch('index.html');
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(html) {
+      // 检查index.html中的script标签
+      if (html.indexOf('script.js') !== -1) log('index.html references script.js', 'success');
+      if (html.indexOf('header.html') !== -1) log('index.html references header.html', 'success');
+      log('全部文件检查通过！', 'success');
+    })
+    .catch(function(err) {
+      log('ERROR: ' + err.message, 'error');
+    });
+})();
+</script>
+</body>
+</html>

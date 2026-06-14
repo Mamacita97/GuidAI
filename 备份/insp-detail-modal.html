@@ -1,0 +1,80 @@
+<!-- 灵感作品详情弹窗（RunningHub 风格） -->
+<div id="insp-detail-modal" class="modal-overlay insp-detail-modal" onclick="if(event.target===this)closeInspirationDetail()">
+  <div class="insp-detail-modal__panel" role="dialog" aria-modal="true" aria-labelledby="idm-title">
+    <button type="button" class="insp-detail-modal__close" onclick="closeInspirationDetail()" aria-label="关闭">×</button>
+    <div class="insp-detail-modal__body">
+      <div class="insp-detail-modal__media">
+        <div id="idm-media" class="insp-detail-modal__media-inner">
+          <span id="idm-media-icon" class="insp-detail-modal__media-icon" aria-hidden="true"></span>
+        </div>
+        <div class="insp-detail-modal__media-bar">
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('▶ 播放预览')">▶ 播放</button>
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('⛶ 全屏预览')">⛶ 全屏</button>
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('⬇ 已开始下载')">⬇ 下载</button>
+        </div>
+      </div>
+      <div class="insp-detail-modal__side">
+        <div class="insp-detail-modal__head">
+          <div class="insp-detail-modal__tags">
+            <span id="idm-type-tag" class="insp-detail-modal__tag">图片</span>
+            <span id="idm-price-tag" class="insp-detail-modal__tag insp-detail-modal__tag--price">免费</span>
+          </div>
+          <h2 id="idm-title" class="insp-detail-modal__title">—</h2>
+          <div class="insp-detail-modal__stats">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="idm-views">0</span></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span id="idm-likes">0</span></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span id="idm-uses">0</span> 次使用</span>
+          </div>
+        </div>
+        <div class="insp-detail-modal__scroll">
+          <div class="insp-detail-modal__kv">
+            <span class="insp-detail-modal__kv-label">使用模型</span>
+            <span id="idm-model" class="insp-detail-modal__kv-value">—</span>
+          </div>
+          <div class="insp-detail-modal__kv">
+            <span class="insp-detail-modal__kv-label">使用价格</span>
+            <span id="idm-price" class="insp-detail-modal__kv-value insp-detail-modal__price">免费</span>
+          </div>
+          <div class="insp-detail-modal__kv insp-detail-modal__kv--source">
+            <span class="insp-detail-modal__kv-label">来源</span>
+            <div class="insp-detail-modal__source-wrap">
+              <span id="idm-source-tag" class="insp-detail-modal__source-tag" data-src="model">大模型</span>
+              <span id="idm-source-name" class="insp-detail-modal__source-name"></span>
+            </div>
+          </div>
+          <div class="insp-detail-modal__author">
+            <div id="idm-avatar" class="insp-detail-modal__avatar">👤</div>
+            <div class="insp-detail-modal__author-meta">
+              <span id="idm-author" class="insp-detail-modal__author-name">创作者</span>
+              <span class="insp-detail-modal__author-sub">创作者主页</span>
+            </div>
+            <button type="button" id="idm-follow-btn" class="insp-detail-modal__follow" onclick="toggleInspirationFollow()">+ 关注</button>
+          </div>
+          <div class="insp-detail-modal__section">
+            <div class="insp-detail-modal__section-title">提示词</div>
+            <div class="insp-detail-modal__prompt-box">
+              <p id="idm-prompt" class="insp-detail-modal__prompt-text">—</p>
+              <div class="insp-detail-modal__prompt-actions">
+                <button type="button" class="insp-detail-modal__ghost-btn" onclick="copyInspirationPrompt()">复制</button>
+                <button type="button" class="insp-detail-modal__ghost-btn" onclick="useInspirationDetail()">填入创作页</button>
+              </div>
+            </div>
+          </div>
+          <div class="insp-detail-modal__section">
+            <div class="insp-detail-modal__section-title">评论 <span id="idm-comment-count">0</span></div>
+            <div id="idm-comment-list" class="insp-detail-modal__comment-list"></div>
+            <div class="insp-detail-modal__comment-input">
+              <input type="text" id="idm-comment-input" class="insp-detail-modal__comment-field" placeholder="说点什么…" maxlength="500">
+              <button type="button" class="insp-detail-modal__ghost-btn" onclick="postInspirationComment()">发布</button>
+            </div>
+          </div>
+        </div>
+        <div class="insp-detail-modal__footer">
+          <button type="button" id="idm-fav-btn" class="insp-detail-modal__icon-btn" onclick="toggleInspirationFav(this)" title="收藏">☆</button>
+          <button type="button" class="insp-detail-modal__icon-btn" onclick="openInspirationShare()" title="分享">↗</button>
+          <button type="button" id="idm-use-btn" class="insp-detail-modal__cta" onclick="useInspirationDetail()">使用这个灵感</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

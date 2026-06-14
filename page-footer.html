@@ -1,0 +1,1717 @@
+
+<!-- ===== MODALS ===== -->
+
+<!-- 灵感详情弹窗 (5.3节) -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal-content p-0" style="max-width:720px">
+    <div class="flex items-center justify-between p-4 pb-0">
+      <button onclick="closeModal('detail-modal')" class="text-xs text-gray-500 hover:text-gray-800 flex items-center gap-1" title="返回"><span>←</span> 返回</button>
+      <div class="flex gap-1"><button class="p-1.5 rounded hover:bg-gray-100 text-gray-400" title="收藏">⭐</button><button class="p-1.5 rounded hover:bg-gray-100 text-gray-400" title="分享">📤</button><button onclick="closeModal('detail-modal')" class="p-1.5 rounded hover:bg-gray-100 text-gray-400" title="关闭">×</button></div>
+    </div>
+    <div class="p-4 pt-3 flex gap-4">
+      <div class="w-1/2"><img id="detail-image" src="" class="w-full aspect-square object-cover rounded-xl bg-gray-100"> <div class="flex gap-2 mt-2"><button class="text-[10px] px-2 py-1 border rounded hover:bg-gray-50">▶ 播放</button><button class="text-[10px] px-2 py-1 border rounded hover:bg-gray-50">⛶ 全屏</button><button class="text-[10px] px-2 py-1 border rounded hover:bg-gray-50">⬇ 下载</button></div></div>
+      <div class="w-1/2"><h2 id="detail-title" class="text-base font-bold mb-2"></h2>
+        <div class="text-xs text-gray-500 space-y-1 mb-3"><div>👤 青铜娃娃 🖼️ Midjourney</div><div>📅 2026-05-19</div><div>⚙️ 参数: 16:9, --s 100</div></div>
+        <div class="flex gap-3 mb-3 text-xs"><span class="flex items-center gap-1 cursor-pointer">❤️ <span class="font-medium">1.2k</span></span><span>👁️ 3.4k</span><span class="cursor-pointer hover:text-purple-600">🔄 456</span></div>
+        <div class="detail-cta mb-3"></div>
+        <!-- Prompt section -->
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 mb-3"><div class="text-[10px] font-semibold text-gray-500 mb-1">📝 提示词</div><p class="text-xs text-gray-700 dark:text-gray-300">A futuristic cyberpunk cityscape at night...</p><div class="flex gap-2 mt-2"><button class="detail-copy text-[10px] px-2 py-1 border rounded hover:bg-gray-100">复制</button><button class="detail-use text-[10px] px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">使用</button></div></div>
+        <!-- Creator -->
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 mb-3 cursor-pointer hover:bg-gray-100"><div class="flex justify-between"><span class="text-[10px] text-gray-500">创作者</span><span class="text-[10px] text-gray-500">本月收益</span></div><div class="flex justify-between"><span class="text-xs font-semibold">青铜娃娃</span><span class="text-xs font-semibold text-purple-600">⚡234</span></div></div>
+        <!-- Comments -->
+        <div class="border-t pt-3"><div class="text-xs font-medium mb-2">💬 评论 128</div><div class="text-[11px] text-gray-600 mb-2">用户1: 太酷了！ <button class="reply-btn text-blue-500 hover:underline ml-2">回复</button></div><div class="flex gap-2"><input placeholder="发表评论..." class="flex-1 text-xs border rounded-lg px-2 py-1.5"><button class="comment-post text-xs px-3 py-1.5 bg-blue-500 text-white rounded-lg">发布</button></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 发布灵感弹窗 (5.4节) -->
+<div class="modal-overlay" id="publish-modal">
+  <div class="modal-content p-5" style="max-width:560px">
+    <div class="flex items-center justify-between mb-4"><span class="text-base font-semibold">发布灵感</span><button onclick="closeModal('publish-modal')" class="text-gray-400 text-xl">×</button></div>
+    <div class="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
+
+      <!-- 作品上传 -->
+      <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-6 text-center cursor-pointer hover:border-blue-400 transition" onclick="showToast('📂 打开文件选择器')">
+        <div class="text-3xl mb-2">🖼️</div>
+        <div class="text-xs font-medium mb-1">点击上传作品</div>
+        <div class="text-[10px] text-gray-400">支持图片或视频，最大100MB<br>建议比例16:9或1:1</div>
+      </div>
+
+      <!-- 作品标题 -->
+      <div>
+        <div class="flex justify-between text-[11px] text-gray-500 mb-1"><span>作品标题 *</span><span class="text-[9px] text-gray-400">0/50</span></div>
+        <input id="pub-title" placeholder="请输入作品标题（最多50字）" maxlength="50" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800">
+      </div>
+
+      <!-- 分类标签 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-1">分类标签</div>
+        <input placeholder="输入标签，按回车添加" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800">
+        <div class="flex gap-1 mt-1.5"><span class="text-[10px] px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 rounded">国风 ✕</span><span class="text-[10px] px-2 py-0.5 bg-purple-50 dark:bg-purple-900/30 text-purple-600 rounded">赛博朋克 ✕</span><span class="text-[10px] px-2 py-0.5 bg-green-50 dark:bg-green-900/30 text-green-600 rounded">城市 ✕</span></div>
+        <div class="text-[9px] text-gray-400 mt-0.5">💡 最多5个标签，按回车添加</div>
+      </div>
+
+      <!-- 提示词 -->
+      <div>
+        <div class="flex justify-between text-[11px] text-gray-500 mb-1"><span>提示词 *</span><span class="text-[9px] text-gray-400">0/5000</span></div>
+        <textarea id="pub-prompt" placeholder="请输入生成此作品的提示词（最多5000字）" rows="3" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg p-2 resize-none focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></textarea>
+        <div class="flex gap-2 mt-1"><button onclick="showToast('📂 打开资产库')" class="text-[10px] px-2 py-1 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-800">从资产库导入</button><button onclick="showToast('💾 已保存')" class="text-[10px] px-2 py-1 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-800">保存为资产</button></div>
+      </div>
+
+      <!-- 作品描述 -->
+      <div>
+        <div class="flex justify-between text-[11px] text-gray-500 mb-1"><span>作品描述（选填）</span><span class="text-[9px] text-gray-400">0/500</span></div>
+        <textarea placeholder="描述你的创作思路、使用的技巧等（最多500字）" rows="2" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg p-2 resize-none focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></textarea>
+      </div>
+
+      <!-- 生成信息 -->
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+        <div class="text-[10px] font-semibold text-gray-400 mb-1">⚙️ 生成信息（自动获取）</div>
+        <div class="text-[10px] text-gray-500 space-y-0.5"><div>使用模型：Midjourney</div><div>生成参数：16:9, --s 100, --q 2</div><div>生成时间：2026-05-19 10:30:00</div></div>
+      </div>
+
+      <!-- 可见性 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-1">可见性设置</div>
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 space-y-2">
+          <label class="flex items-start gap-2 cursor-pointer"><input type="radio" name="pub-vis" checked class="accent-blue-500 mt-0.5"><div class="text-xs"><div class="font-medium">公开分享</div><div class="text-[9px] text-gray-400">作品将发布到灵感广场，所有人可见</div></div></label>
+          <label class="flex items-start gap-2 cursor-pointer"><input type="radio" name="pub-vis" class="accent-blue-500 mt-0.5"><div class="text-xs"><div class="font-medium">仅自己可见</div><div class="text-[9px] text-gray-400">作品仅自己可见，不会出现在灵感广场</div></div></label>
+        </div>
+      </div>
+
+      <!-- 价格 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-1">使用价格</div>
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 space-y-2">
+          <label class="flex items-start gap-2 cursor-pointer"><input type="radio" name="pub-price" checked class="accent-blue-500 mt-0.5"><div class="text-xs"><div class="font-medium">免费</div><div class="text-[9px] text-gray-400">所有人可免费使用此灵感</div></div></label>
+          <label class="flex items-start gap-2 cursor-pointer"><input type="radio" name="pub-price" class="accent-blue-500 mt-0.5"><div class="text-xs"><div class="font-medium">付费 ⚡<input type="number" value="0.5" class="w-12 text-xs border border-gray-200 dark:border-gray-600 rounded px-1 py-0.5 bg-transparent inline-block"> /次</div><div class="text-[9px] text-gray-400">用户需支付积分才能使用此灵感</div></div></label>
+        </div>
+        <div class="text-[10px] text-amber-600 mt-1">💡 付费模板收益：每次被使用，你可获得70%分成</div>
+      </div>
+
+      <!-- 确认提示 -->
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-2.5 text-[10px] text-amber-700 dark:text-amber-300 leading-relaxed">
+        ⚠️ 发布前请确认：<br>• 作品为原创AI生成内容<br>• 不侵犯他人版权<br>• 不包含违规内容
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+        <button onclick="closeModal('publish-modal')" class="text-xs px-4 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">取消</button>
+        <button onclick="submitPublish()" class="text-xs px-4 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700">发布</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 购买确认弹窗 (18.1节) -->
+<div class="modal-overlay" id="purchase-modal">
+  <div class="modal-content p-5">
+    <div class="flex items-center justify-between mb-3"><span class="text-base font-semibold">💎 购买灵感</span><button onclick="closeModal('purchase-modal')" class="text-gray-400 text-xl">×</button></div>
+    <div class="text-sm font-medium mb-2" id="purchase-title">赛博朋克城市夜景</div>
+    <div class="flex items-center gap-4 text-sm mb-4"><span class="text-purple-600 font-semibold">💰 价格: ⚡0.5</span><span class="text-gray-400">当前余额: ⚡12.50</span></div>
+    <div class="mb-4"><div class="text-xs font-medium mb-2">💳 支付方式</div><label class="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 dark:bg-gray-800 mb-1.5 cursor-pointer text-xs"><input type="radio" name="pay" checked class="accent-blue-500"> 余额支付 (⚡12.50)</label><label class="flex items-center gap-2 p-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer text-xs"><input type="radio" name="pay" class="accent-blue-500"> 充值后支付</label></div>
+    <div class="text-[10px] text-gray-400 mb-4">⚠️ 购买后即获得灵感使用权，可永久使用</div>
+    <div class="flex justify-end gap-2"><button onclick="closeModal('purchase-modal')" class="text-xs px-4 py-1.5 border rounded-lg">取消</button><button class="confirm-pay text-xs px-4 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600">确认支付</button></div>
+  </div>
+</div>
+
+<!-- ===== 统一登录弹窗 (4.1节) ===== -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal-content login-modal__panel p-6">
+    <div class="login-modal__head flex items-center justify-between mb-4">
+      <span class="text-base font-bold">✨ 欢迎使用 GUID.AI</span>
+      <button type="button" onclick="closeModal('login-modal')" class="login-modal__close text-gray-400 text-xl leading-none w-8 h-8 flex items-center justify-center" aria-label="关闭">×</button>
+    </div>
+    <div class="login-modal__body">
+    <div class="text-[11px] text-gray-500 mb-4">登录即自动注册，开启您的AI创作之旅</div>
+    <!-- Tab -->
+    <div class="flex mb-4 border-b border-gray-100 dark:border-gray-700">
+      <button class="login-tab active px-4 py-2 text-xs font-medium text-blue-600 border-b-2 border-blue-500 -mb-px" data-tab="phone">📱 手机登录</button>
+      <button class="login-tab px-4 py-2 text-xs font-medium text-gray-500" data-tab="email">✉️ 邮箱登录</button>
+    </div>
+    <!-- Phone form -->
+    <div id="login-form-phone" class="space-y-3">
+      <div><div class="text-[11px] text-gray-500 mb-1">手机号</div><input type="tel" placeholder="请输入手机号" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div>
+      <div><div class="text-[11px] text-gray-500 mb-1">验证码</div><div class="flex gap-2"><input type="text" placeholder="请输入验证码" class="flex-1 text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"><button class="send-code text-[11px] px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shrink-0 whitespace-nowrap">获取验证码</button></div></div>
+      <div><div class="text-[11px] text-gray-500 mb-1">图形验证码</div><div class="flex gap-2"><input type="text" placeholder="请输入图中验证码" class="flex-1 text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"><button class="captcha-refresh text-[10px] px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg font-mono tracking-widest cursor-pointer hover:bg-gray-200">8 9 2 4</button></div></div>
+    </div>
+    <!-- Email form (hidden) -->
+    <div id="login-form-email" class="space-y-3 hidden">
+      <div><div class="text-[11px] text-gray-500 mb-1">邮箱</div><input type="email" placeholder="请输入邮箱地址" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800" autocomplete="email"></div>
+      <div><div class="text-[11px] text-gray-500 mb-1">验证码</div><div class="flex gap-2"><input type="text" placeholder="请输入验证码" class="flex-1 text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800" inputmode="numeric" maxlength="6" autocomplete="one-time-code"><button type="button" class="send-code text-[11px] px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shrink-0 whitespace-nowrap">获取验证码</button></div></div>
+      <div><div class="text-[11px] text-gray-500 mb-1">图形验证码</div><div class="flex gap-2"><input type="text" placeholder="请输入图中验证码" class="flex-1 text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"><button type="button" class="captcha-refresh text-[10px] px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg font-mono tracking-widest cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600">6 3 1 8</button></div></div>
+    </div>
+    <button class="login-submit w-full py-2.5 mt-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-semibold rounded-lg hover:from-blue-600 hover:to-blue-700 transition">登录 / 注册</button>
+    <label class="flex items-center gap-1.5 mt-3 text-[10px] text-gray-400 cursor-pointer"><input type="checkbox" checked class="accent-blue-500"> 我已阅读并同意 <span class="text-blue-500 hover:underline cursor-pointer">《用户协议》</span> 和 <span class="text-blue-500 hover:underline cursor-pointer">《隐私政策》</span></label>
+    <div class="relative my-4"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200 dark:border-gray-700"></div></div><div class="relative flex justify-center"><span class="bg-white dark:bg-gray-800 px-3 text-[10px] text-gray-400">或使用第三方登录</span></div></div>
+    <div class="flex justify-center items-center gap-4 flex-wrap">
+      <button class="oauth-btn w-10 h-10 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-xs hover:bg-green-100 transition" title="微信登录">💬</button>
+      <button class="oauth-btn w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs hover:bg-gray-200 transition" title="GitHub登录">🐙</button>
+      <button class="oauth-btn w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-xs hover:bg-blue-100 transition" title="Google登录">G</button>
+      <button class="oauth-btn w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-xs hover:bg-blue-100 transition" title="QQ登录">🐧</button>
+      <button type="button" class="password-login-entry w-10 h-10 rounded-full bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-xs hover:bg-amber-100 dark:hover:bg-amber-900/40 transition border border-amber-200/80 dark:border-amber-700/50" title="密码登录" aria-label="密码登录" onclick="openPasswordLoginModal()">🔒</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 密码登录弹窗 ===== -->
+<div class="modal-overlay" id="password-login-modal">
+  <div class="modal-content login-modal__panel p-6">
+    <div class="login-modal__head flex items-center justify-between mb-4 gap-2">
+      <button type="button" onclick="backToLoginModal()" class="text-[11px] text-gray-500 hover:text-blue-500 shrink-0 px-1">← 返回</button>
+      <span class="text-base font-bold flex-1 text-center">🔐 密码登录</span>
+      <button type="button" onclick="closeModal('password-login-modal')" class="login-modal__close text-gray-400 text-xl leading-none w-8 h-8 flex items-center justify-center shrink-0" aria-label="关闭">×</button>
+    </div>
+    <div class="login-modal__body">
+      <div class="text-[11px] text-gray-500 mb-4">使用账号与密码登录，未注册将自动创建账号</div>
+      <div class="space-y-3">
+        <div>
+          <div class="text-[11px] text-gray-500 mb-1">账号</div>
+          <input id="pwd-login-account" type="text" placeholder="手机号 / 邮箱 / 用户名" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800" autocomplete="username">
+        </div>
+        <div>
+          <div class="text-[11px] text-gray-500 mb-1">密码</div>
+          <input id="pwd-login-password" type="password" placeholder="请输入登录密码" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800" autocomplete="current-password">
+        </div>
+        <div>
+          <div class="text-[11px] text-gray-500 mb-1">图形验证码</div>
+          <div class="flex gap-2">
+            <input id="pwd-login-captcha" type="text" placeholder="请输入图中验证码" class="flex-1 text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800" autocomplete="off" inputmode="numeric">
+            <button type="button" class="captcha-refresh text-[10px] px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg font-mono tracking-widest cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 shrink-0">5 2 7 1</button>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button type="button" class="text-[10px] text-blue-500 hover:underline" onclick="showToast('请联系客服或通过验证码登录重置（演示）')">忘记密码？</button>
+        </div>
+      </div>
+      <button type="button" class="password-login-submit w-full py-2.5 mt-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-semibold rounded-lg hover:from-blue-600 hover:to-blue-700 transition">登录</button>
+      <label class="flex items-center gap-1.5 mt-3 text-[10px] text-gray-400 cursor-pointer"><input type="checkbox" checked class="accent-blue-500 pwd-login-agree"> 我已阅读并同意 <span class="text-blue-500 hover:underline cursor-pointer">《用户协议》</span> 和 <span class="text-blue-500 hover:underline cursor-pointer">《隐私政策》</span></label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 公告弹窗 (15.1节) ===== -->
+<div class="modal-overlay" id="announcement-modal">
+  <div class="modal-content p-5" style="max-width:480px">
+    <div class="flex items-center justify-between mb-1">
+      <span class="text-base font-bold">📢 系统公告</span>
+      <button onclick="closeModal('announcement-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+    <div class="text-[10px] text-gray-400 mb-3">发布时间: 2026-05-19 01:50:20</div>
+
+    <div class="space-y-2.5 max-h-80 overflow-y-auto" id="announcement-modal-body">
+      <!-- 由 JS 动态渲染 -->
+    </div>
+
+    <div class="flex items-center justify-center gap-3 mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="announcePrev()" class="text-xs px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">上一条</button>
+      <button onclick="announceLatest()" class="text-xs px-3 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">最新</button>
+      <button onclick="announceNext()" class="text-xs px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">下一条</button>
+    </div>
+
+    <div class="text-center mt-3">
+      <button onclick="closeModal('announcement-modal');showPage('announcements')" class="text-[11px] text-blue-500 hover:underline">查看全部公告 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- 邀请有礼弹窗 (17.1节) -->
+<div class="modal-overlay" id="invite-modal">
+  <div class="modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📢 分享有礼</span>
+      <button onclick="closeModal('invite-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+
+    <!-- 奖励规则 -->
+    <div class="border-t border-gray-100 dark:border-gray-700 pt-3 mb-3"></div>
+    <div class="text-center text-[11px] text-gray-500 font-medium mb-2">🎁 奖励规则</div>
+    <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-4">
+      <div class="text-sm font-semibold text-center mb-2">邀请好友，一起赚⚡</div>
+      <div class="space-y-1 text-xs text-gray-600 dark:text-gray-300">
+        <div class="flex items-start gap-2"><span class="text-amber-500 shrink-0">🎯</span><span>每邀请1位好友注册，您获得 <strong>⚡0.3</strong></span></div>
+        <div class="flex items-start gap-2"><span class="text-amber-500 shrink-0">🎯</span><span>好友首次充值，您获得 <strong>充值金额 × 10%</strong> 返利</span></div>
+        <div class="flex items-start gap-2"><span class="text-amber-500 shrink-0">🎯</span><span>好友后续充值，您获得 <strong>充值金额 × 5%</strong> 返利</span></div>
+        <div class="flex items-start gap-2"><span class="text-amber-500 shrink-0">🎯</span><span>月度邀请排行前10名，额外奖励 <strong>⚡50-500</strong></span></div>
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+    <div class="text-center text-[11px] text-gray-500 font-medium mb-3">📤 邀请方式</div>
+
+    <!-- 二维码+链接 -->
+    <div class="flex flex-col md:flex-row gap-4 mb-4">
+      <div class="shrink-0 text-center">
+        <div class="w-28 h-28 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto flex items-center justify-center text-[10px] text-gray-400 border border-gray-200 dark:border-gray-600">二维码</div>
+        <div class="text-[10px] text-gray-400 mt-1">扫码立即注册</div>
+      </div>
+      <div class="flex-1">
+        <div class="text-[11px] text-gray-500 mb-1">邀请链接：</div>
+        <div class="flex items-center gap-2 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg p-2 mb-2">
+          <span class="text-[10px] text-gray-500 truncate flex-1 font-mono">https://guid.ai?invite=S09EEHO8P4GLBDXM</span>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="copyInviteLink()" class="flex-1 px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制链接</button>
+          <button onclick="openInvitePosterModal()" class="flex-1 px-3 py-1.5 text-[10px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">🎨 生成海报</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+
+    <!-- 底部按钮 -->
+    <div class="flex justify-center gap-3">
+      <button onclick="openInvitePosterModal(true)" class="px-4 py-1.5 text-[10px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">📥 下载邀请海报</button>
+      <button onclick="openModal('invite-records-modal')" class="px-4 py-1.5 text-[10px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">📋 查看邀请记录</button>
+    </div>
+  </div>
+</div>
+
+<!-- 邀请海报预览弹窗 -->
+<div class="modal-overlay" id="invite-poster-modal">
+  <div class="modal-content invite-poster-modal__content p-5">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">🎨 邀请海报</span>
+      <button type="button" onclick="closeModal('invite-poster-modal')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl leading-none" aria-label="关闭">×</button>
+    </div>
+    <p class="text-[11px] text-gray-500 dark:text-gray-400 mb-3 text-center">生成专属邀请海报，分享给好友扫码注册</p>
+    <div id="invite-poster-generating" class="invite-poster-generating hidden">
+      <div class="invite-poster-spinner" aria-hidden="true"></div>
+      <p class="text-xs text-gray-500 dark:text-gray-400 mt-3">正在生成海报…</p>
+    </div>
+    <div id="invite-poster-preview-wrap" class="invite-poster-preview-wrap">
+      <div id="invite-poster-canvas" class="invite-poster-canvas" role="img" aria-label="邀请海报预览">
+        <div class="invite-poster-canvas__bg"></div>
+        <div class="invite-poster-canvas__body">
+          <div class="invite-poster-canvas__brand">GUID<span>.AI</span></div>
+          <div class="invite-poster-canvas__title">邀请好友 · 一起赚 ⚡</div>
+          <p class="invite-poster-canvas__sub">注册即送算力，充值再享返利</p>
+          <ul class="invite-poster-canvas__rules">
+            <li>好友注册您得 <strong>⚡0.3</strong></li>
+            <li>首充返利 <strong>10%</strong></li>
+            <li>续充返利 <strong>5%</strong></li>
+          </ul>
+          <div class="invite-poster-canvas__qr-row">
+            <div class="invite-poster-canvas__qr" aria-hidden="true">
+              <span class="invite-poster-canvas__qr-logo">G</span>
+            </div>
+            <div class="invite-poster-canvas__qr-meta">
+              <span class="invite-poster-canvas__scan">扫码立即注册</span>
+              <span class="invite-poster-canvas__code" id="invite-poster-code">S09EEHO8P4GLBDXM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-4">
+      <button type="button" onclick="downloadInvitePoster()" class="flex-1 px-3 py-2 text-[11px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📥 保存海报</button>
+      <button type="button" onclick="copyInviteLink()" class="flex-1 px-3 py-2 text-[11px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">📋 复制链接</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 交易详情弹窗 ===== -->
+<div class="modal-overlay" id="tx-detail-modal">
+  <div class="modal-content p-5" style="max-width:440px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📋 交易详情</span>
+      <button onclick="closeModal('tx-detail-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+    <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-4 space-y-2 text-xs">
+      <div class="flex items-center justify-between"><span class="text-gray-400">交易单号</span><span class="font-mono text-[10px]">TX202605201030001</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">类型</span><span class="font-medium text-red-500">消费</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">金额</span><span class="font-medium text-red-500">-⚡0.5</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">状态</span><span class="text-green-600">成功</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">时间</span><span>2026-05-20 10:30:00</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">说明</span><span>购买灵感「赛博朋克城市夜景」</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">作品ID</span><span class="font-mono text-[10px]">INS_001234</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">创作者</span><span>青铜娃娃</span></div>
+      <div class="flex items-center justify-between"><span class="text-gray-400">支付方式</span><span>余额支付</span></div>
+    </div>
+    <div class="flex justify-center gap-3 mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('tx-detail-modal');showToast('🖼️ 跳转作品详情')" class="px-4 py-1.5 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">查看作品</button>
+      <button onclick="closeModal('tx-detail-modal');openModal('service-modal')" class="px-4 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">联系客服</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 导出账单弹窗 ===== -->
+<div class="modal-overlay" id="export-modal">
+  <div class="modal-content p-5" style="max-width:420px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📥 导出账单</span>
+      <button onclick="closeModal('export-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <div class="text-[11px] text-gray-500 mb-2">导出格式：</div>
+        <label class="flex items-center gap-2 p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-lg cursor-pointer mb-1.5"><input type="radio" name="export-format" checked class="accent-blue-500"><span class="text-xs">Excel (.xlsx)</span></label>
+        <label class="flex items-center gap-2 p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-lg cursor-pointer"><input type="radio" name="export-format" class="accent-blue-500"><span class="text-xs">CSV (.csv)</span></label>
+      </div>
+      <div>
+        <div class="text-[11px] text-gray-500 mb-2">导出范围：</div>
+        <label class="flex items-center gap-2 p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-lg cursor-pointer mb-1.5"><input type="radio" name="export-range" checked class="accent-blue-500"><span class="text-xs">当前筛选结果</span></label>
+        <label class="flex items-center gap-2 p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-lg cursor-pointer"><input type="radio" name="export-range" class="accent-blue-500"><span class="text-xs">全部记录</span></label>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('export-modal')" class="px-4 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">取消</button>
+      <button onclick="confirmExport()" class="px-4 py-1.5 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">确认导出</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 邀请记录弹窗 ===== -->
+<div class="modal-overlay" id="invite-records-modal">
+  <div class="modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📋 邀请记录</span>
+      <button onclick="closeModal('invite-records-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-[11px] text-gray-400">共邀请 23 人，已注册 18 人，已充值 8 人</span>
+      <button onclick="showToast('📥 导出邀请记录Excel')" class="px-3 py-1 text-[10px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">导出记录</button>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs">
+        <thead>
+          <tr class="bg-gray-50 dark:bg-gray-700/50 border-y border-gray-100 dark:border-gray-700 text-left">
+            <th class="p-2.5 pl-3 font-medium text-gray-500">好友</th>
+            <th class="p-2.5 font-medium text-gray-500">注册状态</th>
+            <th class="p-2.5 font-medium text-gray-500">充值金额</th>
+            <th class="p-2.5 font-medium text-gray-500">返利</th>
+            <th class="p-2.5 font-medium text-gray-500">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50/50">
+            <td class="p-2.5 pl-3"><div class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-white text-[8px] font-bold">A</div><span>用户A</span></div></td>
+            <td class="p-2.5"><span class="text-green-600">✅ 已注册</span></td>
+            <td class="p-2.5">¥100.00</td>
+            <td class="p-2.5 text-green-600">⚡10.0</td>
+            <td class="p-2.5"><div class="flex gap-1.5"><button onclick="showToast('📄 显示好友详情')" class="text-blue-500 hover:underline text-[10px]">详情</button><button onclick="showToast('📨 已发送提醒')" class="text-gray-400 hover:underline text-[10px]">提醒</button></div></td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50/50">
+            <td class="p-2.5 pl-3"><div class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-green-400 flex items-center justify-center text-white text-[8px] font-bold">B</div><span>用户B</span></div></td>
+            <td class="p-2.5"><span class="text-green-600">✅ 已注册</span></td>
+            <td class="p-2.5">¥50.00</td>
+            <td class="p-2.5 text-green-600">⚡5.0</td>
+            <td class="p-2.5"><div class="flex gap-1.5"><button onclick="showToast('📄 显示好友详情')" class="text-blue-500 hover:underline text-[10px]">详情</button><button onclick="showToast('📨 已发送提醒')" class="text-gray-400 hover:underline text-[10px]">提醒</button></div></td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50/50">
+            <td class="p-2.5 pl-3"><div class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-purple-400 flex items-center justify-center text-white text-[8px] font-bold">C</div><span>用户C</span></div></td>
+            <td class="p-2.5"><span class="text-green-600">✅ 已注册</span></td>
+            <td class="p-2.5">-</td>
+            <td class="p-2.5 text-gray-400">-</td>
+            <td class="p-2.5"><div class="flex gap-1.5"><button onclick="showToast('📄 显示好友详情')" class="text-blue-500 hover:underline text-[10px]">详情</button><button onclick="showToast('📨 已发送提醒')" class="text-gray-400 hover:underline text-[10px]">提醒</button></div></td>
+          </tr>
+          <tr class="hover:bg-gray-50/50">
+            <td class="p-2.5 pl-3"><div class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-amber-400 flex items-center justify-center text-white text-[8px] font-bold">D</div><span>用户D</span></div></td>
+            <td class="p-2.5"><span class="text-amber-600">⏳ 待注册</span></td>
+            <td class="p-2.5">-</td>
+            <td class="p-2.5 text-gray-400">-</td>
+            <td class="p-2.5"><div class="flex gap-1.5"><button onclick="showToast('📄 显示好友详情')" class="text-blue-500 hover:underline text-[10px]">详情</button><button onclick="showToast('📨 已发送提醒')" class="text-gray-400 hover:underline text-[10px]">提醒</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex justify-center mt-4">
+      <button onclick="closeModal('invite-records-modal')" class="px-5 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 充值弹窗 ===== -->
+<div class="modal-overlay" id="recharge-modal"><div class="modal-content p-5"><div class="flex items-center justify-between mb-3"><span class="text-base font-bold">💰 充值</span><button onclick="closeModal('recharge-modal')" class="text-gray-400 text-xl">×</button></div>
+<div class="text-xs text-gray-500 mb-3">选择充值档次</div>
+<div class="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-4">
+<div class="recharge-tier p-3 border rounded-xl text-center cursor-pointer hover:border-blue-400"><div class="text-sm font-bold">¥10</div><div class="text-[10px] text-gray-400">⚡11 <span class="text-green-500">+1</span></div></div>
+<div class="recharge-tier p-3 border rounded-xl text-center cursor-pointer hover:border-blue-400"><div class="text-sm font-bold">¥50</div><div class="text-[10px] text-gray-400">⚡55 <span class="text-green-500">+5</span></div></div>
+<div class="recharge-tier p-3 border-2 border-blue-500 rounded-xl text-center cursor-pointer bg-blue-50 dark:bg-blue-900/20"><div class="text-sm font-bold text-blue-600">¥100</div><div class="text-[10px] text-blue-400">⚡112 <span class="text-green-500">+12</span></div></div>
+<div class="recharge-tier p-3 border rounded-xl text-center cursor-pointer hover:border-blue-400"><div class="text-sm font-bold">¥200</div><div class="text-[10px] text-gray-400">⚡230 <span class="text-green-500">+30</span></div></div>
+<div class="recharge-tier p-3 border rounded-xl text-center cursor-pointer hover:border-blue-400"><div class="text-sm font-bold">¥500</div><div class="text-[10px] text-gray-400">⚡580 <span class="text-green-500">+80</span></div></div>
+</div>
+<div class="text-xs text-gray-500 mb-2">💳 支付方式</div>
+<div class="grid grid-cols-4 gap-2 mb-4">
+<button class="pay-method p-2 border-2 border-blue-500 rounded-lg text-[10px] bg-blue-50 dark:bg-blue-900/20">微信支付<br><span class="text-gray-400">中国大陆</span></button>
+<button class="pay-method p-2 border rounded-lg text-[10px] hover:border-gray-300">支付宝<br><span class="text-gray-400">中国大陆</span></button>
+<button class="pay-method p-2 border rounded-lg text-[10px] hover:border-gray-300">PayPal<br><span class="text-gray-400">海外通用</span></button>
+<button class="pay-method p-2 border rounded-lg text-[10px] hover:border-gray-300">银行卡<br><span class="text-gray-400">Visa/Master</span></button>
+</div>
+<div class="flex justify-end gap-2"><button onclick="closeModal('recharge-modal')" class="text-xs px-4 py-1.5 border rounded-lg">取消</button><button class="confirm-recharge text-xs px-4 py-1.5 bg-blue-500 text-white rounded-lg">确认充值</button></div>
+</div></div>
+
+<!-- ===== 提现申请弹窗 ===== -->
+<div class="modal-overlay" id="withdraw-modal"><div class="modal-content p-5" style="max-width:420px"><div class="flex items-center justify-between mb-3"><span class="text-base font-bold">💰 申请提现</span><button onclick="closeModal('withdraw-modal')" class="text-gray-400 text-xl">×</button></div>
+<div class="text-xs text-gray-500 mb-3">可提现余额: ⚡89.00 (≈ ¥8.90)</div>
+<div class="mb-3"><div class="text-[11px] text-gray-500 mb-1">提现金额</div><div class="flex items-center gap-1"><span class="text-sm font-bold">¥</span><input type="number" placeholder="0.00" class="flex-1 text-sm border rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div></div>
+<div class="mb-3"><div class="text-[11px] text-gray-500 mb-1">提现方式</div><div class="flex gap-2"><label class="flex items-center gap-1.5 text-xs p-2 border-2 border-blue-500 rounded-lg cursor-pointer bg-blue-50 dark:bg-blue-900/20"><input type="radio" name="wm" checked class="accent-blue-500"> 微信支付</label><label class="flex items-center gap-1.5 text-xs p-2 border rounded-lg cursor-pointer"><input type="radio" name="wm"> 支付宝</label><label class="flex items-center gap-1.5 text-xs p-2 border rounded-lg cursor-pointer"><input type="radio" name="wm"> PayPal</label></div></div>
+<div class="text-[10px] text-amber-600 mb-4">💡 最低提现金额 ¥10，1-3个工作日到账</div>
+<div class="flex justify-end gap-2"><button onclick="closeModal('withdraw-modal')" class="text-xs px-4 py-1.5 border rounded-lg">取消</button><button class="confirm-withdraw text-xs px-4 py-1.5 bg-blue-500 text-white rounded-lg">确认提现</button></div>
+</div></div>
+
+<!-- ===== 角色管理弹窗 ===== -->
+<div class="modal-overlay" id="role-modal">
+  <div class="modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-2"><span class="text-base font-bold">👤 角色管理</span><button onclick="closeModal('role-modal')" class="text-gray-400 text-xl">×</button></div>
+    <div class="text-[11px] text-gray-400 mb-4">管理AI角色，自定义创作风格</div>
+
+    <!-- Tab -->
+    <div class="flex mb-4 border-b border-gray-100 dark:border-gray-700">
+      <button class="role-tab active px-4 py-2 text-xs font-medium text-blue-600 border-b-2 border-blue-500 -mb-px" data-tab="list">📋 我的角色</button>
+      <button class="role-tab px-4 py-2 text-xs font-medium text-gray-500 border-b-2 border-transparent" data-tab="create">✨ 创建角色</button>
+    </div>
+
+    <!-- 我的角色 Tab -->
+    <div id="role-tab-list" class="space-y-2 max-h-64 overflow-y-auto">
+      <div class="role-item p-2.5 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-2" onclick="selectRoleFromModal('写作助手','✍️')"><span class="text-lg">✍️</span><div class="text-xs"><div class="font-medium">写作助手</div><div class="text-[10px] text-gray-400">爆款写作模板</div></div></div>
+      <div class="role-item p-2.5 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-2" onclick="selectRoleFromModal('文案助手','📝')"><span class="text-lg">📝</span><div class="text-xs"><div class="font-medium">文案助手</div><div class="text-[10px] text-gray-400">社媒文案模板</div></div></div>
+      <div class="role-item p-2.5 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-2" onclick="selectRoleFromModal('商业顾问','💼')"><span class="text-lg">💼</span><div class="text-xs"><div class="font-medium">商业顾问</div><div class="text-[10px] text-gray-400">商业分析模板</div></div></div>
+      <div class="role-item p-2.5 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-2" onclick="selectRoleFromModal('数据顾问','📊')"><span class="text-lg">📊</span><div class="text-xs"><div class="font-medium">数据顾问</div><div class="text-[10px] text-gray-400">数据洞察模板</div></div></div>
+      <div class="role-item p-2.5 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-2" onclick="selectRoleFromModal('代码助手','💻')"><span class="text-lg">💻</span><div class="text-xs"><div class="font-medium">代码助手</div><div class="text-[10px] text-gray-400">代码审查模板</div></div></div>
+      <div class="role-item p-2.5 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-2" onclick="selectRoleFromModal('翻译官','🌐')"><span class="text-lg">🌐</span><div class="text-xs"><div class="font-medium">翻译官</div><div class="text-[10px] text-gray-400">专业翻译模板</div></div></div>
+      <div id="custom-roles-list"></div>
+    </div>
+
+    <!-- 创建角色 Tab -->
+    <div id="role-tab-create" class="hidden space-y-3">
+      <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-2.5 text-[11px] text-blue-700 dark:text-blue-300">💡 角色的系统提示词决定了AI生成时的风格和方向。设定好后，AI将按照该角色设定的风格生成内容。</div>
+      <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+        <div class="text-2xl mb-1">📷</div>
+        <div class="text-xs font-medium">上传头像</div>
+        <div class="text-[9px] text-gray-400">支持jpg/png，建议1:1</div>
+      </div>
+      <div><div class="text-[11px] text-gray-500 mb-1">角色名称 *</div><input id="new-role-name" placeholder="例如：治愈系插画师、赛博朋克大师" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div>
+      <div><div class="text-[11px] text-gray-500 mb-1">角色简介（选填）</div><input id="new-role-desc" placeholder="一句话描述这个角色" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div>
+      <div><div class="text-[11px] text-gray-500 mb-1">系统提示词 *</div><textarea id="new-role-prompt" placeholder="定义生成风格和方向..." rows="4" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg p-2 resize-none focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></textarea><div class="text-right text-[9px] text-gray-400 mt-0.5"><span id="prompt-char-count">0</span>/20000字符</div></div>
+      <div class="text-[10px] text-amber-600">⚠️ 创建后可在「我的角色」中管理</div>
+      <div class="flex justify-end gap-2 pt-1"><button onclick="closeModal('role-modal')" class="text-xs px-4 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50">取消</button><button onclick="createNewRole()" class="text-xs px-4 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600">创建角色</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 模板详情弹窗 (聊天预设) ===== -->
+<div class="modal-overlay" id="template-modal">
+  <div class="modal-content p-5" style="max-width:500px">
+    <!-- 标题栏 -->
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-base font-bold" id="tm-title">📋 爆款写作模板</span>
+      <div class="flex items-center gap-2">
+        <button onclick="pressAnim(this);this.classList.toggle('text-yellow-500');showToast(this.classList.contains('text-yellow-500')?'⭐ 已收藏':'已取消收藏')" class="text-gray-400 hover:text-yellow-500 text-lg" id="tm-fav">☆</button>
+        <button onclick="closeModal('template-modal')" class="text-gray-400 text-xl leading-none hover:text-gray-600">×</button>
+      </div>
+    </div>
+
+    <!-- 📝 模板说明 -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">模板说明</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3">
+        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed" id="tm-desc">"从爬文到爆款文案，精通各类文体风格，让你的每一个字都有力量"</p>
+        <div class="mt-2 text-[11px] text-gray-500" id="tm-skills">
+          <div class="font-medium text-[10px] text-gray-400 mb-1">擅长领域：</div>
+          • 公众号爆款文章<br>• 小红书种草文案<br>• 短视频脚本<br>• 产品详情页文案
+        </div>
+      </div>
+    </div>
+
+    <!-- ⚙️ 模板配置 -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">模板配置</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 text-xs space-y-1">
+        <div>推荐模型: <span class="font-semibold text-blue-600" id="tm-model">GPT-5.4</span></div>
+        <div>推荐角色: <span class="font-semibold text-purple-600" id="tm-role">写作助手</span></div>
+        <div>推荐参数: <span id="tm-params" class="text-gray-500">温度 0.8, 最大token 4096</span></div>
+      </div>
+    </div>
+
+    <!-- 💡 使用示例 -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">使用示例</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed" id="tm-example">
+        <div class="mb-1"><span class="text-blue-600 font-medium">用户:</span> 帮我写一篇关于「人工智能」的知乎风格回答</div>
+        <div><span class="text-green-600 font-medium">AI:</span> 谢邀。作为一名AI领域的从业者，我认为未来十年...</div>
+      </div>
+    </div>
+
+    <!-- 📊 使用数据 -->
+    <div class="flex items-center justify-center gap-3 text-[10px] text-gray-400 mb-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+      <span id="tm-uses">📊 使用数据: 12.3k次使用</span>
+      <span>|</span>
+      <span id="tm-rating">👍 96%好评率</span>
+      <span>|</span>
+      <span id="tm-creator">👤 创作者: 平台官方</span>
+    </div>
+
+    <!-- 操作按钮 -->
+    <div class="flex gap-2">
+      <button onclick="closeModal('template-modal')" class="flex-1 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">取消</button>
+      <button id="tm-apply-btn" class="flex-1 py-2 text-xs bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-blue-700 transition">应用模板</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Apps模板详情弹窗 ===== -->
+<div class="modal-overlay" id="app-template-modal">
+  <div class="modal-content p-5" style="max-width:560px">
+    <!-- 标题栏 -->
+    <div class="flex items-center justify-between mb-4">
+      <button type="button" onclick="closeModal('app-template-modal')" class="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 shrink-0"><span>←</span> 返回</button>
+      <span class="text-base font-bold flex-1 text-center px-2 truncate" id="atm-title">🔄 AI智能换脸模板</span>
+      <button id="atm-fav" onclick="pressAnim(this);this.classList.toggle('text-yellow-500');showToast(this.classList.contains('text-yellow-500')?'⭐ 已收藏':'已取消收藏')" class="text-gray-400 hover:text-yellow-500 text-lg shrink-0">☆</button>
+    </div>
+
+    <!-- 模板预览演示 -->
+    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-4">
+      <div class="flex items-center justify-center gap-4" id="atm-preview">
+        <div class="w-28 h-28 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg flex items-center justify-center text-gray-400 text-[10px] text-center leading-relaxed">原图</div>
+        <div class="text-lg text-gray-400">→</div>
+        <div class="w-28 h-28 bg-gradient-to-br from-purple-200 to-blue-200 dark:from-purple-800/30 dark:to-blue-800/30 rounded-lg flex items-center justify-center text-gray-400 text-[10px] text-center leading-relaxed">换脸后效果</div>
+      </div>
+    </div>
+
+    <!-- ═══ 模板说明 ═══ -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">模板说明</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed" id="atm-desc">
+        上传一张目标人脸图片和一张源图片，AI将自动将人脸替换到目标图片中。
+        <div class="mt-2 text-[10px] text-gray-400">⚙️ 使用步骤：<br>1. 上传目标人脸图片（清晰正面照效果最佳）<br>2. 上传需要换脸的源图片<br>3. 点击生成，AI自动完成换脸</div>
+      </div>
+    </div>
+
+    <!-- ═══ 价格信息 ═══ -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">价格信息</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+      <div class="flex gap-4 text-xs bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+        <span>使用价格：<span class="text-purple-600 font-semibold" id="atm-price">⚡0.5/次</span></span>
+        <span class="text-gray-400">|</span>
+        <span>当前余额：⚡12.50</span>
+      </div>
+    </div>
+
+    <!-- ═══ 素材上传 ═══ -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">素材上传</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+      <div class="flex gap-3" id="atm-upload-area">
+        <div class="flex-1 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-blue-400 transition upload-box">
+          <div class="text-lg mb-1" id="atm-up1-icon">📷</div>
+          <div class="text-xs font-medium" id="atm-up1-label">上传人脸</div>
+          <div class="text-[9px] text-gray-400 mt-1">支持 jpg/png，≤10MB</div>
+        </div>
+        <div class="flex-1 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-blue-400 transition upload-box">
+          <div class="text-lg mb-1" id="atm-up2-icon">📷</div>
+          <div class="text-xs font-medium" id="atm-up2-label">上传源图</div>
+          <div class="text-[9px] text-gray-400 mt-1">支持 jpg/png，≤10MB</div>
+        </div>
+      </div>
+      <button class="w-full mt-2 text-[11px] px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition asset-select">从资产库选择</button>
+    </div>
+
+    <!-- ═══ 立即生成 ═══ -->
+    <button class="app-gen-btn w-full py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition mb-3">✨ 立即生成</button>
+
+    <!-- 使用数据 -->
+    <div class="flex items-center justify-center gap-4 text-[10px] text-gray-400 pt-2 border-t border-gray-100 dark:border-gray-700">
+      <span>📊 使用数据: <span id="atm-uses">12.3k次使用</span></span>
+      <span>|</span>
+      <span id="atm-rating">👍 96%好评率</span>
+      <span>|</span>
+      <span id="atm-creator">👤 创作者: 平台官方</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 图片 App 工作区（RunningHub 风格全屏弹层）===== -->
+<div class="modal-overlay" id="app-image-workspace-modal" aria-labelledby="aiws-title" role="dialog" aria-modal="true">
+  <div class="app-image-ws">
+    <header class="app-image-ws-header">
+      <button type="button" class="app-image-ws-back" onclick="closeModal('app-image-workspace-modal')">← 返回</button>
+      <div class="app-image-ws-header-actions">
+        <button type="button" class="app-image-ws-action" id="aiws-like-btn" onclick="toggleAiwsLike()" aria-pressed="false">
+          <span class="app-image-ws-action-icon" aria-hidden="true">👍</span>
+          <span id="aiws-like-count">0</span>
+        </button>
+        <button type="button" class="app-image-ws-action" id="aiws-fav-btn" onclick="toggleAiwsFav()" aria-pressed="false">
+          <span class="app-image-ws-action-icon" aria-hidden="true">☆</span>
+          <span id="aiws-fav-count">0</span>
+        </button>
+        <button type="button" class="app-image-ws-action" onclick="shareAiwsApp()">
+          <span class="app-image-ws-action-icon" aria-hidden="true">↗</span>
+          <span class="app-image-ws-action-label">分享</span>
+        </button>
+        <button type="button" class="app-image-ws-action" id="aiws-comment-btn" onclick="toggleAiwsComments()" aria-pressed="false" aria-expanded="false">
+          <span class="app-image-ws-action-icon" aria-hidden="true">💬</span>
+          <span id="aiws-comment-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="app-image-ws-body aiws-history-open">
+      <aside class="app-image-ws-params">
+        <div class="app-image-ws-params-scroll">
+          <div class="app-image-ws-side-panel" data-aiws-panel="params">
+            <h1 class="app-image-ws-title" id="aiws-title">应用名称</h1>
+            <div class="app-image-ws-tags" id="aiws-tags"></div>
+            <div class="app-image-ws-stats">
+              <span class="app-image-ws-stat" id="aiws-uses">👤 0 次使用</span>
+            </div>
+            <div class="app-image-ws-collect hidden" id="aiws-collect-row">
+              <button type="button" class="app-image-ws-collect-btn" onclick="showToast('⚙️ 工作流（演示）')">
+                <span aria-hidden="true">🔗</span> 工作流
+              </button>
+              <button type="button" class="app-image-ws-collect-btn" onclick="toggleAiwsFav()">
+                <span aria-hidden="true">☆</span> <span id="aiws-collect-fav">0</span>
+              </button>
+              <button type="button" class="app-image-ws-collect-btn" onclick="toggleAiwsComments()">
+                <span aria-hidden="true">💬</span> <span id="aiws-collect-comment">0</span>
+              </button>
+            </div>
+            <div class="app-image-ws-tips">
+              <div class="app-image-ws-tips-title">创作小贴士</div>
+              <div class="app-image-ws-tips-item">✓ <span id="aiws-tip-success">近期运行成功率为 95%</span></div>
+              <div class="app-image-ws-tips-item">⏱ <span id="aiws-tip-duration">平均运行时长约 90s</span></div>
+            </div>
+            <div class="app-image-ws-creator">
+              <div class="app-image-ws-creator-info">
+                <div class="app-image-ws-avatar" id="aiws-avatar" aria-hidden="true">
+                  <span class="app-image-ws-avatar-emoji" id="aiws-avatar-emoji">🤖</span>
+                </div>
+                <span class="app-image-ws-creator-name" id="aiws-creator-name">创作者</span>
+              </div>
+              <button type="button" class="app-image-ws-follow" id="aiws-follow-btn" onclick="toggleAiwsFollow()">+ 关注</button>
+            </div>
+            <div class="app-image-ws-form" id="aiws-params-form"></div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="app-image-ws-main">
+        <div class="app-image-ws-main-scroll">
+          <details class="app-image-ws-intro" open>
+            <summary>应用介绍 &amp; 输入建议</summary>
+            <p id="aiws-desc">应用描述</p>
+          </details>
+          <div class="app-image-ws-preview">
+            <div class="app-image-ws-preview-stage" id="aiws-preview-stage">
+              <span class="app-image-ws-preview-emoji" id="aiws-preview-emoji" aria-hidden="true">🖼️</span>
+              <button type="button" class="app-image-ws-preview-play hidden" id="aiws-preview-play" aria-label="播放预览" onclick="showToast('▶ 预览播放（演示）')">▶</button>
+            </div>
+            <div class="app-image-ws-preview-nav">
+              <button type="button" class="app-image-ws-preview-arrow disabled" disabled aria-label="上一张">‹</button>
+              <span class="app-image-ws-preview-counter">1 / 1</span>
+              <button type="button" class="app-image-ws-preview-arrow disabled" disabled aria-label="下一张">›</button>
+            </div>
+          </div>
+          <div class="app-image-ws-main-tabs" role="tablist">
+            <button type="button" class="app-image-ws-main-tab active" data-aiws-main="works" role="tab">作品</button>
+            <button type="button" class="app-image-ws-main-tab" data-aiws-main="comments" role="tab">评论</button>
+          </div>
+          <div class="app-image-ws-main-panel" data-aiws-main-panel="works">
+            <div class="app-image-ws-empty app-image-ws-empty-inline">
+              <div class="app-image-ws-empty-icon">📭</div>
+              <p>暂无公开作品</p>
+            </div>
+          </div>
+          <div class="app-image-ws-main-panel hidden" data-aiws-main-panel="comments">
+            <div class="app-image-ws-comment-compose">
+              <textarea id="aiws-comment-input" rows="3" placeholder="写下你的评论…" maxlength="500"></textarea>
+              <button type="button" class="app-image-ws-comment-submit" onclick="postAiwsComment()">发布评论</button>
+            </div>
+            <div class="app-image-ws-comment-list" id="aiws-comment-list">
+              <div class="app-image-ws-empty app-image-ws-empty-inline" id="aiws-comment-empty">
+                <div class="app-image-ws-empty-icon">💬</div>
+                <p>暂无评论</p>
+                <span>成为第一个评论的人吧</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="app-image-ws-history" id="aiws-history-aside">
+        <button type="button" class="app-image-ws-history-edge" id="aiws-history-toggle" onclick="toggleAiwsHistory()" aria-expanded="true" aria-label="收起历史记录">
+          <span class="app-image-ws-history-edge-label">历史记录</span>
+          <span class="app-image-ws-history-edge-icon" aria-hidden="true">‹</span>
+        </button>
+        <div class="app-image-ws-history-panel" id="aiws-history-panel">
+          <div class="app-image-ws-history-head">
+            <h2>历史记录</h2>
+            <button type="button" class="app-image-ws-history-collapse" onclick="toggleAiwsHistory()" aria-label="向右侧收起">›</button>
+          </div>
+          <div class="app-image-ws-history-body" id="aiws-history-body">
+            <div class="app-image-ws-empty">
+              <div class="app-image-ws-empty-icon">🖼️</div>
+              <p>暂无作品</p>
+              <span>点击运行开始创作</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="app-image-ws-footer">
+      <div class="app-image-ws-footer-l">
+        <span class="app-image-ws-footer-meta" id="aiws-footer-meta"></span>
+      </div>
+      <div class="app-image-ws-footer-r">
+        <button type="button" class="app-image-ws-run" id="aiws-run-btn" onclick="runAiwsApp()" aria-label="运行">
+          <svg class="app-image-ws-run-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <span class="app-image-ws-run-label">运行</span>
+          <span class="app-image-ws-run-price" id="aiws-run-price">⚡0.5</span>
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- ===== 文案 App 工作区（全屏弹层）===== -->
+<div class="modal-overlay" id="app-copy-workspace-modal" aria-labelledby="acws-title" role="dialog" aria-modal="true">
+  <div class="app-image-ws app-copy-ws">
+    <header class="app-image-ws-header">
+      <button type="button" class="app-image-ws-back" onclick="closeModal('app-copy-workspace-modal')">← 返回</button>
+      <div class="app-image-ws-header-actions">
+        <button type="button" class="app-image-ws-action" id="acws-like-btn" onclick="toggleAcwsLike()" aria-pressed="false">
+          <span class="app-image-ws-action-icon" aria-hidden="true">👍</span>
+          <span id="acws-like-count">0</span>
+        </button>
+        <button type="button" class="app-image-ws-action" id="acws-fav-btn" onclick="toggleAcwsFav()" aria-pressed="false">
+          <span class="app-image-ws-action-icon" aria-hidden="true">☆</span>
+          <span id="acws-fav-count">0</span>
+        </button>
+        <button type="button" class="app-image-ws-action" onclick="shareAcwsApp()">
+          <span class="app-image-ws-action-icon" aria-hidden="true">↗</span>
+          <span class="app-image-ws-action-label">分享</span>
+        </button>
+        <button type="button" class="app-image-ws-action" id="acws-comment-btn" onclick="toggleAcwsComments()" aria-pressed="false" aria-expanded="false">
+          <span class="app-image-ws-action-icon" aria-hidden="true">💬</span>
+          <span id="acws-comment-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="app-image-ws-body acws-history-open">
+      <aside class="app-image-ws-params">
+        <div class="app-image-ws-params-scroll">
+          <h1 class="app-image-ws-title" id="acws-title">文案应用</h1>
+          <div class="app-image-ws-tags" id="acws-tags"></div>
+          <div class="app-image-ws-stats">
+            <span class="app-image-ws-stat" id="acws-uses">👤 0 次使用</span>
+          </div>
+          <div class="app-image-ws-tips">
+            <div class="app-image-ws-tips-title">创作小贴士</div>
+            <div class="app-image-ws-tips-item">✓ <span id="acws-tip-success">近期运行成功率为 95%</span></div>
+            <div class="app-image-ws-tips-item">⏱ <span id="acws-tip-duration">平均生成时长在 45s 左右</span></div>
+          </div>
+          <div class="app-image-ws-creator">
+            <div class="app-image-ws-creator-info">
+              <div class="app-image-ws-avatar" id="acws-avatar" aria-hidden="true">
+                <span class="app-image-ws-avatar-emoji" id="acws-avatar-emoji">📝</span>
+              </div>
+              <span class="app-image-ws-creator-name" id="acws-creator-name">创作者</span>
+            </div>
+            <button type="button" class="app-image-ws-follow" id="acws-follow-btn" onclick="toggleAcwsFollow()">+ 关注</button>
+          </div>
+          <div class="app-image-ws-form" id="acws-params-form"></div>
+        </div>
+      </aside>
+
+      <main class="app-image-ws-main">
+        <div class="app-image-ws-main-scroll">
+          <details class="app-image-ws-intro" open>
+            <summary>应用介绍 &amp; 写作建议</summary>
+            <p id="acws-desc">应用描述</p>
+          </details>
+          <div class="app-copy-ws-draft">
+            <div class="app-copy-ws-draft-toolbar">
+              <span class="app-copy-ws-draft-label">文稿预览</span>
+              <div class="app-copy-ws-draft-actions">
+                <button type="button" class="app-copy-ws-draft-btn" onclick="copyAcwsDraft()">复制</button>
+                <button type="button" class="app-copy-ws-draft-btn" onclick="showToast('📥 已导出 Word（演示）')">导出</button>
+                <button type="button" class="app-copy-ws-draft-btn primary" onclick="runAcwsApp()">重新生成</button>
+              </div>
+            </div>
+            <div class="app-copy-ws-draft-paper" id="acws-draft-preview" contenteditable="true" spellcheck="false">
+              <p class="app-copy-ws-draft-placeholder">填写左侧写作需求，点击底部「生成文案」后，AI 将在此输出可编辑文稿。</p>
+            </div>
+            <div class="app-copy-ws-draft-meta">
+              <span id="acws-word-count">约 0 字</span>
+              <span>·</span>
+              <span>支持直接编辑</span>
+            </div>
+          </div>
+          <div class="app-image-ws-main-tabs" role="tablist">
+            <button type="button" class="app-image-ws-main-tab active" data-acws-main="samples" role="tab">范文参考</button>
+            <button type="button" class="app-image-ws-main-tab" data-acws-main="comments" role="tab">评论</button>
+          </div>
+          <div class="app-image-ws-main-panel" data-acws-main-panel="samples">
+            <div class="app-copy-ws-samples">
+              <button type="button" class="app-copy-ws-sample-card" onclick="showToast('已应用范文结构（演示）')">
+                <strong>种草短文</strong>
+                <p>开头场景代入 + 三点卖点 + 行动号召，适合小红书 / 朋友圈。</p>
+              </button>
+              <button type="button" class="app-copy-ws-sample-card" onclick="showToast('已应用范文结构（演示）')">
+                <strong>产品详情页</strong>
+                <p>标题吸睛、参数清单、对比表格、FAQ，适合电商落地页。</p>
+              </button>
+              <button type="button" class="app-copy-ws-sample-card" onclick="showToast('已应用范文结构（演示）')">
+                <strong>品牌故事</strong>
+                <p>起源叙事 + 价值观 + 用户见证，适合官网 About 栏目。</p>
+              </button>
+            </div>
+          </div>
+          <div class="app-image-ws-main-panel hidden" data-acws-main-panel="comments">
+            <div class="app-image-ws-comment-compose">
+              <textarea id="acws-comment-input" rows="3" placeholder="写下你的评论…" maxlength="500"></textarea>
+              <button type="button" class="app-image-ws-comment-submit" onclick="postAcwsComment()">发布评论</button>
+            </div>
+            <div class="app-image-ws-comment-list" id="acws-comment-list">
+              <div class="app-image-ws-empty app-image-ws-empty-inline" id="acws-comment-empty">
+                <div class="app-image-ws-empty-icon">💬</div>
+                <p>暂无评论</p>
+                <span>分享你的使用体验吧</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="app-image-ws-history" id="acws-history-aside">
+        <button type="button" class="app-image-ws-history-edge" id="acws-history-toggle" onclick="toggleAcwsHistory()" aria-expanded="true" aria-label="收起历史记录">
+          <span class="app-image-ws-history-edge-label">历史记录</span>
+          <span class="app-image-ws-history-edge-icon" aria-hidden="true">‹</span>
+        </button>
+        <div class="app-image-ws-history-panel" id="acws-history-panel">
+          <div class="app-image-ws-history-head">
+            <h2>历史记录</h2>
+            <button type="button" class="app-image-ws-history-collapse" onclick="toggleAcwsHistory()" aria-label="向右侧收起">›</button>
+          </div>
+          <div class="app-image-ws-history-body" id="acws-history-body">
+            <div class="app-copy-ws-history-list">
+              <button type="button" class="app-copy-ws-history-item" onclick="showToast('已载入历史文稿（演示）')">
+                <span class="app-copy-ws-history-item-title">春季新品种草文案</span>
+                <span class="app-copy-ws-history-item-meta">今天 14:32 · 约 486 字</span>
+              </button>
+              <button type="button" class="app-copy-ws-history-item" onclick="showToast('已载入历史文稿（演示）')">
+                <span class="app-copy-ws-history-item-title">品牌故事 V2</span>
+                <span class="app-copy-ws-history-item-meta">昨天 · 约 820 字</span>
+              </button>
+              <button type="button" class="app-copy-ws-history-item" onclick="showToast('已载入历史文稿（演示）')">
+                <span class="app-copy-ws-history-item-title">活动邮件提纲</span>
+                <span class="app-copy-ws-history-item-meta">3 天前 · 约 350 字</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="app-image-ws-footer">
+      <div class="app-image-ws-footer-l">
+        <span class="app-image-ws-footer-meta" id="acws-footer-meta"></span>
+      </div>
+      <div class="app-image-ws-footer-r">
+        <button type="button" class="app-image-ws-run" id="acws-run-btn" onclick="runAcwsApp()" aria-label="生成文案">
+          <svg class="app-image-ws-run-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <span class="app-image-ws-run-label">生成文案</span>
+          <span class="app-image-ws-run-price" id="acws-run-price">⚡0.3</span>
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- ===== GUID.AI 专用分享页（iframe 弹层）===== -->
+<div id="guid-share-modal" class="guid-share-modal" aria-hidden="true">
+  <div class="guid-share-modal-backdrop" onclick="closeGuidSharePage()"></div>
+  <div class="guid-share-modal-panel">
+    <iframe id="guid-share-frame" class="guid-share-frame" title="分享应用" src="about:blank"></iframe>
+  </div>
+</div>
+
+<!-- ===== 品牌系列详情弹窗 ===== -->
+<div class="modal-overlay" id="series-detail-modal"><div class="modal-content p-5" style="max-width:520px"><div class="flex items-center justify-between mb-3"><span class="text-base font-bold">📺 GUID.AI Original Series</span><button onclick="closeModal('series-detail-modal')" class="text-gray-400 text-xl">×</button></div>
+<div class="space-y-3">
+<div class="flex gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl cursor-pointer"><div class="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-lg shrink-0">🎭</div><div><div class="text-sm font-semibold">漫剧：重生之AI崛起</div><div class="text-[10px] text-gray-400">3集连载中</div><button class="text-[10px] text-blue-500 hover:underline">Watch →</button></div></div>
+<div class="flex gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl cursor-pointer"><div class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-lg shrink-0">🎨</div><div><div class="text-sm font-semibold">设计魔方：品牌VI全案</div><div class="text-[10px] text-gray-400">5集已完结</div><button class="text-[10px] text-blue-500 hover:underline">Watch →</button></div></div>
+</div></div></div>
+
+<!-- ===== 模型详情弹窗 ===== -->
+<div class="modal-overlay" id="model-detail-modal">
+  <div class="modal-content model-detail-modal__panel p-5">
+    <div class="model-detail-modal__head flex items-center justify-between mb-4">
+      <span class="text-base font-bold model-detail-title">模型名称</span>
+      <button type="button" onclick="closeModal('model-detail-modal')" class="model-detail-modal__close text-gray-400 hover:text-gray-600 text-xl leading-none w-8 h-8 flex items-center justify-center" aria-label="关闭">×</button>
+    </div>
+
+    <div class="model-detail-modal__body space-y-4">
+      <!-- 基本信息 -->
+      <div>
+        <div class="text-[11px] text-gray-500 font-medium mb-2">📋 基本信息</div>
+        <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-3 space-y-1.5 text-xs">
+          <div><span class="text-gray-400">模型名称：</span><span class="model-detail-name font-medium">-</span></div>
+          <div><span class="text-gray-400">供应商：</span><span class="model-detail-provider">-</span></div>
+          <div><span class="text-gray-400">计费类型：</span><span class="model-detail-billing">-</span></div>
+          <div><span class="text-gray-400">描述：</span><span class="model-detail-desc text-gray-500">-</span></div>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- API端点 -->
+      <div>
+        <div class="text-[11px] text-gray-500 font-medium mb-2">🔌 API端点</div>
+        <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-3">
+          <div class="flex items-center justify-between text-xs mb-1">
+            <span class="model-detail-endpoint font-mono text-blue-600 dark:text-blue-400">-</span>
+            <button onclick="copyDetailEndpoint()" class="text-[10px] px-2 py-0.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition">复制</button>
+          </div>
+          <div class="text-[10px] text-gray-400">Method: <span class="model-detail-method font-mono">POST</span></div>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 价格信息 -->
+      <div>
+        <div class="text-[11px] text-gray-500 font-medium mb-2">💰 价格信息</div>
+        <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-3 space-y-1.5 text-xs">
+          <div><span class="text-gray-400">输入价格：</span><span class="model-detail-in-price font-medium">-</span></div>
+          <div><span class="text-gray-400">输出价格：</span><span class="model-detail-out-price font-medium">-</span></div>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 可用令牌分组 -->
+      <div>
+        <div class="text-[11px] text-gray-500 font-medium mb-2">📦 可用令牌分组</div>
+        <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-3 space-y-2">
+          <div class="flex items-center justify-between text-xs p-1.5 border-b border-gray-100 dark:border-gray-700 last:border-0">
+            <span class="font-medium">default分组</span>
+            <span class="text-gray-400">按量计费</span>
+            <span class="model-detail-def-price text-green-600 inline-flex items-center gap-0.5"><span class="text-yellow-500 leading-none" aria-hidden="true">⚡</span>75.0000</span>
+          </div>
+          <div class="flex items-center justify-between text-xs p-1.5">
+            <span class="font-medium">vip分组</span>
+            <span class="text-gray-400">按量计费</span>
+            <span class="model-detail-vip-price text-green-600 inline-flex items-center gap-0.5"><span class="text-yellow-500 leading-none" aria-hidden="true">⚡</span>150.0000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 调用链路 -->
+      <div>
+        <div class="text-[11px] text-gray-500 font-medium mb-2">🔗 调用链路</div>
+        <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-3 text-xs">
+          <span class="model-detail-chain text-gray-500">auto分组调用链路 → default分组</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 创建密钥弹窗 ===== -->
+<div class="modal-overlay" id="create-key-modal">
+  <div class="modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-base font-bold">创建API密钥</span>
+      <button onclick="closeModal('create-key-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+
+    <div class="space-y-4">
+      <!-- 提示 -->
+      <div class="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
+        <span class="text-amber-500 text-sm">💡</span>
+        <span class="text-[11px] text-amber-700 dark:text-amber-300">密钥相当于你的账号密码，请妥善保管</span>
+      </div>
+
+      <!-- 密钥名称 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-1.5">密钥名称</div>
+        <input id="new-key-name" placeholder="例如：我的应用-生产" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800">
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 绑定模型 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-2">绑定模型</div>
+        <label class="flex items-start gap-3 p-3 border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/10 rounded-lg">
+          <input type="radio" name="bind-model" value="auto" checked class="sr-only" aria-hidden="true">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-medium">Auto（自动选择最优模型）</span>
+              <span class="text-[9px] text-blue-500 bg-blue-100 dark:bg-blue-900/40 px-1.5 py-0.5 rounded font-medium">推荐</span>
+            </div>
+            <div class="text-[10px] text-gray-400 mt-0.5">系统会根据你的请求内容自动选择最适合的模型，无需手动指定</div>
+          </div>
+        </label>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 渠道策略 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-2">渠道策略</div>
+        <div class="flex gap-1.5 flex-wrap">
+          <span class="channel-strategy-btn px-3 py-1.5 bg-blue-500 text-white text-[10px] rounded-lg cursor-pointer transition" data-strategy="price" onclick="selectStrategy(this)">价格优先</span>
+          <span class="channel-strategy-btn px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-strategy="speed" onclick="selectStrategy(this)">速度优先</span>
+          <span class="channel-strategy-btn px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-strategy="success" onclick="selectStrategy(this)">成功率优先</span>
+          <span class="channel-strategy-btn px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-strategy="custom" onclick="selectStrategy(this)">自定义</span>
+        </div>
+        <div class="text-[10px] text-gray-400 mt-1.5 leading-relaxed">
+          💡 价格优先：优先使用价格最低的渠道<br>
+          速度优先：优先使用响应最快的渠道<br>
+          成功率优先：优先使用最稳定的渠道<br>
+          自定义：按勾选的渠道列表顺序调用
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 调用限额 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-2">调用限额</div>
+        <div class="relative limit-select-wrapper" style="max-width:200px">
+          <div class="flex items-center justify-between text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 cursor-pointer limit-select-trigger" onclick="toggleLimitDropdown(event)">
+            <span class="limit-select-text">0 = 不限</span>
+            <span class="text-gray-400 text-[10px]">▼</span>
+          </div>
+          <div class="limit-dropdown hidden absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-50">
+            <div class="p-1">
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="0">0 = 不限</div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="100">100 次/日</div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="500">500 次/日</div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="1000">1,000 次/日</div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="5000">5,000 次/日</div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="10000">10,000 次/日</div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs" data-limit="50000">50,000 次/日</div>
+              <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+              <div class="limit-option px-3 py-2 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg cursor-pointer text-xs text-blue-500" data-limit="custom">自定义...</div>
+            </div>
+          </div>
+        </div>
+        <div class="text-[10px] text-gray-400 mt-1">💡 设置每日调用限额，防止超额消费。0表示不限。</div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 警告 -->
+      <div class="flex items-start gap-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+        <span class="text-red-500 text-sm">⚠️</span>
+        <span class="text-[11px] text-red-700 dark:text-red-300">请妥善保管密钥，它等同于您的账号密码。创建后请立即保存。</span>
+      </div>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div class="flex justify-end gap-2 mt-5 pt-4 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('create-key-modal')" class="px-5 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">取消</button>
+      <button class="confirm-create-key px-5 py-2 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition" onclick="confirmCreateKey()">确认创建</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 创建成功弹窗 ===== -->
+<div class="modal-overlay" id="create-key-success-modal">
+  <div class="modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-base font-bold">✅ 密钥创建成功</span>
+      <button onclick="closeModal('create-key-success-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+
+    <div class="space-y-4">
+      <!-- 警告 -->
+      <div class="flex items-start gap-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+        <span class="text-red-500 text-sm">⚠️</span>
+        <span class="text-[11px] text-red-700 dark:text-red-300">请立即保存此密钥，关闭后将无法再次查看！</span>
+      </div>
+
+      <!-- 密钥 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-1.5">你的API密钥：</div>
+        <div class="flex items-center gap-2">
+          <input id="new-key-value" readonly value="sk-guid-abc123def456ghi789jkl012mno345pqr678stu" class="flex-1 text-xs font-mono border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-gray-700 select-all">
+          <button class="copy-new-key-btn px-3 py-2.5 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition whitespace-nowrap" onclick="copyNewKey()">📋 复制</button>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+      <!-- 使用示例 -->
+      <div>
+        <div class="text-[11px] text-gray-500 mb-1.5">💡 使用示例：</div>
+        <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto">
+          <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap break-all">curl -X POST https://api.guid.ai/v1/chat/completions \
+  -H "Authorization: Bearer sk-guid-abc123..." \
+  -H "Content-Type: application/json" \
+  -d '{"model":"GPT-5.4","messages":[{"role":"user","content":"你好"}]}'</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2 mt-5 pt-4 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="copyNewKey()" class="px-5 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">复制密钥</button>
+      <button onclick="closeModal('create-key-success-modal')" class="px-5 py-2 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">我知道了</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 作品编辑弹窗 ===== -->
+<div class="modal-overlay" id="edit-work-modal">
+  <div class="modal-content p-5" style="max-width:480px">
+    <div class="flex items-center justify-between mb-3"><span class="text-base font-bold">✏️ 编辑作品</span><button onclick="closeModal('edit-work-modal')" class="text-gray-400 text-xl">×</button></div>
+
+    <div class="space-y-3">
+      <div><div class="text-[11px] text-gray-500 mb-1">作品标题</div><input id="ew-title" value="赛博朋克城市夜景" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div>
+
+      <div><div class="text-[11px] text-gray-500 mb-1">分类标签</div><div class="flex gap-1 mb-1"><span class="text-[10px] px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 rounded">国风 ✕</span><span class="text-[10px] px-2 py-0.5 bg-purple-50 dark:bg-purple-900/30 text-purple-600 rounded">赛博朋克 ✕</span><span class="text-[10px] px-2 py-0.5 bg-green-50 dark:bg-green-900/30 text-green-600 rounded">城市 ✕</span></div><input placeholder="添加标签" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div>
+
+      <div><div class="text-[11px] text-gray-500 mb-1">提示词</div><textarea rows="3" placeholder="输入提示词..." class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg p-2 resize-none focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800">A futuristic cyberpunk city at night, neon lights, holographic billboards, cinematic lighting, 8K</textarea></div>
+
+      <div><div class="text-[11px] text-gray-500 mb-1">使用价格</div><label class="flex items-center gap-1.5 text-xs mb-1.5 cursor-pointer"><input type="radio" name="ew-price" checked class="accent-blue-500"> 免费</label><label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="radio" name="ew-price" class="accent-blue-500"> 付费 ⚡<input type="number" value="0.5" class="w-12 text-xs border border-gray-200 dark:border-gray-600 rounded px-1 py-0.5 bg-transparent"> /次</label></div>
+
+      <div><div class="text-[11px] text-gray-500 mb-1">可见性 <span class="text-[9px] text-gray-400">（控制发布/下架）</span></div>
+        <label class="flex items-center text-xs mb-1.5 cursor-pointer p-2 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"><span class="flex items-center gap-1.5 flex-shrink-0"><input type="radio" name="ew-vis" checked class="accent-blue-500"> 公开分享</span><span class="flex-1 text-right text-[9px] text-gray-400">（作品发布，所有人可见）</span></label>
+        <label class="flex items-center text-xs cursor-pointer p-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"><span class="flex items-center gap-1.5 flex-shrink-0"><input type="radio" name="ew-vis" class="accent-blue-500"> 仅自己可见</span><span class="flex-1 text-right text-[9px] text-gray-400">（作品下架，只有自己可见）</span></label>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3"><div class="text-[10px] font-semibold text-gray-400 mb-1.5">📊 作品统计</div>
+        <div class="grid grid-cols-2 gap-1 text-[10px] text-gray-500"><span>浏览量：3,456</span><span>点赞数：234</span><span>使用次数：456</span><span>收益：⚡228</span></div>
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2 mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('edit-work-modal')" class="text-xs px-4 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">取消</button>
+      <button onclick="saveEditWork()" class="text-xs px-4 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 确认删除弹窗 ===== -->
+<div class="modal-overlay" id="delete-work-modal">
+  <div class="modal-content p-5" style="max-width:400px">
+    <div class="text-center mb-4">
+      <div class="text-3xl mb-2">⚠️</div>
+      <div class="text-base font-bold mb-1">确认删除</div>
+      <div class="text-xs text-gray-500">确定要删除作品「<span id="dw-title">赛博朋克城市夜景</span>」吗？<br>此操作不可恢复，已产生的收益不受影响。</div>
+    </div>
+    <div class="flex gap-2">
+      <button onclick="closeModal('delete-work-modal')" class="flex-1 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">取消</button>
+      <button onclick="confirmDeleteWork()" class="flex-1 py-2 text-xs bg-red-500 text-white rounded-lg hover:bg-red-600">确认删除</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 帮助反馈弹窗 ===== -->
+<div class="modal-overlay" id="feedback-modal"><div class="modal-content p-5" style="max-width:460px"><div class="flex items-center justify-between mb-3"><span class="text-base font-bold">❓ 帮助反馈</span><button onclick="closeModal('feedback-modal')" class="text-gray-400 text-xl">×</button></div>
+<div class="space-y-3"><div><div class="text-[11px] text-gray-500 mb-1">反馈类型</div><select class="w-full text-xs border rounded-lg px-3 py-2 bg-white dark:bg-gray-800"><option>功能建议</option><option>BUG反馈</option><option>使用疑问</option></select></div>
+<div><div class="text-[11px] text-gray-500 mb-1">内容</div><textarea placeholder="请详细描述..." class="w-full text-xs border rounded-lg p-3 h-24 resize-none focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></textarea></div>
+<div><div class="text-[11px] text-gray-500 mb-1">联系方式</div><input placeholder="邮箱或手机号" class="w-full text-xs border rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div></div>
+<div class="flex justify-end gap-2 mt-4 pt-3 border-t"><button onclick="closeModal('feedback-modal')" class="text-xs px-4 py-1.5 border rounded-lg">取消</button><button class="submit-feedback text-xs px-4 py-1.5 bg-blue-500 text-white rounded-lg">提交反馈</button></div>
+</div></div>
+
+<!-- ===== 在线客服弹窗 ===== -->
+<div class="modal-overlay" id="service-modal"><div class="modal-content p-5" style="max-width:420px"><div class="flex items-center justify-between mb-3"><span class="text-base font-bold">💬 在线客服</span><button onclick="closeModal('service-modal')" class="text-gray-400 text-xl">×</button></div>
+<div class="h-40 bg-gray-50 dark:bg-gray-800 rounded-xl mb-3 p-3 overflow-y-auto"><div class="flex justify-start mb-2"><div class="text-[11px] bg-white dark:bg-gray-700 p-2 rounded-lg max-w-[80%] border">您好！欢迎来到GUID.AI，请问有什么可以帮您？</div></div><div class="flex justify-end"><div class="text-[11px] bg-blue-500 text-white p-2 rounded-lg max-w-[80%]">你好，我想咨询充值</div></div></div>
+<div class="flex gap-2"><input placeholder="输入消息..." class="flex-1 text-xs border rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"><button class="text-xs px-3 py-2 bg-blue-500 text-white rounded-lg">发送</button></div>
+</div></div>
+
+<!-- ===== 客服投诉弹窗 ===== -->
+<div class="modal-overlay" id="complaint-modal"><div class="modal-content p-5" style="max-width:460px"><div class="flex items-center justify-between mb-3"><span class="text-base font-bold">⚠️ 客服投诉</span><button onclick="closeModal('complaint-modal')" class="text-gray-400 text-xl">×</button></div>
+<div class="space-y-3"><div><div class="text-[11px] text-gray-500 mb-1">投诉对象</div><input placeholder="客服名称/工号" class="w-full text-xs border rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"></div>
+<div><div class="text-[11px] text-gray-500 mb-1">投诉原因</div><select class="w-full text-xs border rounded-lg px-3 py-2 bg-white dark:bg-gray-800"><option>响应慢</option><option>态度差</option><option>问题未解决</option></select></div>
+<div><textarea placeholder="请详细描述投诉内容..." class="w-full text-xs border rounded-lg p-3 h-20 resize-none focus:border-blue-500 focus:outline-none"></textarea></div></div>
+<div class="flex justify-end gap-2 mt-4 pt-3 border-t"><button onclick="closeModal('complaint-modal')" class="text-xs px-4 py-1.5 border rounded-lg">取消</button><button class="text-xs px-4 py-1.5 bg-red-500 text-white rounded-lg">提交投诉</button></div>
+</div></div>
+
+<!-- ===== 资产库弹窗 ===== -->
+<div class="modal-overlay" id="asset-modal">
+  <div class="modal-content p-5" style="max-width:640px">
+    <div class="flex items-center justify-between mb-2"><span class="text-base font-bold">💎 我的资产</span></div>
+    <div class="text-[11px] text-gray-400 mb-3">选择已保存的资产，或从本地上传至资料库</div>
+
+    <!-- Tab -->
+    <div class="flex items-center gap-1 mb-3">
+      <button class="asset-tab text-[11px] px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 cursor-pointer" data-tab="image" onclick="switchAssetTab('image',this)">📷 图片</button>
+      <button class="asset-tab text-[11px] px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700" data-tab="video" onclick="switchAssetTab('video',this)">🎬 视频</button>
+      <button class="asset-tab text-[11px] px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700" data-tab="text" onclick="switchAssetTab('text',this)">📝 文本</button>
+      <button class="asset-tab text-[11px] px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700" data-tab="audio" onclick="switchAssetTab('audio',this)">🎵 音频</button>
+    </div>
+
+    <!-- 本地上传 -->
+    <div id="asset-upload-zone" onclick="triggerAssetUpload()" class="mb-3 border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition">
+      <input type="file" id="asset-upload-input" class="hidden" multiple onchange="handleAssetUpload(this)">
+      <div class="text-2xl mb-1">📤</div>
+      <div class="text-[11px] text-gray-600 dark:text-gray-300 font-medium">点击此处上传</div>
+      <div id="asset-upload-hint" class="text-[10px] text-gray-400 mt-1">支持 JPG / PNG / WebP 等图片</div>
+    </div>
+    <div id="asset-upload-progress" class="hidden mb-3">
+      <div class="flex items-center justify-between text-[10px] text-gray-500 mb-1"><span id="asset-upload-status">上传中...</span><span id="asset-upload-pct">0%</span></div>
+      <div class="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div id="asset-upload-bar" class="h-full bg-blue-500 rounded-full transition-all" style="width:0%"></div></div>
+    </div>
+
+    <!-- 搜索 -->
+    <div class="relative mb-3">
+      <input id="asset-search" placeholder="🔍 搜索资产..." oninput="filterAssetLibrary()" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800">
+    </div>
+
+    <!-- 📷 图片 Tab -->
+    <div id="asset-tab-image" class="max-h-72 overflow-y-auto">
+      <div id="asset-image-list" class="space-y-3"></div>
+      <div id="asset-image-grid" class="grid grid-cols-4 gap-2">
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="参考图_001.jpg" data-date="2026-05-19">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-blue-200 to-purple-200 dark:from-blue-700 dark:to-purple-700 flex items-center justify-center text-white text-lg">🖼️</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="城市夜景.jpg" data-date="2026-05-18">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-green-200 to-teal-200 dark:from-green-700 dark:to-teal-700 flex items-center justify-center text-white text-lg">🌃</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="产品展示.png" data-date="2026-05-17">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-amber-200 to-orange-200 dark:from-amber-700 dark:to-orange-700 flex items-center justify-center text-white text-lg">📦</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="人物写真.jpg" data-date="2026-05-16">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-pink-200 to-rose-200 dark:from-pink-700 dark:to-rose-700 flex items-center justify-center text-white text-lg">👤</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="水墨山水.jpg" data-date="2026-05-15">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-slate-200 to-gray-200 dark:from-slate-600 dark:to-gray-600 flex items-center justify-center text-white text-lg">🎋</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="美食摄影.jpg" data-date="2026-05-14">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-orange-200 to-yellow-200 dark:from-orange-700 dark:to-yellow-700 flex items-center justify-center text-white text-lg">🍜</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="科幻概念.jpg" data-date="2026-05-13">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-indigo-200 to-blue-200 dark:from-indigo-700 dark:to-blue-700 flex items-center justify-center text-white text-lg">🚀</div>
+        </div>
+        <div class="asset-img-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'image',event)" data-name="自然风光.jpg" data-date="2026-05-12">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'image')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-emerald-200 to-green-200 dark:from-emerald-700 dark:to-green-700 flex items-center justify-center text-white text-lg">🏔️</div>
+        </div>
+      </div>
+      <div id="asset-image-uploaded" class="grid grid-cols-4 gap-2 mt-2"></div>
+      <button onclick="showToast('🔄 加载更多')" class="w-full mt-2 py-1.5 text-[10px] text-blue-600 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">🔄 加载更多</button>
+    </div>
+
+    <!-- 🎬 视频 Tab -->
+    <div id="asset-tab-video" class="hidden max-h-72 overflow-y-auto">
+      <div id="asset-video-list" class="space-y-3"></div>
+      <div id="asset-video-grid" class="grid grid-cols-4 gap-2">
+        <div class="asset-video-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'video',event)" data-name="短片_001.mp4" data-date="2026-05-19">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'video')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-slate-600 to-blue-800 dark:from-slate-700 dark:to-blue-900 flex items-center justify-center text-white text-2xl relative">🎬<span class="absolute bottom-1.5 right-1.5 text-[8px] bg-black/50 px-1 rounded">0:08</span></div>
+        </div>
+        <div class="asset-video-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'video',event)" data-name="产品展示_竖屏.mp4" data-date="2026-05-18">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'video')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-indigo-600 to-purple-800 dark:from-indigo-700 dark:to-purple-900 flex items-center justify-center text-white text-2xl relative">🎬<span class="absolute bottom-1.5 right-1.5 text-[8px] bg-black/50 px-1 rounded">0:12</span></div>
+        </div>
+        <div class="asset-video-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'video',event)" data-name="城市延时.mp4" data-date="2026-05-17">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'video')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-teal-600 to-cyan-800 dark:from-teal-700 dark:to-cyan-900 flex items-center justify-center text-white text-2xl relative">🎬<span class="absolute bottom-1.5 right-1.5 text-[8px] bg-black/50 px-1 rounded">0:15</span></div>
+        </div>
+        <div class="asset-video-item bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="toggleAssetRecord(this,'video',event)" data-name="口播参考.mp4" data-date="2026-05-16">
+          <div class="asset-card-actions"><button type="button" class="asset-card-preview-btn" title="预览" aria-label="预览" onclick="event.stopPropagation();previewAssetRecord(this,'video')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+          <div class="aspect-square bg-gradient-to-br from-rose-600 to-orange-700 dark:from-rose-700 dark:to-orange-800 flex items-center justify-center text-white text-2xl relative">🎬<span class="absolute bottom-1.5 right-1.5 text-[8px] bg-black/50 px-1 rounded">0:06</span></div>
+        </div>
+      </div>
+      <div id="asset-video-uploaded" class="grid grid-cols-4 gap-2 mt-2"></div>
+      <button onclick="showToast('🔄 加载更多')" class="w-full mt-2 py-1.5 text-[10px] text-blue-600 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">🔄 加载更多</button>
+    </div>
+
+    <!-- 📝 文本 Tab -->
+    <div id="asset-tab-text" class="hidden max-h-72 overflow-y-auto">
+      <div id="asset-text-list" class="space-y-3"></div>
+      <div id="asset-text-uploaded" class="space-y-1 hidden"></div>
+      <div class="asset-text-item p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition" data-name="爆款写作提示词 v1" data-date="2026-05-19" data-asset-text="A futuristic cyberpunk city at night, neon lights, flying cars, holographic billboards, cinematic lighting, 8K" onclick="toggleAssetRecord(this,'text',event)"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><span class="text-xs font-medium">📝 爆款写作提示词 v1</span><div class="text-[10px] text-gray-400 truncate mt-0.5">"A futuristic cyberpunk city at night..."</div><div class="text-[9px] text-gray-400 mt-0.5">2026-05-19</div></div><div class="flex gap-1 shrink-0 ml-2"><button type="button" class="text-[9px] px-2 py-0.5 border border-gray-200 rounded hover:bg-gray-50" onclick="event.stopPropagation();viewAssetTextRecord(this)" title="查看">👁️</button></div></div></div>
+      <div class="asset-text-item p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition" data-name="产品海报提示词" data-date="2026-05-18" data-asset-text="Product poster, minimalist design, clean composition, elegant typography, professional photography lighting" onclick="toggleAssetRecord(this,'text',event)"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><span class="text-xs font-medium">📝 产品海报提示词</span><div class="text-[10px] text-gray-400 truncate mt-0.5">"Product poster, minimalist design..."</div><div class="text-[9px] text-gray-400 mt-0.5">2026-05-18</div></div><div class="flex gap-1 shrink-0 ml-2"><button type="button" class="text-[9px] px-2 py-0.5 border border-gray-200 rounded hover:bg-gray-50" onclick="event.stopPropagation();viewAssetTextRecord(this)" title="查看">👁️</button></div></div></div>
+      <div class="asset-text-item p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition" data-name="有声读物脚本 - 第一章" data-date="2026-05-17" data-asset-text="在很久很久以前，有一个美丽的王国，国王和王后过着幸福的生活。他们有一个可爱的女儿，公主有着一头金色的长发..." onclick="toggleAssetRecord(this,'text',event)"><div class="flex justify-between items-start"><div class="flex-1 min-w-0"><span class="text-xs font-medium">📝 有声读物脚本 - 第一章</span><div class="text-[10px] text-gray-400 truncate mt-0.5">"在很久很久以前，有一个美丽的王国..."</div><div class="text-[9px] text-gray-400 mt-0.5">2026-05-17</div></div><div class="flex gap-1 shrink-0 ml-2"><button type="button" class="text-[9px] px-2 py-0.5 border border-gray-200 rounded hover:bg-gray-50" onclick="event.stopPropagation();viewAssetTextRecord(this)" title="查看">👁️</button></div></div></div>
+      <button onclick="showToast('🔄 加载更多')" class="w-full mt-1 py-1.5 text-[10px] text-blue-600 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">🔄 加载更多</button>
+    </div>
+
+    <!-- 🎵 音频 Tab -->
+    <div id="asset-tab-audio" class="hidden max-h-72 overflow-y-auto">
+      <div id="asset-audio-list" class="space-y-3"></div>
+      <div id="asset-audio-uploaded" class="space-y-1 hidden"></div>
+      <div class="asset-audio-item p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50" data-name="背景音乐_01.mp3" data-date="2026-05-19" onclick="toggleAssetRecord(this,'audio',event)"><div class="flex justify-between items-center"><div class="flex items-center gap-2 min-w-0"><span class="text-sm">🎵</span><div class="min-w-0"><div class="text-xs font-medium truncate">背景音乐_01.mp3</div><div class="text-[9px] text-gray-400">2026-05-19</div></div></div><div class="flex gap-1 shrink-0"><button type="button" class="text-[9px] px-2 py-0.5 border border-gray-200 rounded hover:bg-gray-50" onclick="event.stopPropagation();showToast('▶ 播放音频')" title="播放">▶️</button></div></div></div>
+      <div class="asset-audio-item p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50" data-name="配音_试听.mp3" data-date="2026-05-18" onclick="toggleAssetRecord(this,'audio',event)"><div class="flex justify-between items-center"><div class="flex items-center gap-2 min-w-0"><span class="text-sm">🎵</span><div class="min-w-0"><div class="text-xs font-medium truncate">配音_试听.mp3</div><div class="text-[9px] text-gray-400">2026-05-18</div></div></div><div class="flex gap-1 shrink-0"><button type="button" class="text-[9px] px-2 py-0.5 border border-gray-200 rounded hover:bg-gray-50" onclick="event.stopPropagation();showToast('▶ 播放音频')" title="播放">▶️</button></div></div></div>
+    </div>
+
+    <div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between gap-3">
+      <button type="button" onclick="closeModal('asset-modal')" class="asset-cancel-icon-btn" aria-label="关闭">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="flex items-center gap-3">
+        <span id="asset-count-label" class="text-[10px] text-gray-400">共 15 个资产</span>
+        <button type="button" id="asset-confirm-btn" onclick="confirmAssetPicker()" class="asset-confirm-icon-btn" aria-label="确定">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 资产库：文本查看 -->
+<div class="modal-overlay" id="asset-text-view-modal" onclick="if(event.target===this)closeModal('asset-text-view-modal')">
+  <div class="modal-content p-5" style="max-width:520px" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between mb-3">
+      <span id="asset-text-view-title" class="text-base font-bold truncate pr-2">📝 查看文本</span>
+      <button type="button" onclick="closeModal('asset-text-view-modal')" class="text-gray-400 text-xl shrink-0" aria-label="关闭">×</button>
+    </div>
+    <textarea id="asset-text-view-body" readonly rows="10" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 leading-relaxed resize-none focus:outline-none"></textarea>
+  </div>
+</div>
+
+<!-- ===== 音色克隆弹窗 ===== -->
+<div class="modal-overlay" id="voice-clone-modal">
+  <div class="modal-content p-5" style="max-width:480px">
+    <div class="flex items-center justify-between mb-2"><span class="text-base font-bold">🎤 新建音色</span><button onclick="closeModal('voice-clone-modal')" class="text-gray-400 text-xl">×</button></div>
+    <div class="text-[11px] text-gray-400 mb-3">上传或录制音频，AI 将克隆你的专属音色，首次激活后永久有效</div>
+    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 text-[11px] text-blue-700 dark:text-blue-300 mb-4 space-y-0.5">
+      <div>💡 • 请上传清晰的人声录音，背景噪音越小效果越好</div>
+      <div>&nbsp;&nbsp;• 建议音频时长 10-60 秒，效果最佳</div>
+      <div>&nbsp;&nbsp;• 支持格式：MP3、WAV、AAC、M4A</div>
+      <div>&nbsp;&nbsp;• 首次激活后永久有效，可在「选择音色」中随时使用</div>
+    </div>
+    <div id="voice-source-row" class="voice-source-row">
+      <div id="voice-upload-area" class="voice-source-card" onclick="startVoiceUpload()">
+        <div class="text-4xl mb-2">📁</div>
+        <div class="text-sm font-medium mb-1">点击上传音频</div>
+        <div class="text-[10px] text-gray-400">MP3 / WAV / AAC / M4A<br>建议 10-60 秒</div>
+      </div>
+      <div class="voice-source-card voice-record-card">
+        <button type="button" id="voice-record-btn" onclick="toggleVoiceCloneRecording(event)">
+          <div id="voice-record-icon" class="text-4xl mb-2">🎙️</div>
+          <div id="voice-record-label" class="text-sm font-medium mb-1">点击开始录音</div>
+          <div id="voice-record-hint" class="text-[10px] text-gray-400">使用麦克风录制<br>建议 10-60 秒</div>
+          <div id="voice-record-timer" class="voice-record-timer hidden">00:00</div>
+        </button>
+      </div>
+    </div>
+    <div id="voice-upload-progress" class="hidden mb-4">
+      <div class="flex items-center justify-between text-xs mb-1"><span>⏳ 上传中...</span><span id="voice-upload-pct">0%</span></div>
+      <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div id="voice-upload-bar" class="h-full bg-blue-500 rounded-full transition-all" style="width:0%"></div></div>
+      <div class="text-[10px] text-gray-400 mt-1" id="voice-upload-name">正在上传音频文件...</div>
+    </div>
+    <div id="voice-upload-done" class="hidden mb-4">
+      <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 mb-3"><div class="text-xs font-semibold text-green-700 dark:text-green-300">✅ 上传成功</div><div class="text-[10px] text-gray-500 mt-0.5" id="voice-file-info">文件：my_voice.mp3 ｜ 时长：00:00:35</div></div>
+      <div class="h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 text-xs"><span>🔊 音频波形预览  ▶ 0:00 / 0:35</span></div>
+    </div>
+    <div class="mb-4"><div class="text-[11px] text-gray-500 mb-1">音色名称（选填）</div><input id="voice-name-input" placeholder="例如：我的专属音色" class="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800"></div>
+    <div id="voice-clone-progress" class="hidden mb-4">
+      <div class="flex items-center justify-between text-xs mb-1"><span>⏳ AI正在克隆你的音色...</span><span id="voice-clone-pct">0%</span></div>
+      <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div id="voice-clone-bar" class="h-full bg-purple-500 rounded-full transition-all" style="width:0%"></div></div>
+      <div class="text-[10px] text-gray-400 mt-1" id="voice-clone-status">正在分析音频特征...</div>
+    </div>
+    <div id="voice-clone-success" class="hidden mb-4">
+      <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-4"><div class="text-center mb-3"><div class="text-3xl mb-1">✅</div><div class="text-sm font-bold">音色克隆成功！</div><div class="text-[10px] text-gray-500 mt-0.5" id="voice-clone-name-display">音色名称：我的专属音色</div></div><div class="h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 text-xs cursor-pointer hover:bg-gray-200" onclick="showToast('🔊 播放试听')">🔊 试听克隆音色  ▶ 0:00 / 0:05</div><div class="text-[9px] text-gray-400 mt-2 text-center">"你好，这是AI克隆的声音效果"</div><div class="text-[10px] text-blue-600 mt-2 text-center">💡 音色已保存，可在「选择音色」中随时使用</div></div>
+    </div>
+    <div class="text-[10px] text-amber-600 mb-4">⚠️ 克隆的音色仅限本人使用，请勿上传他人音频</div>
+    <button type="button" id="voice-start-clone" onclick="startVoiceClone()" class="w-full py-2 text-xs bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-blue-600">开始克隆</button>
+  </div>
+</div>
+
+<!-- ===== 选择音色弹窗 ===== -->
+<div class="modal-overlay" id="voice-picker-modal">
+  <div class="modal-content">
+    <div class="voice-picker-head">
+      <span class="text-base font-bold text-gray-900 dark:text-white">选择音色</span>
+      <button type="button" onclick="closeModal('voice-picker-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none w-8 h-8 flex items-center justify-center" aria-label="关闭">×</button>
+    </div>
+    <div id="voice-picker-filters-wrap" class="voice-picker-filters-wrap">
+      <div id="voice-picker-filters" class="voice-picker-filters"></div>
+    </div>
+    <button type="button" id="voice-picker-collapse-btn" class="voice-picker-collapse" onclick="toggleVoicePickerFilters()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+      <span id="voice-picker-collapse-text">收起</span>
+    </button>
+    <div class="voice-picker-body">
+      <div id="voice-picker-grid" class="voice-picker-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 法律信息弹窗 ===== -->
+<div class="modal-overlay" id="legal-modal">
+  <div class="modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📄 用户协议</span>
+      <button onclick="closeModal('legal-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+    <div class="space-y-4 text-xs leading-relaxed text-gray-600 dark:text-gray-400 max-h-80 overflow-y-auto">
+      <div><strong class="text-gray-800 dark:text-gray-200">1. 服务说明</strong><br>GUID.AI是一个AI大模型聚合平台，为用户提供AI聊天、图片生成、视频生成、音频生成等服务。</div>
+      <div><strong class="text-gray-800 dark:text-gray-200">2. 账户注册</strong><br>用户使用手机号或邮箱验证码登录即自动注册，无需单独注册流程。</div>
+      <div><strong class="text-gray-800 dark:text-gray-200">3. 积分与支付</strong><br>平台使用⚡算力作为积分单位，充值比例为¥1=⚡1。积分永久有效，不可转让。</div>
+      <div><strong class="text-gray-800 dark:text-gray-200">4. 用户行为规范</strong><br>用户不得使用平台服务从事违法违规活动，不得利用AI生成违反法律法规的内容。</div>
+      <div><strong class="text-gray-800 dark:text-gray-200">5. 知识产权</strong><br>用户使用平台生成的内容，知识产权归用户所有。平台不对用户生成内容的合法性承担责任。</div>
+      <div><strong class="text-gray-800 dark:text-gray-200">6. 免责声明</strong><br>平台按"现状"提供服务，不对服务的连续性、及时性、安全性做任何明示或默示的保证。</div>
+      <div><strong class="text-gray-800 dark:text-gray-200">7. 协议修改</strong><br>平台有权根据需要修改本协议，修改后的协议一经发布即生效。</div>
+    </div>
+    <div class="flex justify-end mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('legal-modal')" class="px-5 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 通知弹窗 ===== -->
+<div class="modal-overlay" id="notif-modal">
+  <div class="modal-content p-5" style="max-width:480px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">🔔 通知中心</span>
+      <div class="flex items-center gap-2">
+        <button onclick="openModal('notif-settings-modal')" class="text-gray-400 hover:text-gray-600 text-sm">⚙️</button>
+        <button onclick="closeModal('notif-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+      </div>
+    </div>
+    <div class="flex gap-1 mb-3 flex-wrap">
+      <span class="ntab active px-2.5 py-1 bg-blue-500 text-white text-[10px] rounded-lg cursor-pointer transition" data-ntab="all">全部</span>
+      <span class="ntab px-2.5 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-ntab="unread">未读</span>
+      <span class="ntab px-2.5 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-ntab="interact">互动</span>
+      <span class="ntab px-2.5 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-ntab="income">收益</span>
+      <span class="ntab px-2.5 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition" data-ntab="system">系统</span>
+    </div>
+    <div class="border-t border-gray-100 dark:border-gray-700"></div>
+    <div class="space-y-2 max-h-72 overflow-y-auto py-2" id="notif-modal-body"></div>
+    <div class="text-center mt-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('notif-modal');showPage('notifications')" class="text-[11px] text-blue-500 hover:underline">查看全部通知 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 通知设置弹窗 ===== -->
+<div class="modal-overlay" id="notif-settings-modal">
+  <div class="modal-content notif-prefs-modal-content p-5" style="max-width:520px">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-base font-bold">通知偏好</span>
+      <button type="button" onclick="closeModal('notif-settings-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none" aria-label="关闭">×</button>
+    </div>
+    <div class="notif-prefs-form" id="modal-notif-prefs">
+      <div class="notif-prefs-field">
+        <div class="notif-prefs-label">通知方式 <span class="notif-prefs-required" aria-hidden="true">*</span></div>
+        <div class="notif-prefs-radio-group" role="radiogroup" aria-label="通知方式">
+          <label class="notif-prefs-radio"><input type="radio" name="notif-method-modal" value="email" checked> 邮件通知</label>
+          <label class="notif-prefs-radio"><input type="radio" name="notif-method-modal" value="webhook"> Webhook通知</label>
+          <label class="notif-prefs-radio"><input type="radio" name="notif-method-modal" value="bark"> Bark通知</label>
+          <label class="notif-prefs-radio"><input type="radio" name="notif-method-modal" value="gotify"> Gotify通知</label>
+        </div>
+      </div>
+      <div class="notif-prefs-field">
+        <div class="notif-prefs-label">
+          额度预警阈值
+          <span class="notif-prefs-equiv">等价金额: <span class="notif-quota-usd">$1.00</span></span>
+          <span class="notif-prefs-required" aria-hidden="true">*</span>
+        </div>
+        <div class="notif-prefs-input-wrap">
+          <svg class="notif-prefs-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <input type="number" class="notif-prefs-input notif-quota-threshold" value="500000" min="0" step="1" inputmode="numeric" aria-label="额度预警阈值">
+        </div>
+        <p class="notif-prefs-hint">当钱包或订阅剩余额度低于此数值时，系统将通过选择的方式发送通知</p>
+      </div>
+      <div class="notif-prefs-field">
+        <div class="notif-prefs-check-list">
+          <label class="notif-prefs-check-row">
+            <span>创意被引用</span>
+            <input type="checkbox" class="notif-prefs-toggle" data-notif-key="citeCreative" checked>
+          </label>
+          <label class="notif-prefs-check-row">
+            <span>邀请朋友成功</span>
+            <input type="checkbox" class="notif-prefs-toggle" data-notif-key="inviteSuccess" checked>
+          </label>
+        </div>
+        <p class="notif-prefs-hint">满足条件时，将通过已选通知方式提醒你</p>
+      </div>
+      <div class="notif-prefs-field notif-prefs-email-field">
+        <div class="notif-prefs-label">通知邮箱</div>
+        <div class="notif-prefs-input-wrap">
+          <svg class="notif-prefs-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <input type="email" class="notif-prefs-input notif-notify-email" placeholder="留空则使用账号绑定的邮箱" autocomplete="email" aria-label="通知邮箱">
+        </div>
+        <p class="notif-prefs-hint">设置用于接收额度预警的邮箱地址，不填则使用账号绑定的邮箱</p>
+      </div>
+      <div class="notif-prefs-actions">
+        <button type="button" class="notif-prefs-save-btn" onclick="saveNotifSettings()">保存设置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 通知详情弹窗 ===== -->
+<div class="modal-overlay" id="notif-detail-modal">
+  <div class="modal-content p-5" style="max-width:440px">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-base font-bold">📋 通知详情</span>
+      <button onclick="closeModal('notif-detail-modal')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+    <div class="space-y-3">
+      <div class="flex items-center gap-2"><span class="text-lg">❤️</span><span class="text-xs font-medium text-blue-600">点赞通知</span></div>
+      <div class="text-xs text-gray-600 dark:text-gray-400">用户「小明」点赞了你的作品</div>
+      <div class="bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl p-3 space-y-1.5 text-xs">
+        <div><span class="text-gray-400">作品名称：</span><span class="font-medium">赛博朋克城市夜景</span></div>
+        <div><span class="text-gray-400">作品ID：</span>INS_001234</div>
+        <div><span class="text-gray-400">点赞时间：</span>2026-05-20 10:30:00</div>
+        <div><span class="text-gray-400">当前点赞数：</span>1,234</div>
+      </div>
+    </div>
+    <div class="flex justify-center gap-3 mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+      <button onclick="closeModal('notif-detail-modal');showToast('🖼️ 跳转作品详情')" class="px-4 py-1.5 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">查看作品</button>
+      <button onclick="closeModal('notif-detail-modal');showToast('💬 打开私信窗口')" class="px-4 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">回复用户</button>
+    </div>
+  </div>
+</div>
+
+<!-- 图片页：提示词优化弹窗 -->
+<div id="image-prompt-optimize-modal" class="modal-overlay" aria-hidden="true" onclick="if(event.target===this)closeImagePromptOptimizeModal()">
+  <div class="ipom-panel" role="dialog" aria-modal="true" aria-labelledby="ipom-modal-title" onclick="event.stopPropagation()">
+    <div class="ipom-head">
+      <h3 id="ipom-modal-title">✨ 提示词优化</h3>
+    </div>
+    <div class="ipom-prompt-wrap">
+      <textarea id="ipom-prompt-input" rows="3" placeholder="在此编辑或查看待优化的提示词…"></textarea>
+    </div>
+    <div class="ipom-body">
+      <div class="ipom-schemes" id="ipom-scheme-list"></div>
+    </div>
+    <div class="ipom-foot">
+      <button type="button" class="ipom-cancel-btn" onclick="closeImagePromptOptimizeModal()" aria-label="关闭">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <button type="button" class="ipom-confirm-btn" onclick="confirmImagePromptOptimize()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 视频页：提示词优化弹窗 -->
+<div id="video-prompt-optimize-modal" class="modal-overlay" aria-hidden="true" onclick="if(event.target===this)closeVideoPromptOptimizeModal()">
+  <div class="ipom-panel" role="dialog" aria-modal="true" aria-labelledby="vpom-modal-title" onclick="event.stopPropagation()">
+    <div class="ipom-head">
+      <h3 id="vpom-modal-title">✨ 提示词优化</h3>
+    </div>
+    <div class="ipom-prompt-wrap">
+      <textarea id="vpom-prompt-input" rows="3" placeholder="在此编辑或查看待优化的视频描述…"></textarea>
+    </div>
+    <div class="ipom-body">
+      <div class="ipom-schemes" id="vpom-scheme-list"></div>
+    </div>
+    <div class="ipom-foot">
+      <button type="button" class="ipom-cancel-btn" onclick="closeVideoPromptOptimizeModal()" aria-label="关闭">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <button type="button" class="ipom-confirm-btn" onclick="confirmVideoPromptOptimize()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 图片/视频页提示词优化进度 -->
+<div id="prompt-optimize-overlay" class="hidden" aria-hidden="true">
+  <div class="prompt-optimize-backdrop" aria-hidden="true"></div>
+  <div class="prompt-optimize-panel" role="dialog" aria-modal="true" aria-labelledby="prompt-optimize-title">
+    <div class="prompt-optimize-icon" aria-hidden="true">✨</div>
+    <p class="prompt-optimize-page-tag" id="prompt-optimize-page-tag">图片创作</p>
+    <h3 class="prompt-optimize-title" id="prompt-optimize-title">提示词优化中</h3>
+    <p class="prompt-optimize-style-name" id="prompt-optimize-style-name">—</p>
+    <div class="prompt-optimize-bar-wrap">
+      <div id="prompt-optimize-progress-bar" class="prompt-optimize-progress-bar"></div>
+    </div>
+    <p class="prompt-optimize-status" id="prompt-optimize-status">正在准备...</p>
+    <p class="prompt-optimize-hint">AI 正在根据所选风格优化您的创作描述，请稍候</p>
+    <p class="prompt-optimize-pct" id="prompt-optimize-pct">0%</p>
+  </div>
+</div>
+
+<!-- 图片/视频/音频页手机端大弹窗（挂 body） -->
+<div id="media-mobile-sheet" class="hidden" aria-hidden="true">
+  <div class="media-mobile-sheet-backdrop" onclick="closeMediaMobileSheet()"></div>
+  <div class="media-mobile-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="media-sheet-title">
+    <div class="media-mobile-sheet-head">
+      <h3 id="media-sheet-title">选项</h3>
+      <button type="button" class="media-mobile-sheet-close" onclick="closeMediaMobileSheet()" aria-label="关闭">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="media-sheet-body"></div>
+  </div>
+</div>
+
+<!-- 文字页手机端大弹窗（挂 body，避免挡住顶部栏/消息区点击） -->
+<div id="chat-mobile-sheet" class="chat-mobile-sheet hidden" aria-hidden="true">
+  <div class="chat-mobile-sheet-backdrop" onclick="closeChatMobileSheet()"></div>
+  <div class="chat-mobile-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="chat-sheet-title">
+    <div class="chat-mobile-sheet-head">
+      <h3 id="chat-sheet-title">选项</h3>
+      <button type="button" class="chat-mobile-sheet-close" onclick="closeChatMobileSheet()" aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="chat-sheet-body"></div>
+  </div>
+</div>
+
+<!-- 多模型协作配置面板（挂到 body，避免挡住聊天消息区点击） -->
+<div id="collab-panel" class="hidden fixed inset-0 z-[80] items-center justify-center">
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="document.getElementById('collab-panel').classList.add('hidden');"></div>
+  <div class="relative bg-white dark:bg-gray-800 border border-purple-200 dark:border-purple-800 rounded-2xl shadow-2xl p-5 w-full max-w-lg mx-4 pointer-events-auto">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-sm font-semibold text-purple-700 dark:text-purple-300">⚡ 多模型协作配置</span>
+      <button onclick="document.getElementById('collab-panel').classList.add('hidden');" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-[11px] text-gray-500 shrink-0">🤖 参与模型：</span>
+      <select id="collab-new-select" class="flex-1 text-[11px] border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 outline-none">
+        <option value="">选择模型...</option>
+        <option>GPT-4 Turbo</option>
+        <option>Claude 3.5 Sonnet</option>
+        <option>DeepSeek V3</option>
+        <option>Gemini 2.5 Pro</option>
+        <option>Grok 3</option>
+        <option>Qwen Max</option>
+        <option>Moonshot V1</option>
+        <option>ChatGLM-4</option>
+      </select>
+      <button onclick="addCollabModel()" class="text-[11px] px-3 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600">+ 添加</button>
+    </div>
+    <div id="collab-model-list" class="flex flex-wrap gap-2 mb-4 min-h-[40px]">
+      <div class="model-card flex items-center gap-2 px-3 py-2 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
+        <input type="checkbox" checked class="accent-purple-500 w-3.5 h-3.5">
+        <span class="text-[11px] font-medium">GPT-4 Turbo</span>
+        <button class="remove-model text-[9px] text-red-400 hover:text-red-600" onclick="removeCollabModel(this)">✕</button>
+      </div>
+      <div class="model-card flex items-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+        <input type="checkbox" checked class="accent-blue-500 w-3.5 h-3.5">
+        <span class="text-[11px] font-medium">Claude 3.5 Sonnet</span>
+        <button class="remove-model text-[9px] text-red-400 hover:text-red-600" onclick="removeCollabModel(this)">✕</button>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-[11px] text-gray-500 shrink-0">✨ 总结模型：</span>
+      <select id="collab-summary-select" class="flex-1 text-[11px] border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 outline-none">
+        <option>GPT-4 Turbo</option>
+        <option>Claude 3.5 Sonnet</option>
+      </select>
+      <button onclick="startCollab()" class="text-[11px] px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600">开始协作</button>
+    </div>
+  </div>
+</div>

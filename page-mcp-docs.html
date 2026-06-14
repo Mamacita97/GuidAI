@@ -1,0 +1,249 @@
+<section id="page-mcp-docs" class="page-section">
+  <div class="flex items-center gap-2 mb-4">
+    <button onclick="showPage('skills')" class="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1"><span>←</span> 返回Skills</button>
+  </div>
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6"></div>
+  <div class="text-center mb-6">
+    <h2 class="text-lg font-bold">📚 MCP接入文档</h2>
+    <p class="text-xs text-gray-400 mt-1">完整接入指南、API参考和代码示例</p>
+  </div>
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-6"></div>
+
+  <div class="flex flex-col md:flex-row gap-5">
+    <!-- 左侧导航 -->
+    <div class="md:w-56 shrink-0">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-3 sticky top-20">
+        <div class="relative mb-3">
+          <input class="mcp-search w-full text-[10px] border border-gray-200 dark:border-gray-600 rounded-lg px-2.5 py-1.5 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:border-blue-500" placeholder="🔍 搜索文档...">
+        </div>
+        <div class="space-y-0.5 text-xs">
+          <div class="text-[10px] text-gray-400 font-medium px-2 py-1">📌 快速开始</div>
+          <div class="mcp-nav-item active px-2 py-1.5 rounded-lg cursor-pointer bg-blue-50 dark:bg-blue-900/20 text-blue-600" data-section="intro">简介</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="setup" onclick="scrollToSection('setup')">安装配置</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="first" onclick="scrollToSection('first')">第一个请求</div>
+          <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+          <div class="text-[10px] text-gray-400 font-medium px-2 py-1">🔌 API参考</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="chat-api" onclick="scrollToSection('chat-api')">对话API</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="image-api" onclick="scrollToSection('image-api')">图像API</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="video-api" onclick="scrollToSection('video-api')">视频API</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="audio-api" onclick="scrollToSection('audio-api')">音频API</div>
+          <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+          <div class="text-[10px] text-gray-400 font-medium px-2 py-1">🛠️ SDK与工具</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="python-sdk" onclick="scrollToSection('python-sdk')">Python SDK</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="js-sdk" onclick="scrollToSection('js-sdk')">JavaScript SDK</div>
+          <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+          <div class="text-[10px] text-gray-400 font-medium px-2 py-1">❓ 常见问题</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="faq-agents" onclick="scrollToSection('faq-agents')">支持哪些Agent？</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="faq-pricing" onclick="scrollToSection('faq-pricing')">费用如何计算？</div>
+          <div class="mcp-nav-item px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30" data-section="faq-key" onclick="scrollToSection('faq-key')">需要API密钥？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧内容 -->
+    <div class="flex-1 min-w-0 space-y-5" id="mcp-docs-content">
+      <!-- 简介 -->
+      <div id="section-intro" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">📖 简介</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-2">
+          <p>MCP（Model Context Protocol）是一个开放标准，允许AI代理访问外部工具。GUID.AI通过MCP协议，让您的AI Agent具备图像和视频生成能力。</p>
+          <div class="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-[11px] space-y-1">
+            <div>✅ 支持30+顶尖AI模型</div>
+            <div>✅ 图片/视频/音频全能力</div>
+            <div>✅ 无需API密钥，账号认证即可</div>
+            <div>✅ 与平台积分体系打通</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 安装配置 -->
+      <div id="section-setup" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">⚙️ 安装配置</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-3">
+          <p>将以下MCP配置添加到你的Agent客户端配置文件中：</p>
+          <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto">
+            <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">{
+  "mcpServers": {
+    "guid": {
+      "url": "https://api.guid.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}</pre>
+          </div>
+          <button onclick="copyMcpConfig()" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制配置</button>
+        </div>
+      </div>
+
+      <!-- 第一个请求 -->
+      <div id="section-first" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">🚀 第一个请求</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-2">
+          <p>配置完成后，在Agent中直接说：<strong>"用GUID生成一张赛博朋克图片"</strong></p>
+          <p>Agent会通过MCP协议调用GUID.AI的图像生成API，返回生成的图片。</p>
+        </div>
+      </div>
+
+      <!-- 对话API -->
+      <div id="section-chat-api" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">💬 对话API</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-2">
+          <div class="text-[11px]"><strong>端点：</strong><span class="font-mono text-blue-600">https://api.guid.ai/v1/chat/completions</span></div>
+          <div class="text-[11px]"><strong>方法：</strong>POST</div>
+          <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto mt-2">
+            <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">curl -X POST https://api.guid.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "GPT-5.4",
+    "messages": [{"role": "user", "content": "你好"}]
+  }'</pre>
+          </div>
+          <button onclick="copyCode(this, 'curl')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制代码</button>
+          <div class="text-[11px] font-medium mt-2">响应示例：</div>
+          <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto">
+            <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">{
+  "choices": [{
+    "message": {"role": "assistant", "content": "你好！有什么我可以帮助你的吗？"}
+  }]
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 图像API -->
+      <div id="section-image-api" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">🖼️ 图像API</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-2">
+          <div class="text-[11px]"><strong>端点：</strong><span class="font-mono text-blue-600">https://api.guid.ai/v1/images/generations</span></div>
+          <div class="text-[11px]"><strong>方法：</strong>POST</div>
+          <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto mt-2">
+            <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">curl -X POST https://api.guid.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "赛博朋克城市夜景",
+    "model": "Nano Banana Pro",
+    "size": "1024x1024"
+  }'</pre>
+          </div>
+          <button onclick="copyCode(this, 'curl')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制代码</button>
+        </div>
+      </div>
+
+      <!-- 视频API -->
+      <div id="section-video-api" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">🎬 视频API</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-2">
+          <div class="text-[11px]"><strong>端点：</strong><span class="font-mono text-blue-600">https://api.guid.ai/v1/video/generations</span></div>
+          <div class="text-[11px]"><strong>方法：</strong>POST</div>
+          <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto mt-2">
+            <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">curl -X POST https://api.guid.ai/v1/video/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "未来城市航拍",
+    "model": "VIDU-音乐MV",
+    "duration": 15
+  }'</pre>
+          </div>
+          <button onclick="copyCode(this, 'curl')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制代码</button>
+        </div>
+      </div>
+
+      <!-- 音频API -->
+      <div id="section-audio-api" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">🎵 音频API</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="text-xs leading-relaxed text-gray-600 dark:text-gray-400 space-y-2">
+          <div class="text-[11px]"><strong>端点：</strong><span class="font-mono text-blue-600">https://api.guid.ai/v1/audio/generations</span></div>
+          <div class="text-[11px]"><strong>方法：</strong>POST</div>
+          <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto mt-2">
+            <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">curl -X POST https://api.guid.ai/v1/audio/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "治愈系纯音乐",
+    "model": "海螺音乐生成",
+    "duration": 30
+  }'</pre>
+          </div>
+          <button onclick="copyCode(this, 'curl')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制代码</button>
+        </div>
+      </div>
+
+      <!-- Python SDK -->
+      <div id="section-python-sdk" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">🐍 Python SDK</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto mb-2">
+          <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">pip install guid-ai-sdk
+
+from guid_ai import GUIDClient
+client = GUIDClient(api_key="YOUR_API_KEY")
+response = client.chat.completions.create(
+    model="GPT-5.4",
+    messages=[{"role": "user", "content": "你好"}]
+)</pre>
+        </div>
+        <button onclick="copyCode(this, 'py')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制代码</button>
+      </div>
+
+      <!-- JS SDK -->
+      <div id="section-js-sdk" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-2">📦 JavaScript SDK</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-3"></div>
+        <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-3 overflow-x-auto mb-2">
+          <pre class="text-[10px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap">npm install guid-ai-sdk
+
+import { GUIDClient } from 'guid-ai-sdk';
+const client = new GUIDClient({ apiKey: "YOUR_API_KEY" });
+const response = await client.chat.completions.create({
+    model: "GPT-5.4",
+    messages: [{ role: "user", content: "你好" }]
+});</pre>
+        </div>
+        <button onclick="copyCode(this, 'js')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">📋 复制代码</button>
+      </div>
+
+      <!-- FAQ -->
+      <div id="section-faq-agents" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 scroll-mt-20">
+        <div class="text-sm font-semibold mb-3">❓ 常见问题</div>
+        <div class="space-y-2">
+          <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+            <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+              <span class="text-xs font-medium">支持哪些Agent？</span><span class="faq-icon text-gray-400 text-sm">▼</span>
+            </div>
+            <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+              <div class="text-[11px] text-gray-500 leading-relaxed pt-3">支持 Claude Web、Claude Code、Cursor IDE、Codex、OpenClaw Agent、Hermes Agent、NemoClaw 等任何支持MCP协议的客户端。</div>
+            </div>
+          </div>
+          <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+            <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+              <span class="text-xs font-medium">费用如何计算？</span><span class="faq-icon text-gray-400 text-sm">▼</span>
+            </div>
+            <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+              <div class="text-[11px] text-gray-500 leading-relaxed pt-3">使用平台积分（⚡算力）计费：图片生成⚡0.06-0.24/次，视频生成⚡0.35-2.80/次，对话按token计费。</div>
+            </div>
+          </div>
+          <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+            <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+              <span class="text-xs font-medium">需要API密钥吗？</span><span class="faq-icon text-gray-400 text-sm">▼</span>
+            </div>
+            <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+              <div class="text-[11px] text-gray-500 leading-relaxed pt-3">需要在<a href="#" onclick="showPage('api')" class="text-blue-500 hover:underline">API令牌页面</a>创建密钥，配置到MCP配置文件中进行身份验证。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

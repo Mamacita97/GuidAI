@@ -1,0 +1,136 @@
+<section id="page-model-hub" class="page-section model-hub-page">
+  <div class="model-hub-layout" style="min-height: calc(100vh - 56px);">
+    <div class="model-hub-main p-4 max-w-[1440px] mx-auto w-full">
+
+      <!-- 蓝色横幅区域 -->
+      <div class="relative rounded-xl p-5 mb-4 overflow-hidden" style="background:linear-gradient(135deg,#3B82F6 0%,#2563EB 50%,#1E40AF 100%);">
+        <div class="relative z-10">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-lg font-bold text-white">全部供应商</span>
+            <span class="px-2 py-0.5 bg-white/20 rounded-full text-[10px] text-white font-medium">共 <span id="model-count-badge">33</span> 个模型</span>
+          </div>
+          <p class="text-xs text-white/80">查看所有可用的AI模型供应商，包括众多知名供应商的模型。</p>
+        </div>
+        <div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-10">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="white">
+            <path d="M40 0C17.9 0 0 17.9 0 40s17.9 40 40 40 40-17.9 40-40S62.1 0 40 0zm0 70c-16.5 0-30-13.5-30-30S23.5 10 40 10s30 13.5 30 30-13.5 30-30 30z"/>
+            <circle cx="40" cy="40" r="15"/>
+            <path d="M40 20L45 35L60 35L48 45L53 60L40 50L27 60L32 45L20 35L35 35Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 搜索工具栏 -->
+      <div class="model-hub-toolbar flex items-center gap-3 mb-3 flex-wrap">
+        <div class="flex-1 min-w-[200px] flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+          <span class="text-gray-400 text-xs">🔍</span>
+          <input id="model-search-input" class="flex-1 text-xs border-0 outline-none bg-transparent text-gray-700 dark:text-gray-300 placeholder-gray-400" placeholder="模糊搜索模型名称" oninput="clearSelectedModels(); filterModelCards(); updateCopyButton()">
+        </div>
+        <button id="copy-btn" onclick="copyModels()" class="flex items-center gap-1 px-3 py-2 text-[11px] border rounded-lg transition text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 cursor-not-allowed">
+          <span>📋</span><span>复制</span>
+        </button>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-gray-500">充值价格显示</span>
+          <div class="toggle-switch w-8 h-4 bg-gray-200 dark:bg-gray-700 rounded-full relative cursor-pointer" onclick="togglePriceDisplay(this)">
+            <div class="knob w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+          </div>
+          <select id="currency-select" class="hidden text-[11px] border border-gray-200 dark:border-gray-600 rounded-lg px-2 py-1 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 outline-none cursor-pointer" onchange="onCurrencyChange(this.value)">
+            <option value="USD">USD</option>
+            <option value="CNY" selected>CNY</option>
+            <option value="custom">自定义货币</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-gray-500">倍率</span>
+          <div class="toggle-switch w-8 h-4 bg-gray-200 dark:bg-gray-700 rounded-full relative cursor-pointer" onclick="toggleRateDisplay(this)">
+            <div class="knob w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+          </div>
+        </div>
+        <button id="view-toggle-btn" onclick="toggleModelView()" class="flex items-center gap-1.5 px-3 py-2 text-[11px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-gray-600 dark:text-gray-400">
+          <span>表格视图</span>
+        </button>
+        <button id="unit-toggle-btn" onclick="togglePriceUnit()" class="px-2 py-2 text-[11px] border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-gray-600 dark:text-gray-400 font-bold text-blue-500">M</button>
+      </div>
+
+      <!-- 筛选区（原左侧栏，移至搜索框下方，可折叠） -->
+      <div id="model-filters-panel" class="model-hub-filters is-collapsed mb-4" aria-label="模型筛选">
+        <div class="model-hub-filters-head">
+          <button type="button" class="model-hub-filters-toggle" onclick="toggleModelHubFilters()" aria-expanded="false" aria-controls="model-filters-body">
+            <svg class="model-hub-filters-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="model-hub-filters-title">筛选</span>
+            <span id="model-filters-toggle-text" class="model-hub-filters-toggle-hint">展开</span>
+          </button>
+          <button type="button" onclick="resetModelFilters()" class="model-hub-filters-reset">重置</button>
+        </div>
+
+        <div id="model-filters-body" class="model-hub-filters-body">
+        <div class="model-hub-filter-row">
+          <span class="model-hub-filter-label">供应商</span>
+          <div class="model-hub-filter-options">
+            <span class="model-filter-chip active px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border" data-filter="provider" data-value="all" style="color:#7C3AED;border-color:#7C3AED;background:rgba(124,58,237,0.08);">全部供应商</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="provider" data-value="Google"><span class="mr-0.5 text-blue-400">◆</span>Google</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="provider" data-value="OpenAI"><span class="mr-0.5 text-green-400">◎</span>OpenAI</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="provider" data-value="阿里巴巴"><span class="mr-0.5 text-orange-400">✧</span>阿里巴巴</span>
+          </div>
+        </div>
+
+        <div class="model-hub-filter-row">
+          <span class="model-hub-filter-label">令牌分组</span>
+          <div class="model-hub-filter-options">
+            <span class="model-filter-chip active px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border" data-filter="group" data-value="all" style="color:#7C3AED;border-color:#7C3AED;background:rgba(124,58,237,0.08);">全部分组</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="group" data-value="default">default</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="group" data-value="vip">vip</span>
+          </div>
+        </div>
+
+        <div class="model-hub-filter-row">
+          <span class="model-hub-filter-label">计费类型</span>
+          <div class="model-hub-filter-options">
+            <span class="model-filter-chip active px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border" data-filter="billing" data-value="all" style="color:#7C3AED;border-color:#7C3AED;background:rgba(124,58,237,0.08);">全部类型</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="billing" data-value="按量计费">按量计费</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="billing" data-value="按次计费">按次计费</span>
+          </div>
+        </div>
+
+        <div class="model-hub-filter-row">
+          <span class="model-hub-filter-label">标签</span>
+          <div class="model-hub-filter-options">
+            <span class="model-filter-chip active px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border" data-filter="tag" data-value="all" style="color:#7C3AED;border-color:#7C3AED;background:rgba(124,58,237,0.08);">全部标签</span>
+          </div>
+        </div>
+
+        <div class="model-hub-filter-row">
+          <span class="model-hub-filter-label">端点类型</span>
+          <div class="model-hub-filter-options">
+            <span class="model-filter-chip active px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border" data-filter="endpoint" data-value="all" style="color:#7C3AED;border-color:#7C3AED;background:rgba(124,58,237,0.08);">全部端点</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="endpoint" data-value="gemini">gemini</span>
+            <span class="model-filter-chip px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-500" data-filter="endpoint" data-value="openai">openai</span>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- 模型卡片网格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="model-card-grid-new"></div>
+
+      <div class="hidden" id="model-list-view-new"></div>
+
+      <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
+        <div class="flex items-center gap-1">
+          <button onclick="modelPagePrev()" class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 text-xs">＜</button>
+          <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-500 text-white text-xs font-medium">1</button>
+          <button onclick="modelPageNext()" class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 text-xs">＞</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-gray-500">每页条数：</span>
+          <select class="text-[11px] border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 outline-none">
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

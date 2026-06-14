@@ -1,0 +1,32 @@
+<section id="page-my-works" class="page-section">
+  <div class="flex items-center gap-2 mb-4">
+    <button onclick="showPage('myassets')" class="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1"><span>←</span> 返回我的资产</button>
+    <span class="text-sm font-bold">📋 我的作品</span>
+    <div class="flex-1"></div>
+    <button onclick="openNewWork()" class="text-[10px] px-2.5 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600">＋ 新建作品</button>
+  </div>
+
+  <!-- 筛选Tab -->
+  <div class="flex items-center gap-2 mb-3">
+    <span class="text-[10px] px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 cursor-pointer">全部</span>
+    <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200">图片</span>
+    <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200">视频</span>
+    <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200">音频</span>
+    <span class="text-[10px] px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer hover:bg-gray-200">付费</span>
+    <div class="flex-1"></div>
+    <button onclick="showToast('📦 批量操作')" class="text-[10px] px-2 py-1 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-800">批量操作 ▼</button>
+  </div>
+
+  <!-- 统计 -->
+  <div class="flex items-center gap-3 text-[10px] text-gray-400 mb-4 bg-gray-50 dark:bg-gray-800 rounded-lg p-2.5">
+    <span>📊 共23个作品</span><span>总收入 ⚡234</span><span>总获赞 1,234</span><span>总购买 456次</span>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer" onclick="showPage('design-detail')"><div class="aspect-square bg-gradient-to-br from-purple-300 to-blue-300 dark:from-purple-700 dark:to-blue-700 flex items-center justify-center text-white text-lg">🖼️</div><div class="p-2"><div class="text-[10px] font-medium truncate">赛博朋克城市</div><div class="flex items-center gap-2 mt-1"><button onclick="event.stopPropagation();openEditWork('赛博朋克城市')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50">编辑</button><button onclick="event.stopPropagation();openDeleteWork('赛博朋克城市')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 text-red-500">删除</button></div></div></div>
+    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer" onclick="showPage('design-detail')"><div class="aspect-square bg-gradient-to-br from-green-300 to-teal-300 dark:from-green-700 dark:to-teal-700 flex items-center justify-center text-white text-lg">🎨</div><div class="p-2"><div class="text-[10px] font-medium truncate">国风插画系列</div><div class="flex items-center gap-2 mt-1"><button onclick="event.stopPropagation();openEditWork('国风插画系列')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50">编辑</button><button onclick="event.stopPropagation();openDeleteWork('国风插画系列')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 text-red-500">删除</button></div></div></div>
+    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer" onclick="showPage('comic-detail')"><div class="aspect-square bg-gradient-to-br from-amber-300 to-orange-300 dark:from-amber-700 dark:to-orange-700 flex items-center justify-center text-white text-lg">🎬</div><div class="p-2"><div class="text-[10px] font-medium truncate">AI漫剧预告</div><div class="flex items-center gap-2 mt-1"><button onclick="event.stopPropagation();openEditWork('AI漫剧预告')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50">编辑</button><button onclick="event.stopPropagation();openDeleteWork('AI漫剧预告')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 text-red-500">删除</button></div></div></div>
+    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer" onclick="showPage('music-detail')"><div class="aspect-square bg-gradient-to-br from-pink-300 to-rose-300 dark:from-pink-700 dark:to-rose-700 flex items-center justify-center text-white text-lg">🎵</div><div class="p-2"><div class="text-[10px] font-medium truncate">治愈系钢琴曲</div><div class="flex items-center gap-2 mt-1"><button onclick="event.stopPropagation();openEditWork('治愈系钢琴曲')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50">编辑</button><button onclick="event.stopPropagation();openDeleteWork('治愈系钢琴曲')" class="text-[9px] px-1.5 py-0.5 border border-gray-200 dark:border-gray-600 rounded hover:bg-gray-50 text-red-500">删除</button></div></div></div>
+  </div>
+  <button onclick="showToast('🔄 加载更多')" class="w-full mt-3 py-2 text-[10px] text-blue-600 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">🔄 加载更多</button>
+</section>

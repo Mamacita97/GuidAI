@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>我的产品 - GUID.AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;background:#0d0d0d;color:#f9fafb;-webkit-font-smoothing:antialiased}
+html,body{width:100%;min-height:100vh;overflow-x:hidden}
+/* 页面容器 */
+.page-myassets-mobile{min-height:100vh;padding:0}
+/* 卡片网格 2列 */
+.mob-list{display:grid;grid-template-columns:1fr;gap:10px;padding-top:12px}
+.mob-card{border-radius:14px;overflow:hidden;background:#1a1a1a;cursor:pointer;transition:transform .15s;border:1px solid #2a2a2a}
+.mob-card:active{transform:scale(0.97)}
+.mob-card-img{position:relative;overflow:hidden}
+.mob-card-info{padding:10px 8px 14px}
+/* Toast */
+#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:#fff;padding:10px 24px;border-radius:12px;font-size:13px;z-index:200100;transition:opacity .3s;opacity:0;pointer-events:none}
+#toast.show{opacity:1}
+/* 加载更多按钮 */
+.mob-list > button{grid-column:1/-1}
+</style>
+</head>
+<body>
+<div class="page-myassets-mobile">
+<section id="page-myassets-mobile" style="background:#0d0d0d;min-height:100vh;padding:0;display:block;">
+
+  <!-- ═══ Tab 切换（横向滚动） ═══ -->
+  <div style="overflow-x:auto;padding:8px 16px 0;border-bottom:1px solid #1f1f1f;white-space:nowrap;-webkit-overflow-scrolling:touch;">
+    <div style="display:inline-flex;gap:0;background:#1a1a1a;border-radius:10px;padding:2px;">
+      <button class="m-mob-tab active" data-tab="works" onclick="switchMobTab('works')" style="padding:7px 18px;border-radius:8px;border:none;background:#3b82f6;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;">我的作品</button>
+      <button class="m-mob-tab" data-tab="publish" onclick="switchMobTab('publish')" style="padding:7px 18px;border-radius:8px;border:none;background:transparent;color:#6b7280;font-size:13px;cursor:pointer;transition:all .2s;">我的发布</button>
+      <button class="m-mob-tab" data-tab="favs" onclick="switchMobTab('favs')" style="padding:7px 18px;border-radius:8px;border:none;background:transparent;color:#6b7280;font-size:13px;cursor:pointer;transition:all .2s;">我的收藏</button>
+    </div>
+  </div>
+
+  <!-- ═══ 类型过滤（横向滚动） ═══ -->
+  <div style="overflow-x:auto;padding:8px 16px;white-space:nowrap;-webkit-overflow-scrolling:touch;">
+    <div style="display:inline-flex;gap:6px;">
+      <button class="mob-filter-btn active" data-filter="all" onclick="filterMobType('all')" style="padding:5px 14px;border-radius:8px;border:1px solid #3b82f6;background:#3b82f6;color:#fff;font-size:12px;cursor:pointer;transition:all .15s;">全部</button>
+      <button class="mob-filter-btn" data-filter="image" onclick="filterMobType('image')" style="padding:5px 14px;border-radius:8px;border:1px solid #333;background:transparent;color:#9ca3af;font-size:12px;cursor:pointer;transition:all .15s;">🖼️ 图片</button>
+      <button class="mob-filter-btn" data-filter="video" onclick="filterMobType('video')" style="padding:5px 14px;border-radius:8px;border:1px solid #333;background:transparent;color:#9ca3af;font-size:12px;cursor:pointer;transition:all .15s;">🎬 视频</button>
+      <button class="mob-filter-btn" data-filter="audio" onclick="filterMobType('audio')" style="padding:5px 14px;border-radius:8px;border:1px solid #333;background:transparent;color:#9ca3af;font-size:12px;cursor:pointer;transition:all .15s;">🎵 音频</button>
+      <button class="mob-filter-btn" data-filter="text" onclick="filterMobType('text')" style="padding:5px 14px;border-radius:8px;border:1px solid #333;background:transparent;color:#9ca3af;font-size:12px;cursor:pointer;transition:all .15s;">📄 文件</button>
+    </div>
+  </div>
+
+  <!-- ═══ Tab 内容容器 ═══ -->
+  <div style="padding:0 12px 80px;">
+
+    <!-- ─── 我的作品 ─── -->
+    <div id="mob-tab-works" class="mob-tab-content">
+      <div class="mob-list">
+        <div class="mob-card" onclick="mobOpenPreview(this)" data-name="赛博朋克城市概念图" data-type="image" data-model="Stable Diffusion XL" data-params="1024×1024 · steps:30 · CFG:7.0" data-prompt="A cyberpunk city at night, neon lights reflecting in puddles, highly detailed, 8K, unreal engine render" data-source="文生图" data-cost="2 Credits" data-taskid="task_8a3f2c1d9e" data-created="2026-05-25 14:32" data-expires="2026-06-24 14:32">
+          <div class="mob-card-img" style="aspect-ratio:4/5;background:linear-gradient(135deg,#9333ea,#ec4899,#fb923c);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <span style="font-size:48px;">🏙️</span>
+            <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:6px;">今天 14:32</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);padding:5px 8px;padding-top:16px;">
+              <div style="font-size:10px;color:rgba(255,255,255,0.9);font-weight:500;line-height:1.3;">🤖 SD XL · 1024×1024</div>
+            </div>
+          </div>
+        </div>
+        <div class="mob-card" onclick="mobOpenPreview(this)" data-name="产品Demo演示短片" data-type="video" data-model="Kling 1.6" data-params="720×1280 · 5s · motion:5" data-prompt="A sleek product demo showing a smartphone floating and rotating, cinematic lighting, 4K" data-source="文生视频" data-cost="8 Credits" data-taskid="task_b7e4a5f2c3" data-created="2026-05-25 10:15" data-expires="2026-06-24 10:15">
+          <div class="mob-card-img" style="aspect-ratio:1;background:linear-gradient(135deg,#334155,#1e40af,#312e81);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
+            <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:6px;">今天 10:15</span>
+            <span style="position:absolute;bottom:8px;right:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:4px;">0:42</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);padding:5px 8px;padding-top:16px;">
+              <div style="font-size:10px;color:rgba(255,255,255,0.9);font-weight:500;line-height:1.3;">🎬 Kling 1.6 · 720×1280</div>
+            </div>
+          </div>
+        </div>
+        <div class="mob-card" onclick="mobOpenPreview(this)" data-name="品牌宣传背景音乐" data-type="audio" data-model="Stable Audio 2.0" data-params="44.1kHz · stereo · 2:35" data-prompt="Orchestral background music, uplifting, warm strings, gentle crescendo" data-source="文生音频" data-cost="5 Credits" data-taskid="task_d2f8c1b6a7" data-created="2026-05-24 16:20" data-expires="2026-06-23 16:20">
+          <div class="mob-card-img" style="height:140px;background:linear-gradient(135deg,#10b981,#0d9488);border-radius:12px;display:flex;align-items:center;padding:16px;position:relative;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:12px;flex:1;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="8,5 19,12 8,19"/></svg></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:600;color:#fff;">品牌宣传背景音乐</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.6);">2:35</div>
+              </div>
+            </div>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.3);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">⋯</button>
+            <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:6px;">昨天 16:20</span>
+          </div>
+        </div>
+        <div class="mob-card" onclick="mobOpenPreview(this)" data-name="科幻电影风格提示词" data-type="text" data-model="GPT-4o" data-params="temp:0.8 · max_tokens:200" data-prompt="Generate a creative sci-fi movie prompt with cinematic elements" data-source="灵感广场" data-cost="1 Credit" data-taskid="task_c5a9e2d8f1" data-created="2026-05-24 09:45" data-expires="2026-06-23 09:45">
+          <div class="mob-card-img" style="height:140px;background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:12px;padding:16px;position:relative;overflow:hidden;">
+            <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px;">"A cinematic wide shot of a futuristic space station orbiting a ringed planet, stars shimmering in the background, highly detailed, 8K resolution, unreal engine 5 render"</div>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.3);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+            <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:6px;">昨天 09:45</span>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.75),transparent);padding:5px 8px;padding-top:16px;">
+              <div style="font-size:10px;color:rgba(255,255,255,0.9);font-weight:500;line-height:1.3;">🤖 GPT-4o · temp:0.8</div>
+            </div>
+          </div>
+        </div>
+        <button onclick="showToast('🔄 加载更多')" style="width:100%;margin-top:8px;padding:12px 0;font-size:12px;color:#3b82f6;border:1px solid #333;border-radius:12px;background:transparent;cursor:pointer;">🔄 加载更多</button>
+      </div>
+    </div>
+
+    <!-- ─── 我的发布 ─── -->
+    <div id="mob-tab-publish" class="mob-tab-content" style="display:none;">
+      <div class="mob-list">
+        <div class="mob-card" onclick="mobOpenPreview(this)" data-name="AI绘画作品精选" data-type="image" data-source="self" data-category="艺术" data-price="0" data-source-name="AI绘画助手" data-model="DALL·E 3" data-params="1792×1024 · temp:0.9" data-prompt="一只漂浮在云朵中的猫，霓虹色彩，梦幻超现实数字绘画" data-source="灵感广场" data-cost="3 Credits" data-taskid="task_e9b8c7d6f5" data-created="2026-05-23 18:00" data-expires="2026-06-22 18:00">
+          <div class="mob-card-img" style="aspect-ratio:3/4;background:linear-gradient(135deg,#f472b6,#e11d48,#7c3aed);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <span style="font-size:48px;">🎨</span>
+            <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:6px;">已发布</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+          </div>
+          <div class="mob-card-info" style="padding:10px 4px 14px;">
+            <div style="font-size:13px;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">AI绘画作品精选</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap;">
+              <span style="font-size:11px;color:#6b7280;">🖼️ 图片</span>
+              <span style="font-size:10px;color:#be185d;background:#fce7f3;padding:1px 6px;border-radius:4px;">🎨 艺术</span>
+              <span style="font-size:11px;color:#6b7280;">5月16日</span>
+            </div>
+          </div>
+        </div>
+        <div class="mob-card" onclick="mobOpenPreview(this)" data-name="AI摄影作品" data-type="image" data-source="self" data-category="摄影" data-price="5" data-model="Midjourney V6" data-params="2048×1536 · style:raw · v:6.1" data-prompt="日系胶片风格街拍，东京雨后街巷，暖色调，胶片颗粒感" data-source="影像创作" data-cost="4 Credits" data-taskid="task_f1a2b3c4d5" data-created="2026-05-22 20:15" data-expires="2026-06-21 20:15">
+          <div class="mob-card-img" style="aspect-ratio:4/5;background:linear-gradient(135deg,#64748b,#475569);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <span style="font-size:48px;">📷</span>
+            <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 8px;border-radius:6px;">已发布</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+          </div>
+          <div class="mob-card-info" style="padding:10px 4px 14px;">
+            <div style="font-size:13px;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">AI摄影作品</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:3px;">
+              <span style="font-size:11px;color:#6b7280;">🖼️ 图片</span>
+              <span style="font-size:10px;color:#d97706;background:#fef3c7;padding:1px 6px;border-radius:4px;">📷 摄影</span>
+              <span style="font-size:11px;color:#6b7280;">·</span>
+              <span style="font-size:11px;color:#22c55e;">⚡5</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="showToast('🔄 加载更多')" style="width:100%;margin-top:8px;padding:12px 0;font-size:12px;color:#3b82f6;border:1px solid #333;border-radius:12px;background:transparent;cursor:pointer;">🔄 加载更多</button>
+      </div>
+    </div>
+
+    <!-- ─── 我的收藏（含灵感/Apps卡片） ─── -->
+    <div id="mob-tab-favs" class="mob-tab-content" style="display:none;">
+      <div class="mob-list">
+        <div class="mob-card" onclick="mobOpenFavInspr(this)" data-name="静谧湖心：湿透衣衫下的纯粹爱意" data-type="image" data-source="inspiration" data-category="图片" data-views="983" data-uses="6" data-model="gemini-3-pro-image-preview" data-price="免费" data-author="创作者A">
+          <div class="mob-card-img" style="aspect-ratio:1;background:linear-gradient(135deg,#64748b,#475569,#52525b);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <span style="font-size:48px;">🏛️</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+          </div>
+          <div class="mob-card-info" style="padding:10px 4px 14px;">
+            <div style="font-size:13px;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">静谧湖心：湿透衣衫下的纯粹爱意</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:3px;">
+              <span style="font-size:11px;color:#6b7280;">💡 灵感</span>
+              <span style="font-size:11px;color:#6b7280;">·</span>
+              <span style="font-size:11px;color:#6b7280;">收藏于 昨天</span>
+            </div>
+          </div>
+        </div>
+        <div class="mob-card" onclick="mobOpenFavApps(this)" data-name="一键换装：完美替换衣物" data-type="image" data-source="apps" data-category="图片" data-likes="245" data-runs="1368" data-app-desc="Qwen2511一键换装" data-author="机智波玩AI" data-price="生成">
+          <div class="mob-card-img" style="aspect-ratio:4/3;background:linear-gradient(135deg,#34d399,#14b8a6,#059669);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <span style="font-size:48px;">👗</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+          </div>
+          <div class="mob-card-info" style="padding:10px 4px 14px;">
+            <div style="font-size:13px;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">一键换装：完美替换衣物</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:3px;">
+              <span style="font-size:11px;color:#6b7280;">📦 Apps</span>
+              <span style="font-size:11px;color:#6b7280;">·</span>
+              <span style="font-size:11px;color:#6b7280;">收藏于 5月22日</span>
+            </div>
+          </div>
+        </div>
+        <div class="mob-card" onclick="mobOpenFavInspr(this)" data-name="赛博都市：霓虹之夜" data-type="image" data-source="inspiration" data-category="图片" data-views="2341" data-uses="87" data-model="flux-pro-1.1" data-price="免费" data-author="NeonMaster">
+          <div class="mob-card-img" style="aspect-ratio:1;background:linear-gradient(135deg,#7c3aed,#4338ca,#1e3a5f);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;">
+            <span style="font-size:48px;">🌃</span>
+            <button onclick="event.stopPropagation();mobShowActions(this)" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">⋯</button>
+          </div>
+          <div class="mob-card-info" style="padding:10px 4px 14px;">
+            <div style="font-size:13px;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">赛博都市：霓虹之夜</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:3px;">
+              <span style="font-size:11px;color:#6b7280;">💡 灵感</span>
+              <span style="font-size:11px;color:#6b7280;">·</span>
+              <span style="font-size:11px;color:#6b7280;">收藏于 5月21日</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="showToast('🔄 加载更多')" style="width:100%;margin-top:8px;padding:12px 0;font-size:12px;color:#3b82f6;border:1px solid #333;border-radius:12px;background:transparent;cursor:pointer;">🔄 加载更多</button>
+      </div>
+    </div>
+
+  </div>
+
+</section><!-- end page-myassets-mobile -->
+
+<!-- ═══ 移动端预览（全屏覆盖） ═══ -->
+<div id="mob-preview-sheet" style="display:none;position:fixed;inset:0;z-index:200060;background:#0a0a0a;" onclick="if(event.target===this)mobClosePreview()">
+
+  <!-- 主内容区：可滚动 -->
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;">
+
+    <!-- 预览图区域（居中） -->
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px 16px;overflow-y:auto;">
+      <div id="mob-preview-media" style="width:100%;max-width:420px;aspect-ratio:4/5;background:#2d3748;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;flex-shrink:0;">
+        <button onclick="mobClosePreview()" style="position:absolute;top:10px;right:10px;z-index:10;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.8);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</button>
+        <span id="mob-preview-emoji" style="font-size:48px;opacity:0.7;">🏙️</span>
+        <span id="mob-preview-label" style="position:absolute;font-size:13px;color:#94a3b8;">生成结果 1</span>
+      </div>
+    </div>
+
+    <!-- 底部信息栏（固定） -->
+    <div style="padding:12px 16px 28px;padding-left:44px;background:transparent;border-top:1px solid #1a1a2e;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;" onclick="event.stopPropagation()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="font-size:12px;color:#94a3b8;"><span style="color:#64748b;">本次对话</span><span style="margin:0 4px;color:#334155;">·</span><span id="mob-preview-type-text">图片库</span></div>
+        <div id="mob-preview-count" style="font-size:11px;color:#475569;margin-left:4px;">共 1 张</div>
+      </div>
+      <div id="mob-thumb-strip" style="display:flex;align-items:center;gap:6px;">
+        <div id="mob-thumb-item" style="width:36px;height:36px;border-radius:6px;background:#2d3748;border:2px solid #84cc16;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+          <span id="mob-thumb-emoji" style="font-size:18px;line-height:1;">🏙️</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 左侧折叠信息面板 -->
+  <div id="mob-preview-drawer" style="position:fixed;top:0;left:-300px;width:300px;height:100%;background:#141414;border-right:1px solid #222;display:flex;flex-direction:column;z-index:200062;transition:left 0.3s cubic-bezier(0.4,0,0.2,1);" onclick="event.stopPropagation()">
+    <!-- 触发标签（嵌在抽屉右边缘） -->
+    <div id="mob-drawer-trigger" onclick="event.stopPropagation();mobToggleDrawer()" style="position:absolute;right:-32px;top:45%;width:32px;height:56px;background:#2a2a2a;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #3a3a3a;border-left:none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </div>
+
+    <div style="padding:56px 20px 20px;flex:1;overflow-y:auto;display:flex;flex-direction:column;height:100%;">
+      <!-- 头部 -->
+      <div style="margin-bottom:20px;">
+        <span style="font-size:15px;font-weight:700;color:#f1f5f9;">作品信息</span>
+      </div>
+
+      <!-- ═══ 产品名称 ═══ -->
+      <div id="mob-section-title" style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">产品名称</div>
+        <div id="mob-info-title" style="font-size:15px;font-weight:600;color:#e5e7eb;line-height:1.4;word-break:break-word;">—</div>
+      </div>
+
+      <!-- ═══ 分类标签 ═══ -->
+      <div id="mob-section-category" style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">分类标签</div>
+        <div id="mob-info-category" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">未分类</span>
+        </div>
+      </div>
+
+      <!-- ═══ 使用价格 ═══ -->
+      <div id="mob-section-price" style="margin-bottom:18px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">使用价格</div>
+        <div id="mob-info-price" style="font-size:14px;font-weight:600;color:#f59e0b;">—</div>
+      </div>
+
+      <!-- ═══ 提示词 ═══ -->
+      <div style="margin-bottom:20px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">提示词</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+          <div id="mob-info-prompt" style="font-size:14px;font-weight:600;color:#e5e7eb;line-height:1.5;word-break:break-word;flex:1;">—</div>
+          <button onclick="mobCopyPrompt()" style="flex-shrink:0;padding:6px 12px;border-radius:6px;border:none;background:#1e3a5f;color:#60a5fa;font-size:11px;cursor:pointer;white-space:nowrap;">复制提示词</button>
+        </div>
+      </div>
+
+      <!-- 分割线 -->
+      <div style="border-top:1px solid #1e1e1e;margin-bottom:18px;"></div>
+
+      <!-- ═══ 来源 ═══ -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">来源</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="mob-info-source-tag" style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;background:#1e3a5f;color:#60a5fa;font-size:12px;font-weight:500;">大模型</span>
+          <span id="mob-info-source" style="font-size:13px;color:#d1d5db;">Stable Diffusion XL</span>
+        </div>
+      </div>
+
+      <!-- ═══ 参数配置 ═══ -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">参数配置</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+          <div id="mob-info-params" style="font-size:13px;color:#d1d5db;line-height:1.4;word-break:break-all;flex:1;">—</div>
+          <button onclick="showToast('🎨 图片制作');" style="flex-shrink:0;padding:6px 12px;border-radius:6px;border:none;background:#1e3a5f;color:#60a5fa;font-size:11px;cursor:pointer;white-space:nowrap;">图片制作</button>
+        </div>
+      </div>
+
+      <!-- 分割线 -->
+      <div style="border-top:1px solid #1e1e1e;margin-bottom:18px;"></div>
+
+      <!-- ═══ 任务消费 ═══ -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">任务消费</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span id="mob-info-cost" style="font-size:15px;font-weight:700;color:#f59e0b;font-family:monospace;">0.01</span>
+        </div>
+      </div>
+
+      <!-- ═══ TaskId ═══ -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">Task ID</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="mob-info-taskid" style="font-size:12px;color:#94a3b8;font-family:monospace;word-break:break-all;flex:1;">—</span>
+          <button onclick="mobCopyTaskId()" style="flex-shrink:0;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:4px;border:none;background:rgba(255,255,255,0.06);color:#64748b;cursor:pointer;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 分割线 -->
+      <div style="border-top:1px solid #1e1e1e;margin-bottom:18px;"></div>
+
+      <!-- ═══ 创建时间 ═══ -->
+      <div style="margin-bottom:14px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:4px;">创建时间</div>
+        <div id="mob-info-created" style="font-size:13px;color:#d1d5db;">—</div>
+      </div>
+
+      <!-- ═══ 过期时间 ═══ -->
+      <div style="margin-bottom:20px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:4px;">过期时间</div>
+        <div id="mob-info-expires" style="font-size:13px;color:#d1d5db;">—</div>
+      </div>
+
+      <!-- 底部按钮 -->
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-around;padding:10px 0 4px;border-top:1px solid #1e1e1e;">
+        <button onclick="showToast('📥 下载');" style="display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:#9ca3af;cursor:pointer;padding:8px 12px;" title="下载">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button onclick="mobOpenPublish()" style="display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:#9ca3af;cursor:pointer;padding:8px 12px;" title="发布">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+        <button onclick="mobOpenShare()" style="display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:#9ca3af;cursor:pointer;padding:8px 12px;" title="分享">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+        <button onclick="var c=mobGetCurrCard();if(c)deleteProduct({closest:function(){return c}});mobClosePreview();" style="display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:#f87171;cursor:pointer;padding:8px 12px;" title="删除">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 操作菜单 Action Sheet ═══ -->
+<div id="mob-action-sheet" style="display:none;position:fixed;inset:0;z-index:200070;background:rgba(0,0,0,0.5);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)mobCloseActions()">
+  <div style="width:100%;max-width:480px;background:#1a1a1a;border-radius:16px 16px 0 0;padding:8px 16px max(24px,env(safe-area-inset-bottom,24px));">
+    <!-- 拖拽指示条 -->
+    <div style="display:flex;align-items:center;justify-content:center;padding:4px 0 12px;">
+      <div style="width:36px;height:4px;border-radius:4px;background:#4b5563;"></div>
+    </div>
+
+    <!-- 分享 -->
+    <button onclick="mobCloseActions();setTimeout(openMyworksShare,150);" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">📤</span> 分享作品
+    </button>
+
+    <!-- 发布 -->
+    <button onclick="mobCloseActions();setTimeout(mobOpenPublish,150);" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">🚀</span> 发布作品
+    </button>
+
+    <!-- 再次生成 -->
+    <button onclick="var c=mobGetActionCard();if(c)regenerateProduct({closest:function(){return c}});mobCloseActions();" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">🔄</span> 再次生成
+    </button>
+
+    <!-- 下载 -->
+    <button onclick="showToast('📥 下载');mobCloseActions();" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">⬇️</span> 下载
+    </button>
+
+    <!-- 删除 -->
+    <button onclick="var c=mobGetActionCard();if(c)deleteProduct({closest:function(){return c}});mobCloseActions();" style="width:100%;padding:14px 0;border:none;background:transparent;color:#ef4444;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(239,68,68,0.12)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">🗑️</span> 删除
+    </button>
+
+    <!-- 取消 -->
+    <button onclick="mobCloseActions()" style="width:100%;margin-top:10px;padding:15px 0;border-radius:12px;border:none;background:#2a2a2a;color:#9ca3af;font-size:15px;cursor:pointer;font-weight:600;transition:background 0.12s;" onpointerdown="this.style.background='#3a3a3a'" onpointerup="this.style.background='#2a2a2a'" onpointerleave="this.style.background='#2a2a2a'">取消</button>
+  </div>
+</div>
+
+<!-- 手机端批量操作栏 -->
+<div id="mob-batch-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200075;background:#1a1a1a;border-top:1px solid #2a2a2a;padding:10px 16px max(24px,env(safe-area-inset-bottom,24px));align-items:center;justify-content:space-between;transition:transform 0.2s;">
+  <button onclick="mobBatchSelectAll()" style="display:flex;align-items:center;gap:6px;border:none;background:transparent;color:#9ca3af;font-size:13px;cursor:pointer;padding:6px 10px;border-radius:8px;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.06)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+    <span id="mob-batch-check-icon" style="width:18px;height:18px;border-radius:4px;border:2px solid #6b7280;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;"></span> 全选
+  </button>
+  <div style="display:flex;gap:10px;">
+    <button onclick="showToast('📥 批量下载');mobCloseManage()" style="display:flex;align-items:center;gap:4px;border:none;background:#374151;color:#f3f4f6;font-size:12px;cursor:pointer;padding:8px 16px;border-radius:8px;transition:background 0.12s;" onpointerdown="this.style.background='#4b5563'" onpointerup="this.style.background='#374151'" onpointerleave="this.style.background='#374151'">⬇️ 下载</button>
+    <button onclick="mobBatchDelete()" style="display:flex;align-items:center;gap:4px;border:none;background:#ef4444;color:#fff;font-size:12px;cursor:pointer;padding:8px 16px;border-radius:8px;transition:background 0.12s;" onpointerdown="this.style.background='#dc2626'" onpointerup="this.style.background='#ef4444'" onpointerleave="this.style.background='#ef4444'">🗑️ 删除</button>
+  </div>
+</div>
+
+<!-- ═══ 内嵌移动端 JS ═══ -->
+<script>
+// ── Tab 切换 ──────────────────────────────────────────
+window.switchMobTab=function(tab){
+  document.querySelectorAll('.m-mob-tab').forEach(function(b){
+    if(b.getAttribute('data-tab')===tab){
+      b.style.background='#3b82f6'; b.style.color='#fff'; b.style.fontWeight='600';
+    } else {
+      b.style.background='transparent'; b.style.color='#6b7280'; b.style.fontWeight='400';
+    }
+  });
+  document.querySelectorAll('.mob-tab-content').forEach(function(c){ c.style.display='none'; });
+  var el=document.getElementById('mob-tab-'+tab);
+  if(el) el.style.display='block';
+  // 联动桌面端 filter
+  var curFilter=document.querySelector('.mob-filter-btn.active');
+  var filterType=curFilter?curFilter.getAttribute('data-filter')||'all':'all';
+  if(typeof filterMyWorks==='function') filterMyWorks();
+};
+
+// ── 类型过滤 ──────────────────────────────────────────
+window.filterMobType=function(type){
+  document.querySelectorAll('.mob-filter-btn').forEach(function(b){
+    var ft=b.getAttribute('data-filter');
+    if(ft===type){
+      b.style.borderColor='#3b82f6'; b.style.background='#3b82f6'; b.style.color='#fff';
+    } else {
+      b.style.borderColor='#333'; b.style.background='transparent'; b.style.color='#9ca3af';
+    }
+  });
+  // 过滤当前Tab的卡片
+  var activeTab=document.querySelector('.m-mob-tab.active')||document.querySelector('.m-mob-tab[style*="background: #3b82f6"]');
+  var tabId=activeTab?activeTab.getAttribute('data-tab'):'works';
+  document.querySelectorAll('#mob-tab-'+tabId+' .mob-card').forEach(function(card){
+    if(type==='all'||card.getAttribute('data-type')===type){
+      card.style.display='';
+    } else {
+      card.style.display='none';
+    }
+  });
+};
+
+// ── 预览 Bottom Sheet ────────────────────────────────
+window._mobCurrCard=null;
+
+window.mobGetCurrCard=function(){ return window._mobCurrCard; };
+
+window.mobOpenPreview=function(card){
+  window._mobCurrCard=card;
+  var name=card.getAttribute('data-name')||'';
+  var type=card.getAttribute('data-type')||'image';
+  var model=card.getAttribute('data-model')||'';
+  var params=card.getAttribute('data-params')||'';
+  var prompt=card.getAttribute('data-prompt')||'';
+  var source=card.getAttribute('data-source')||'';
+  var cost=card.getAttribute('data-cost')||'';
+  var taskId=card.getAttribute('data-taskid')||'';
+  var created=card.getAttribute('data-created')||'';
+  var expires=card.getAttribute('data-expires')||'';
+  var category=card.getAttribute('data-category')||'';
+  var price=card.getAttribute('data-price')||'';
+  var emojiEl=card.querySelector('.mob-card-img .text-4xl');
+  if(!emojiEl) emojiEl=card.querySelector('.mob-card-img span:nth-child(3)');
+  var emoji=emojiEl?emojiEl.textContent:'📦';
+  var typeLabels={image:'图片库',video:'视频库',audio:'音频库',text:'文本库'};
+  var sourceTagMap={image:'大模型',video:'大模型',audio:'大模型',text:'文本模型'};
+
+  // 判断是否已发布：有 data-price 即为已发布，否则为草稿
+  var isPublished=!!card.getAttribute('data-price');
+  
+  // 已发布产品显示 产品名称/分类标签/使用价格，草稿隐藏
+  ['mob-section-title','mob-section-category','mob-section-price'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.style.display=isPublished?'':'none';
+  });
+
+  // 产品名称
+  var titleEl=document.getElementById('mob-info-title');
+  if(titleEl) titleEl.textContent=name||'未命名';
+
+  // 分类标签
+  var catEl=document.getElementById('mob-info-category');
+  if(catEl){
+    var catColors={
+      商业:{bg:'#dbeafe',color:'#1d4ed8',icon:'💼'},
+      营销:{bg:'#fef3c7',color:'#b45309',icon:'📊'},
+      艺术:{bg:'#fce7f3',color:'#be185d',icon:'🎨'},
+      文案:{bg:'#fef3c7',color:'#b45309',icon:'✍️'},
+      视频:{bg:'#e0e7ff',color:'#4338ca',icon:'🎬'},
+      图片:{bg:'#d1fae5',color:'#059669',icon:'🖼️'},
+      摄影:{bg:'#e0e7ff',color:'#4338ca',icon:'📷'}
+    };
+    if(category&&catColors[category]){
+      var c=catColors[category];
+      catEl.innerHTML='<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;font-size:11px;background:'+c.bg+';color:'+c.color+';">'+c.icon+' '+category+'</span>';
+    } else if(category){
+      catEl.innerHTML='<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">'+category+'</span>';
+    } else {
+      catEl.innerHTML='<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">未分类</span>';
+    }
+  }
+
+  // 使用价格
+  var priceEl=document.getElementById('mob-info-price');
+  if(priceEl){
+    var priceNum=parseFloat(price);
+    if(price==='免费'||price==='0'||priceNum===0){
+      priceEl.innerHTML='🆓 免费';
+    } else if(priceNum>0){
+      priceEl.innerHTML='⚡ <span style="font-family:monospace;">'+priceNum.toFixed(2)+'</span> /次';
+    } else if(price){
+      priceEl.textContent=price;
+    } else {
+      priceEl.innerHTML='<span style="color:#6b7280;font-size:13px;">未定价</span>';
+    }
+  }
+
+  // 提示词 — 显示实际提示词，存入 hidden 用于复制
+  window._mobPromptText=prompt||'';
+  var promptEl=document.getElementById('mob-info-prompt');
+  if(promptEl) promptEl.textContent=prompt||name||'（无提示词）';
+
+  // 来源 — 蓝色标签 + 模型名（PC端逻辑：data-source-name 或 data-name 作为来源名称）
+  var tagEl=document.getElementById('mob-info-source-tag');
+  if(tagEl) tagEl.textContent=sourceTagMap[type]||'大模型';
+  var srcEl=document.getElementById('mob-info-source');
+  if(srcEl){
+    var srcName=card.getAttribute('data-source-name')||'';
+    srcEl.textContent=srcName||model||'未指定';
+  }
+
+  // 参数配置
+  var paramEl=document.getElementById('mob-info-params');
+  if(paramEl) paramEl.textContent=params||'Auto / 0:16 / 2k / 质量：中';
+
+  // 任务消费
+  var costEl=document.getElementById('mob-info-cost');
+  if(costEl) costEl.textContent=cost||'⚡ 0.01';
+
+  // TaskId — 存到 hidden（PC端生成随机id）
+  if(!taskId) taskId='17796745558069535'+Math.floor(Math.random()*90+10);
+  window._mobTaskIdText=taskId;
+  var tidEl=document.getElementById('mob-info-taskid');
+  if(tidEl) tidEl.textContent=taskId;
+
+  // 创建时间/过期时间（PC端使用当前时间作为回退）
+  var now=new Date();
+  var fmtShort=function(d){
+    return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')+':'+d.getSeconds().toString().padStart(2,'0');
+  };
+  var createdEl=document.getElementById('mob-info-created');
+  if(createdEl) createdEl.textContent=created||fmtShort(now);
+  var expiresEl=document.getElementById('mob-info-expires');
+  if(expiresEl){
+    var exp=expires||new Date(now.getTime()+13*24*60*60*1000);
+    expiresEl.textContent=(typeof exp==='string')?exp:fmtShort(exp);
+  }
+
+  // 预览图
+  var media=document.getElementById('mob-preview-media');
+  var pe=document.getElementById('mob-preview-emoji');
+  if(pe) pe.textContent=emoji;
+  if(media){
+    if(type==='video') media.style.aspectRatio='16/9';
+    else if(type==='audio') media.style.aspectRatio='1/1';
+    else media.style.aspectRatio='4/5';
+  }
+
+  // 底部信息
+  var tEl=document.getElementById('mob-preview-type-text');
+  if(tEl) tEl.textContent=typeLabels[type]||'图片库';
+  var cntEl=document.getElementById('mob-preview-count');
+  if(cntEl) cntEl.textContent='共 1 张';
+  var te=document.getElementById('mob-thumb-emoji');
+  if(te) te.textContent=emoji;
+
+  document.getElementById('mob-preview-sheet').style.display='block';
+  document.body.style.overflow='hidden';
+
+  window._mobDrawerOpen=false;
+  var drawer=document.getElementById('mob-preview-drawer');
+  if(drawer) drawer.style.left='-300px';
+};
+
+// 复制提示词
+window.mobCopyPrompt=function(){
+  var txt=window._mobPromptText||'';
+  if(!txt){ showToast('⚠️ 无提示词可复制'); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ showToast('✅ 提示词已复制'); }); }
+  else { showToast('⚠️ 复制功能不可用'); }
+};
+
+// 复制 TaskId
+window.mobCopyTaskId=function(){
+  var txt=window._mobTaskIdText||'';
+  if(!txt){ showToast('⚠️ 无Task ID可复制'); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Task ID已复制'); }); }
+  else { showToast('⚠️ 复制功能不可用'); }
+};
+
+// 打开发布弹窗（移动端提升 z-index 显示在预览层上方）
+window.mobOpenPublish=function(){
+  var el=document.getElementById('edit-work-modal');
+  if(el) el.style.zIndex='200100';
+  if(typeof openModal==='function') openModal('edit-work-modal');
+};
+
+// 打开分享弹窗（移动端预览底部按钮调用）
+window.mobOpenShare=function(){
+  if(typeof openMyworksShare==='function') openMyworksShare();
+};
+
+// 辅助：设置信息字段
+function setMobInfo(id,val){
+  var el=document.getElementById(id);
+  if(el) el.textContent=val||'—';
+}
+
+// ── 左侧信息抽屉 ────────────────────────────────────
+window._mobDrawerOpen=false;
+window.mobToggleDrawer=function(){
+  window._mobDrawerOpen=!window._mobDrawerOpen;
+  var drawer=document.getElementById('mob-preview-drawer');
+  if(!drawer) return;
+  if(window._mobDrawerOpen){
+    drawer.style.left='0';
+  } else {
+    drawer.style.left='-300px';
+  }
+};
+
+window.mobClosePreview=function(){
+  document.getElementById('mob-preview-sheet').style.display='none';
+  document.body.style.overflow='';
+  window._mobDrawerOpen=false;
+};
+
+// 收藏灵感/Apps 预览
+window.mobOpenFavInspr=function(card){
+  window._mobCurrCard=card;
+  if(typeof openFavInsprPreview==='function') openFavInsprPreview(card);
+};
+window.mobOpenFavApps=function(card){
+  window._mobCurrCard=card;
+  if(typeof openFavAppsPreview==='function') openFavAppsPreview(card);
+};
+
+// ── Action Sheet ────────────────────────────────────
+window._mobActionCard=null;
+window.mobGetActionCard=function(){ return window._mobActionCard; };
+
+window.mobShowActions=function(btn){
+  var card=btn.closest('.mob-card');
+  if(!card) return;
+  window._mobActionCard=card;
+  document.getElementById('mob-action-sheet').style.display='flex';
+  document.body.style.overflow='hidden';
+};
+
+window.mobCloseActions=function(){
+  document.getElementById('mob-action-sheet').style.display='none';
+  document.body.style.overflow='';
+};
+
+// 手机版管理模式
+window._mobManageMode=false;
+window.mobToggleManage=function(){
+  var btn=document.querySelector('#page-myassets-mobile .manage-btn');
+  window._mobManageMode=!window._mobManageMode;
+  var bar=document.getElementById('mob-batch-bar');
+  if(window._mobManageMode){
+    if(btn) btn.textContent='完成';
+    if(bar){bar.style.display='flex';}
+    document.querySelectorAll('#page-myassets-mobile .mob-card').forEach(function(c){
+      c.style.position='relative';
+      if(!c.querySelector('.mob-manage-check')){
+        var check=document.createElement('div');
+        check.className='mob-manage-check';
+        check.style.cssText='position:absolute;top:8px;right:42px;z-index:30;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;font-size:12px;color:#fff;';
+        check.innerHTML='<span style="opacity:0;transition:opacity 0.15s;">✓</span>';
+        check.dataset.checked='0';
+        check.onclick=function(e){
+          e.stopPropagation();
+          var ch=this.querySelector('span');
+          if(this.dataset.checked==='0'){
+            this.dataset.checked='1';
+            this.style.borderColor='#3b82f6'; this.style.background='#3b82f6';
+            if(ch) ch.style.opacity='1';
+          } else {
+            this.dataset.checked='0';
+            this.style.borderColor='rgba(255,255,255,0.6)'; this.style.background='rgba(0,0,0,0.4)';
+            if(ch) ch.style.opacity='0';
+          }
+          mobUpdateBatchCount();
+        };
+        c.appendChild(check);
+      }
+    });
+    mobUpdateBatchCount();
+  } else {
+    if(btn) btn.textContent='管理';
+    if(bar){bar.style.display='none';}
+    document.querySelectorAll('#page-myassets-mobile .mob-manage-check').forEach(function(el){el.remove();});
+  }
+};
+
+// 更新批量操作栏选中计数
+window.mobUpdateBatchCount=function(){
+  var checked=document.querySelectorAll('#page-myassets-mobile .mob-manage-check[data-checked="1"]');
+  var total=document.querySelectorAll('#page-myassets-mobile .mob-card').length;
+  // 更新全选图标
+  var icon=document.getElementById('mob-batch-check-icon');
+  if(icon){
+    if(checked.length===total&&total>0){
+      icon.style.background='#3b82f6'; icon.style.borderColor='#3b82f6'; icon.textContent='✓';
+    } else if(checked.length>0){
+      icon.style.background='#3b82f6'; icon.style.borderColor='#3b82f6'; icon.textContent='-';
+    } else {
+      icon.style.background='transparent'; icon.style.borderColor='#6b7280'; icon.textContent='';
+    }
+  }
+};
+
+// 全选/取消全选
+window.mobBatchSelectAll=function(){
+  var allChecked=document.querySelectorAll('#page-myassets-mobile .mob-manage-check:not([data-checked="1"])');
+  if(allChecked.length===0){
+    // 全部已选中→取消全选
+    document.querySelectorAll('#page-myassets-mobile .mob-manage-check').forEach(function(c){
+      c.dataset.checked='0';
+      c.style.borderColor='rgba(255,255,255,0.6)'; c.style.background='rgba(0,0,0,0.4)';
+      var ch=c.querySelector('span'); if(ch) ch.style.opacity='0';
+    });
+  } else {
+    // 全选
+    document.querySelectorAll('#page-myassets-mobile .mob-manage-check').forEach(function(c){
+      c.dataset.checked='1';
+      c.style.borderColor='#3b82f6'; c.style.background='#3b82f6';
+      var ch=c.querySelector('span'); if(ch) ch.style.opacity='1';
+    });
+  }
+  mobUpdateBatchCount();
+};
+
+// 批量删除
+window.mobBatchDelete=function(){
+  var selected=document.querySelectorAll('#page-myassets-mobile .mob-manage-check[data-checked="1"]');
+  if(selected.length===0){showToast('⚠️ 请先选择要删除的作品');return;}
+  if(!confirm('确定要删除选中的 '+selected.length+' 个作品吗？此操作不可撤销。')) return;
+  selected.forEach(function(c){
+    var card=c.closest('.mob-card');
+    if(card){card.style.transition='all 0.3s';card.style.transform='scale(0.9)';card.style.opacity='0';setTimeout(function(){card.remove();},300);}
+  });
+  showToast('🗑️ 已删除 '+selected.length+' 个作品');
+  setTimeout(mobUpdateBatchCount,350);
+};
+
+// 退出管理模式
+window.mobCloseManage=function(){
+  if(window._mobManageMode) mobToggleManage();
+};
+
+// 分享面板（底部滑入动画）
+window.openMyworksShare=function(){
+  var modal=document.getElementById('myworks-share-modal');
+  if(!modal) return;
+  var panel=document.getElementById('myworks-share-panel');
+  if(panel) panel.style.transform='translateY(100%)';
+  modal.style.display='flex';
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      if(panel){
+        panel.style.transition='transform 0.25s cubic-bezier(0.32,0.72,0,1)';
+        panel.style.transform='translateY(0)';
+      }
+    });
+  });
+};
+window.closeMyworksShare=function(){
+  var panel=document.getElementById('myworks-share-panel');
+  if(panel){
+    panel.style.transition='transform 0.2s cubic-bezier(0.32,0.72,0,1)';
+    panel.style.transform='translateY(100%)';
+  }
+  setTimeout(function(){
+    document.getElementById('myworks-share-modal').style.display='none';
+    document.body.style.overflow='';
+  },200);
+};
+
+// 为手机卡片添加来源标识图标
+function initMobSourceBadges(){
+  var sourceMap={
+    '文生图':'🤖','文生视频':'🤖','文生音频':'🤖','文字创作':'🤖','self':'🤖','影像创作':'🤖',
+    '灵感广场':'💡','inspiration':'💡',
+    'apps':'🎮'
+  };
+  document.querySelectorAll('#page-myassets-mobile .mob-card').forEach(function(card){
+    var imgEl=card.querySelector('.mob-card-img');
+    if(!imgEl||imgEl.querySelector('.mob-source-badge')) return;
+    var src=card.getAttribute('data-source')||'';
+    var icon=sourceMap[src]||'🤖';
+    var label=
+      icon==='💡'?'灵感':
+      icon==='🎮'?'Apps':
+      '大模型';
+    var badge=document.createElement('span');
+    badge.className='mob-source-badge';
+    badge.style.cssText='position:absolute;top:36px;left:8px;font-size:9px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:4px;z-index:20;display:flex;align-items:center;gap:3px;';
+    badge.textContent=icon+' '+label;
+    imgEl.appendChild(badge);
+  });
+}
+document.addEventListener('DOMContentLoaded',initMobSourceBadges);
+
+// ↓ 以下为其他功能预留
+
+</script>
+
+</div>
+</body>
+</html>

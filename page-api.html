@@ -1,0 +1,200 @@
+<section id="page-api" class="page-section">
+  <!-- ═══ 标题 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6"></div>
+  <div class="text-center mb-6">
+    <h2 class="text-lg font-bold">🔑 API令牌管理</h2>
+    <p class="text-xs text-gray-400 mt-1">管理您的开发者API密钥，查看调用统计和接口文档</p>
+  </div>
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-6"></div>
+
+  <!-- 卡片区域 -->
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <!-- 头部 -->
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-sm font-semibold">API令牌管理</span>
+      <button class="new-key-btn px-4 py-2 bg-blue-500 text-white text-xs font-medium rounded-lg hover:bg-blue-600 transition">+ 新建密钥</button>
+    </div>
+  </div>
+
+  <!-- ═══ 调用统计 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">📊 调用统计</div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="stat-card p-4 bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl text-center cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all">
+        <div class="text-[11px] text-gray-400 mb-1">今日调用</div>
+        <div class="text-xl font-bold text-blue-600 dark:text-blue-400">1,234</div>
+        <div class="text-[10px] text-gray-400 mt-1">较昨日 +12.3%</div>
+      </div>
+      <div class="stat-card p-4 bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl text-center cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all">
+        <div class="text-[11px] text-gray-400 mb-1">本周调用</div>
+        <div class="text-xl font-bold text-green-600 dark:text-green-400">8,765</div>
+        <div class="text-[10px] text-gray-400 mt-1">较上周 +5.2%</div>
+      </div>
+      <div class="stat-card p-4 bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl text-center cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all">
+        <div class="text-[11px] text-gray-400 mb-1">本月调用</div>
+        <div class="text-xl font-bold text-purple-600 dark:text-purple-400">32,100</div>
+        <div class="text-[10px] text-gray-400 mt-1">较上月 +8.7%</div>
+      </div>
+      <div class="stat-card p-4 bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 rounded-xl text-center cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all">
+        <div class="text-[11px] text-gray-400 mb-1">累计调用</div>
+        <div class="text-xl font-bold text-amber-600 dark:text-amber-400">156,789</div>
+        <div class="text-[10px] text-gray-400 mt-1">总消耗 ¥3,847.50</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 我的密钥 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6">
+    <div class="p-5 pb-0">
+      <div class="text-sm font-semibold mb-4">🔐 我的密钥</div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs api-key-table">
+        <thead>
+          <tr class="bg-gray-50 dark:bg-gray-700/50 border-y border-gray-100 dark:border-gray-700">
+            <th class="text-left p-3 pl-5 font-medium text-gray-500">密钥名称</th>
+            <th class="text-left p-3 font-medium text-gray-500">绑定模型</th>
+            <th class="text-left p-3 font-medium text-gray-500">创建时间</th>
+            <th class="text-left p-3 font-medium text-gray-500">最后使用</th>
+            <th class="text-left p-3 font-medium text-gray-500">调用次数</th>
+            <th class="text-left p-3 font-medium text-gray-500">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition">
+            <td class="p-3 pl-5 font-medium">我的应用-生产</td>
+            <td class="p-3"><span class="inline-block px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded text-[10px] font-medium">Auto</span></td>
+            <td class="p-3 text-gray-500">05-01</td>
+            <td class="p-3 text-gray-500">05-19</td>
+            <td class="p-3 font-medium">45,678</td>
+            <td class="p-3">
+              <div class="flex gap-2">
+                <button class="copy-key text-blue-500 hover:text-blue-700 hover:underline text-[10px]">复制</button>
+                <button class="edit-key text-blue-500 hover:text-blue-700 hover:underline text-[10px]">编辑</button>
+                <button class="del-key text-red-500 hover:text-red-700 hover:underline text-[10px]">删除</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition">
+            <td class="p-3 pl-5 font-medium">我的应用-测试</td>
+            <td class="p-3"><span class="inline-block px-2 py-0.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded text-[10px] font-medium">GPT-5.4</span></td>
+            <td class="p-3 text-gray-500">05-15</td>
+            <td class="p-3 text-gray-500">05-18</td>
+            <td class="p-3 font-medium">1,234</td>
+            <td class="p-3">
+              <div class="flex gap-2">
+                <button class="copy-key text-blue-500 hover:text-blue-700 hover:underline text-[10px]">复制</button>
+                <button class="edit-key text-blue-500 hover:text-blue-700 hover:underline text-[10px]">编辑</button>
+                <button class="del-key text-red-500 hover:text-red-700 hover:underline text-[10px]">删除</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition">
+            <td class="p-3 pl-5 font-medium">数据分析项目</td>
+            <td class="p-3"><span class="inline-block px-2 py-0.5 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded text-[10px] font-medium">Gemini 3.1</span></td>
+            <td class="p-3 text-gray-500">05-10</td>
+            <td class="p-3 text-gray-500">05-17</td>
+            <td class="p-3 font-medium">8,901</td>
+            <td class="p-3">
+              <div class="flex gap-2">
+                <button class="copy-key text-blue-500 hover:text-blue-700 hover:underline text-[10px]">复制</button>
+                <button class="edit-key text-blue-500 hover:text-blue-700 hover:underline text-[10px]">编辑</button>
+                <button class="del-key text-red-500 hover:text-red-700 hover:underline text-[10px]">删除</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ 接口文档 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">📚 接口文档</div>
+    <div class="bg-gray-900 dark:bg-gray-950 rounded-xl p-4 overflow-x-auto">
+      <pre class="text-[11px] text-green-400 leading-relaxed font-mono whitespace-pre-wrap break-all">
+<span class="text-gray-500"># Chat Completions API</span>
+curl -X POST https://api.guid.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "GPT-5.4",
+    "messages": [{"role": "user", "content": "你好"}]
+  }'</pre>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <button class="copy-curl-btn px-4 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">📋 复制代码</button>
+      <button class="view-docs-btn px-4 py-2 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">查看完整文档 →</button>
+    </div>
+  </div>
+
+  <!-- ═══ API套餐 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">💎 API套餐</div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs api-plan-table">
+        <thead>
+          <tr class="bg-gray-50 dark:bg-gray-700/50 border-y border-gray-100 dark:border-gray-700">
+            <th class="text-left p-3 pl-5 font-medium text-gray-500"></th>
+            <th class="text-center p-3 font-medium">免费套餐</th>
+            <th class="text-center p-3 font-medium">开发者套餐</th>
+            <th class="text-center p-3 font-medium">企业套餐</th>
+            <th class="text-center p-3 font-medium">定制套餐</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100 dark:border-gray-700">
+            <td class="p-3 pl-5 text-gray-500">价格</td>
+            <td class="p-3 text-center font-semibold">¥0/月</td>
+            <td class="p-3 text-center font-semibold">¥99/月</td>
+            <td class="p-3 text-center font-semibold">¥499/月</td>
+            <td class="p-3 text-center font-semibold">联系销售</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700">
+            <td class="p-3 pl-5 text-gray-500">调用次数</td>
+            <td class="p-3 text-center">1,000次/月</td>
+            <td class="p-3 text-center">10,000次/月</td>
+            <td class="p-3 text-center">100,000次/月</td>
+            <td class="p-3 text-center">不限量</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700">
+            <td class="p-3 pl-5 text-gray-500">并发支持</td>
+            <td class="p-3 text-center">1</td>
+            <td class="p-3 text-center">5</td>
+            <td class="p-3 text-center">20</td>
+            <td class="p-3 text-center">定制</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700">
+            <td class="p-3 pl-5 text-gray-500">优先支持</td>
+            <td class="p-3 text-center text-red-400">❌</td>
+            <td class="p-3 text-center text-red-400">❌</td>
+            <td class="p-3 text-center text-green-500">✅</td>
+            <td class="p-3 text-center text-green-500">✅</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-700">
+            <td class="p-3 pl-5 text-gray-500">专属客服</td>
+            <td class="p-3 text-center text-red-400">❌</td>
+            <td class="p-3 text-center text-red-400">❌</td>
+            <td class="p-3 text-center text-green-500">✅</td>
+            <td class="p-3 text-center text-green-500">✅</td>
+          </tr>
+          <tr>
+            <td class="p-3 pl-5"></td>
+            <td class="p-3 text-center"><span class="inline-block px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-500 text-[10px] rounded-lg">当前使用</span></td>
+            <td class="p-3 text-center"><button class="upgrade-plan-btn px-3 py-1.5 bg-blue-500 text-white text-[10px] rounded-lg hover:bg-blue-600 transition">升级</button></td>
+            <td class="p-3 text-center"><button class="upgrade-plan-btn px-3 py-1.5 bg-blue-500 text-white text-[10px] rounded-lg hover:bg-blue-600 transition">升级</button></td>
+            <td class="p-3 text-center"><button class="consult-plan-btn px-3 py-1.5 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 text-[10px] rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">咨询</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

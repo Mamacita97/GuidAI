@@ -1,0 +1,1371 @@
+<div id="profile-bind-drawer" class="profile-bind-drawer" aria-hidden="true">
+  <div class="profile-bind-drawer-backdrop" onclick="closeProfileBindDrawer()"></div>
+  <div class="profile-bind-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="profile-bind-drawer-title">
+    <header class="profile-bind-drawer-head">
+      <button type="button" class="profile-bind-drawer-back" id="profile-bind-drawer-back" onclick="profileBindDrawerBack()" aria-label="返回" style="display:none">�</button>
+      <h2 id="profile-bind-drawer-title" class="profile-bind-drawer-title">���手机�</h2>
+      <button type="button" class="profile-bind-drawer-close" onclick="closeProfileBindDrawer()" aria-label="关闭">×</button>
+    </header>
+    <div class="profile-bind-drawer-steps" id="profile-bind-step-dots" aria-hidden="true">
+      <span class="profile-bind-dot is-active" data-step-dot="1"></span>
+      <span class="profile-bind-dot" data-step-dot="2"></span>
+    </div>
+    <div class="profile-bind-drawer-body">
+
+      <!-- 手机 · ���步：验证原手机号 -->
+      <div class="profile-bind-step" id="phone-bind-step-1" data-bind-flow="phone" data-step="1" hidden>
+        <p class="profile-bind-security-tip">🔒 为了账户安全，换绑前须先验证当前绑定手机，不���免验证直接修改�</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label">当前手机�</label>
+          <div class="profile-bind-readonly" id="phone-bind-old-display">+86 138****1234</div>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="phone-old-code">���验证�</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="phone-old-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+            <button type="button" class="profile-bind-code-btn" id="phone-old-code-btn" onclick="profileBindSendCode('phone-old')">获取验证�</button>
+          </div>
+        </div>
+        <div class="profile-bind-foot">
+          <p class="profile-bind-hint" id="phone-step1-hint">为了账户安全，�先验证当前手�</p>
+          <button type="button" class="profile-bind-primary" id="phone-step1-next" disabled onclick="profileBindPhoneStep1Next()">下一步（验证����</button>
+        </div>
+      </div>
+
+      <!-- 手机 · ���步：绑定新手机号 -->
+      <div class="profile-bind-step" id="phone-bind-step-2" data-bind-flow="phone" data-step="2" hidden>
+        <p class="profile-bind-step-desc">���已验证，请绑定新的手机号�</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="phone-new-number">新手机号</label>
+          <div class="profile-bind-phone-row">
+            <span class="profile-bind-prefix">+86</span>
+            <input type="tel" id="phone-new-number" class="profile-bind-input" placeholder="请输入新手机�? maxlength="11" inputmode="numeric" autocomplete="tel">
+          </div>
+          <p class="profile-bind-error" id="phone-new-same-error" hidden>新手机号不能与当前相�</p>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="phone-new-code">���验证�</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="phone-new-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric">
+            <button type="button" class="profile-bind-code-btn" id="phone-new-code-btn" onclick="profileBindSendCode('phone-new')" disabled>获取验证�</button>
+          </div>
+        </div>
+        <div class="profile-bind-foot">
+          <button type="button" class="profile-bind-primary" id="phone-step2-submit" disabled onclick="profileBindConfirmPhone()">�换绑</button>
+        </div>
+      </div>
+
+      <!-- � · ���步：验证原邮�?-->
+      <div class="profile-bind-step" id="email-bind-step-1" data-bind-flow="email" data-step="1" hidden>
+        <p class="profile-bind-security-tip">🔒 为了账户安全，换绑前须先验证当前绑定�，不���免验证直接修改�</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label">当前�</label>
+          <div class="profile-bind-readonly" id="email-bind-old-display">u****er@example.com</div>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="email-old-code">�验证�</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="email-old-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+            <button type="button" class="profile-bind-code-btn" id="email-old-code-btn" onclick="profileBindSendCode('email-old')">发送验证码</button>
+          </div>
+          <p class="profile-bind-hint profile-bind-hint-block" id="email-old-sent-hint">验证码将发送至当前�，�注意查收（包���圾�）�</p>
+        </div>
+        <div class="profile-bind-foot">
+          <button type="button" class="profile-bind-primary" id="email-step1-next" disabled onclick="profileBindEmailStep1Next()">下一步（验证����</button>
+          <button type="button" class="profile-bind-appeal-link" onclick="openProfileBindAppeal()">无法接收验证码？人工申诉换绑</button>
+        </div>
+      </div>
+
+      <!-- � · ���步：绑定新邮�?-->
+      <div class="profile-bind-step" id="email-bind-step-2" data-bind-flow="email" data-step="2" hidden>
+        <p class="profile-bind-step-desc">���已验证，请绑定新的邮箱地址�</p>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="email-new-address">新邮�</label>
+          <input type="email" id="email-new-address" class="profile-bind-input profile-bind-input-block" placeholder="请输入新�地址" autocomplete="email">
+          <p class="profile-bind-error" id="email-new-same-error" hidden>新邮箱不能与当前相同</p>
+        </div>
+        <div class="profile-bind-field">
+          <label class="profile-bind-label" for="email-new-code">�验证�</label>
+          <div class="profile-bind-code-row">
+            <input type="text" id="email-new-code" class="profile-bind-input" placeholder="请输入验证码" maxlength="6" inputmode="numeric">
+            <button type="button" class="profile-bind-code-btn" id="email-new-code-btn" onclick="profileBindSendCode('email-new')" disabled>发送验证码</button>
+          </div>
+        </div>
+        <div class="profile-bind-foot">
+          <button type="button" class="profile-bind-primary" id="email-step2-submit" disabled onclick="profileBindConfirmEmail()">�换绑</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 人工申诉（邮箱丢失等�?-->
+
+<div id="myworks-preview-modal" style="display:none;position:fixed;top:56px;left:0;right:0;bottom:0;z-index:200060;background:#0d0d0d;flex-direction:row;">
+  <!-- 左侧列：图片预��?+ 底部图片�?-->
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;">
+    <!-- 图片预��?-->
+    <div id="mwp-media-area" style="flex:1;display:flex;align-items:center;justify-content:center;background:#0d0d0d;min-width:0;min-height:0;position:relative;">
+      <div id="mwp-media-box" style="width:380px;height:380px;border-radius:10px;overflow:hidden;background:#2a3044;display:flex;align-items:center;justify-content:center;position:relative;">
+        <img id="mwp-image" src="" alt="" style="width:100%;height:100%;object-fit:contain;display:none;">
+        <div id="mwp-placeholder" style="text-align:center;">
+          <div style="font-size:13px;color:#6b7280;letter-spacing:0.02em;" id="mwp-label">生成结果 1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部左侧：图片库 -->
+    <div style="flex-shrink:0;background:#0d0d0d;border-top:1px solid #1a1f2e;padding:12px 20px 14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span style="font-size:12px;color:#6b7280;font-weight:500;">�对话 · 图片�</span>
+        <span id="mwp-thumb-count" style="font-size:12px;color:#6b7280;">�?0 �</span>
+      </div>
+      <div id="mwp-thumbnails" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;"></div>
+    </div>
+  </div>
+
+  <!-- 右侧列：信息面板（占满整列高度） -->
+  <div style="width:360px;min-width:360px;background:#141820;display:flex;flex-direction:column;border-left:1px solid #1e2535;">
+    <!-- 顶部工具栏：图标无背���靠右 -->
+    <div style="display:flex;align-items:center;justify-content:flex-end;padding:10px 14px;gap:4px;">
+      <!-- 下载 -->
+      <button onclick="mwpDownload()" title="下载" style="width:30px;height:30px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9ca3af;border-radius:6px;transition:color 0.15s,background 0.15s;" onmouseover="this.style.color='#e5e7eb';this.style.background='#1e2535'" onmouseout="this.style.color='#9ca3af';this.style.background='none'">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+      <!-- 发布 -->
+      <button id="mwp-publish-btn" onclick="mwpPublish()" title="发布" style="width:30px;height:30px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9ca3af;border-radius:6px;transition:color 0.15s,background 0.15s;" onmouseover="this.style.color='#e5e7eb';this.style.background='#1e2535'" onmouseout="this.style.color='#9ca3af';this.style.background='none'">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4"/><path d="M8 12h8"/></svg>
+      </button>
+      <!-- 分享 -->
+      <button onclick="openMyworksShare()" title="分享" style="width:30px;height:30px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9ca3af;border-radius:6px;transition:color 0.15s,background 0.15s;" onmouseover="this.style.color='#e5e7eb';this.style.background='#1e2535'" onmouseout="this.style.color='#9ca3af';this.style.background='none'">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </button>
+      <!-- 删除 -->
+      <button onclick="mwpDelete()" title="删除" style="width:30px;height:30px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9ca3af;border-radius:6px;transition:color 0.15s,background 0.15s;" onmouseover="this.style.color='#e5e7eb';this.style.background='#1e2535'" onmouseout="this.style.color='#9ca3af';this.style.background='none'">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      </button>
+      <!-- 关闭 -->
+      <button onclick="closeMyworksPreview()" title="关闭" style="width:30px;height:30px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9ca3af;border-radius:6px;font-size:20px;line-height:1;transition:color 0.15s,background 0.15s;" onmouseover="this.style.color='#e5e7eb';this.style.background='#1e2535'" onmouseout="this.style.color='#9ca3af';this.style.background='none'">×</button>
+    </div>
+
+    <!-- 信息内�区（������ -->
+    <div style="flex:1;overflow-y:auto;padding:6px 20px 16px;">
+      <!-- 产品名称 -->
+      <div id="mwp-section-title" style="margin-bottom:18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;">产品名称</span>
+        </div>
+        <div id="mwp-title" style="font-size:15px;font-weight:600;color:#f1f5f9;">�</div>
+      </div>
+
+      <!-- 分类标� -->
+      <div id="mwp-section-category" style="margin-bottom:18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;">分类标�</span>
+        </div>
+        <div id="mwp-category" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">����</span>
+        </div>
+      </div>
+
+      <!-- 使用价格 -->
+      <div id="mwp-section-price" style="margin-bottom:18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;">使用价格</span>
+        </div>
+        <div id="mwp-price" style="font-size:15px;font-weight:600;color:#f59e0b;">�</div>
+      <!-- 互动数据 -->
+      <div id="mwp-section-stats" style="margin-bottom:18px;display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;">互动数据</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;">
+          <div style="display:flex;align-items:center;gap:6px;color:#fca5a5;"><span>❤️</span><span>点赞</span><span id="mwp-likes" style="font-weight:600;color:#f1f5f9;margin-left:auto;">0</span></div>
+          <div style="display:flex;align-items:center;gap:6px;color:#fcd34d;"><span>⭐</span><span>收藏</span><span id="mwp-favs" style="font-weight:600;color:#f1f5f9;margin-left:auto;">0</span></div>
+        </div>
+      </div>
+
+      </div>
+
+      <!-- 图片提示�?-->
+      <div style="margin-bottom:22px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;" id="mwp-prompt-label">图片提示�</span>
+          <button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('mwp-prompt-text').textContent);showToast('�?已�制提示词')" style="font-size:12px;color:#6b7280;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:3px;padding:0;white-space:nowrap;" onmouseover="this.style.color='#9ca3af'" onmouseout="this.style.color='#6b7280'">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            复制提示�?
+          </button>
+        </div>
+        <p id="mwp-prompt-text" style="font-size:13px;color:#d1d5db;line-height:1.6;word-break:break-all;margin:0;">�</p>
+      </div>
+
+      <!-- 来源 -->
+      <div style="margin-bottom:20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;">来源</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+          <span class="mwp-source-tag" data-src="model" style="display:none;font-size:11px;padding:4px 10px;border-radius:6px;background:#1e3a5f;color:#93c5fd;border:1px solid #2563eb;">大模�</span>
+          <span class="mwp-source-tag" data-src="inspiration" style="display:none;font-size:11px;padding:4px 10px;border-radius:6px;background:#3b1f5e;color:#c4a5f5;border:1px solid #7c3aed;">灵感广场</span>
+          <span class="mwp-source-tag" data-src="apps" style="display:none;font-size:11px;padding:4px 10px;border-radius:6px;background:#1f4a3a;color:#6ee7b7;border:1px solid #059669;">Apps</span>
+          <span id="mwp-source-name" style="font-size:11px;color:#9ca3af;display:none;"></span>
+          <span id="mwp-source-none" style="font-size:11px;color:#6b7280;">�</span>
+        </div>
+      </div>
+
+      <!-- 参数配置 -->
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <span style="font-size:14px;font-weight:700;color:#e5e7eb;">参数配置</span>
+          <button id="mwp-make-btn" onclick="closeMyworksPreview();showToast('🖼�?跳转到图片制作页�?)" style="font-size:11px;color:#e5e7eb;background:#1e2535;border:1px solid #2d3a50;border-radius:6px;cursor:pointer;padding:4px 12px;transition:background 0.15s;" onmouseover="this.style.background='#2d3a50'" onmouseout="this.style.background='#1e2535'">图片制作</button>
+        </div>
+        <div style="font-size:12px;color:#6b7280;line-height:2.1;">
+          <!-- 使用大模型��?-->
+          <div id="mwp-model-info" style="margin-bottom:12px;padding:10px 12px;background:#1a2130;border:1px solid #2d3a50;border-radius:8px;line-height:1.5;">
+            <div style="font-size:12px;color:#6b7280;margin-bottom:8px;">使用大模�</div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+              <span id="mwp-model-icon" style="font-size:15px;line-height:1;">�</span>
+              <span id="mwp-model-name" style="font-size:13px;font-weight:600;color:#93c5fd;">�</span>
+              <span id="mwp-model-type-tag" style="font-size:10px;padding:2px 7px;border-radius:4px;background:#1e3a5f;color:#93c5fd;border:1px solid #2563eb;">图片生成</span>
+            </div>
+            <p id="mwp-model-desc" style="font-size:11px;color:#9ca3af;margin:0;line-height:1.55;">�</p>
+          </div>
+          <div id="mwp-param-line" style="color:#9ca3af;">Auto / 0:16 / 2k / 质量：中</div>
+          <div>任务消耗：<span style="color:#a78bfa;" id="mwp-cost">�?0.01</span></div>
+          <div style="display:flex;align-items:center;gap:5px;">
+            <span>Taskid�</span><span style="color:#9ca3af;font-size:11px;" id="mwp-taskid">�</span>
+            <button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('mwp-taskid').textContent);showToast('�?已��?)" style="background:none;border:none;cursor:pointer;color:#4b5563;padding:0;line-height:1;display:flex;align-items:center;" onmouseover="this.style.color='#9ca3af'" onmouseout="this.style.color='#4b5563'">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            </button>
+          </div>
+          <div>创作时间�?span id="mwp-created-at" style="color:#9ca3af;">�</span></div>
+          <div>过期时间�?span id="mwp-expired-at" style="color:#9ca3af;">�</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══�?评�区（���叠） ══�?-->
+    <div style="border-top:1px solid #1e2535;">
+      <div onclick="mwpToggleComment()" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;transition:background 0.12s;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+        <div style="font-size:13px;font-weight:700;color:#e5e7eb;">💬 评� <span style="font-size:11px;color:#6b7280;font-weight:400;">(128)</span></div>
+        <span id="mwp-comment-arrow" style="font-size:12px;color:#6b7280;transition:transform 0.2s;">�</span>
+      </div>
+      <div id="mwp-comment-body" style="padding:0 16px 0;overflow:hidden;transition:max-height 0.25s ease;">
+        <div id="mwp-comment-list" style="max-height:160px;overflow-y:auto;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;gap:8px;">
+          <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;">A</div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+              <span style="font-size:10px;font-weight:600;color:#e5e7eb;">阿��</span>
+              <span style="font-size:9px;color:#6b7280;">2小时�</span>
+            </div>
+            <div style="font-size:11px;color:#d1d5db;line-height:1.5;">效果���了，完全看不出是AI生成的！请问用的什么模型？</div>
+            <div style="margin-top:2px;"><button onclick="showToast('💬 回�')" style="font-size:9px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">回�</button></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;">B</div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+              <span style="font-size:10px;font-weight:600;color:#e5e7eb;">青青草原</span>
+              <span style="font-size:9px;color:#6b7280;">5小时�</span>
+            </div>
+            <div style="font-size:11px;color:#d1d5db;line-height:1.5;">已使���效果惊艳！一���成太方便�</div>
+            <div style="margin-top:2px;"><button onclick="showToast('💬 回�')" style="font-size:9px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">回�</button></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;">C</div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+              <span style="font-size:10px;font-weight:600;color:#e5e7eb;">设�����</span>
+              <span style="font-size:9px;color:#6b7280;">昨天</span>
+            </div>
+            <div style="font-size:11px;color:#d1d5db;line-height:1.5;">求问能否���批量处理？有几百张商品图需要换�</div>
+            <div style="margin-top:2px;"><button onclick="showToast('💬 回�')" style="font-size:9px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">回�</button></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;padding-bottom:12px;border-top:1px solid #1e2535;padding-top:10px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#6366f1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;">�</div>
+        <div style="flex:1;display:flex;gap:8px;">
+          <input id="mwp-comment-input" placeholder="说点什�?.." style="flex:1;font-size:11px;border:1px solid #2d3a50;border-radius:8px;padding:6px 10px;background:#1a2130;color:#e5e7eb;outline:none;" onfocus="this.style.borderColor='#3b82f6'" onblur="this.style.borderColor='#2d3a50'">
+          <button onclick="var v=document.getElementById('mwp-comment-input');if(v&&v.value.trim()){showToast('💬 评�已发�?);v.value='';}else{showToast('⚠️ 请输入评论内�?);}" style="padding:6px 14px;border-radius:8px;border:none;background:#3b82f6;color:#fff;font-size:11px;cursor:pointer;font-weight:500;white-space:nowrap;">发�</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部：操作按�?-->
+    <div style="padding:12px 16px 14px;border-top:1px solid #1e2535;">
+      <div style="display:flex;gap:10px;">
+        <button onclick="var _c=window._mwpCurrentCard;var _t=_c?_c.getAttribute('data-type')||'image':'image';var _p={image:'image',video:'video',audio:'audio',text:'chat'}[_t]||'image';closeMyworksPreview();showPage&amp;&amp;showPage(_p);showToast('✏️ 跳转到编辑：'+_t)" style="flex:1;padding:11px 0;border-radius:10px;border:1px solid #2d3a50;background:transparent;color:#e5e7eb;font-size:13px;font-weight:500;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='#1e2535'" onmouseout="this.style.background='transparent'">重新编辑</button>
+        <button onclick="var _c=window._mwpCurrentCard;var _t=_c?_c.getAttribute('data-type')||'image':'image';var _p={image:'image',video:'video',audio:'audio',text:'chat'}[_t]||'image';closeMyworksPreview();showPage&amp;&amp;showPage(_p);showToast('🔄 再�生成�?+_t)" style="flex:1;padding:11px 0;border-radius:10px;border:none;background:#b6ef3a;color:#0d1117;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background 0.15s;" onmouseover="this.style.background='#9fde1e'" onmouseout="this.style.background='#b6ef3a'">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          再�生成
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+window.mwpToggleComment=function(){
+  var body=document.getElementById('mwp-comment-body');
+  var arrow=document.getElementById('mwp-comment-arrow');
+  if(!body) return;
+  if(body.dataset.open==='1'){
+    body.style.maxHeight='0';
+    body.dataset.open='0';
+    if(arrow) arrow.style.transform='rotate(0deg)';
+  } else {
+    body.style.maxHeight=body.scrollHeight+'px';
+    body.dataset.open='1';
+    if(arrow) arrow.style.transform='rotate(180deg)';
+  }
+};
+document.addEventListener('DOMContentLoaded',function(){
+  var body=document.getElementById('mwp-comment-body');
+  if(body){body.style.maxHeight='0';body.dataset.open='0';}
+});
+</script>
+
+<!-- ══════�?收藏Apps预�弹窗 ══════�?-->
+<div id="fav-apps-preview-modal" style="display:none;position:fixed;top:56px;left:0;right:0;bottom:0;z-index:200090;background:#111;flex-direction:column;width:100vw;height:calc(100vh - 56px);">
+  <style>
+    @media (max-width: 768px) {
+      #fav-apps-preview-modal > div:last-child { flex-direction:column !important; }
+      #fav-apps-preview-modal > div:last-child > div:first-child { width:100% !important; min-width:0 !important; max-height:40vh !important; overflow-y:auto !important; }
+    }
+  </style>
+
+  <!-- ── 顶部标��?── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:#1a1a1a;border-bottom:1px solid #2a2a2a;flex-shrink:0;">
+    <!-- 左侧：标�?+ 标� -->
+    <div style="display:flex;align-items:center;gap:12px;min-width:0;flex:1;">
+      <h2 id="fapm-title" style="font-size:15px;font-weight:700;color:#f9fafb;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px;">App名称</h2>
+      <div id="fapm-tags" style="display:flex;gap:6px;flex-wrap:nowrap;"></div>
+    </div>
+    <!-- 右侧：数�?+ 关闭 -->
+    <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+      <!-- 点赞按钮 -->
+      <button id="fapm-like-btn" onclick="fapmToggleLike()" style="display:flex;align-items:center;gap:5px;font-size:12px;color:#9ca3af;border:none;background:transparent;cursor:pointer;padding:2px;">
+        <svg id="fapm-like-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <span id="fapm-likes">0</span>
+      </button>
+      <!-- 收藏按钮 -->
+      <button id="fapm-fav-btn" onclick="fapmToggleFav()" style="display:flex;align-items:center;gap:5px;font-size:12px;color:#f59e0b;border:none;background:transparent;cursor:pointer;padding:2px;">
+        <svg id="fapm-fav-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span id="fapm-fav-count" style="font-size:12px;color:#f59e0b;">0</span>
+      </button>
+      <button onclick="closeFavAppsPreview()" style="width:28px;height:28px;border-radius:50%;border:none;background:rgba(255,255,255,0.1);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:16px;line-height:1;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">×</button>
+    </div>
+  </div>
+
+  <!-- ── 主体区域（左侧边�?+ ���内��?── -->
+  <div style="flex:1;display:flex;flex-direction:row;overflow:hidden;min-height:0;">
+
+    <!-- 左侧边栏（暗色，固定宽度�?-->
+    <div style="width:260px;min-width:260px;background:#1a1a1a;border-right:1px solid #2a2a2a;display:flex;flex-direction:column;overflow-y:auto;">
+
+      <!-- 创作者信�?-->
+      <div style="padding:14px 16px 10px;border-bottom:1px solid #252525;">
+        <div style="font-size:11px;color:#6b7280;margin-bottom:8px;font-weight:500;">创作小贴�</div>
+        <div style="font-size:11px;color:#10b981;margin-bottom:3px;">�?近期运�成功率为<span id="fapm-success-rate">98%</span></div>
+        <div style="font-size:11px;color:#f59e0b;">�?平均运�时长�?span id="fapm-avg-time">34s</span>左右</div>
+      </div>
+
+      <!-- 创作者头�?+ 名称 -->
+      <div style="padding:12px 16px;border-bottom:1px solid #252525;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div id="fapm-avatar-wrap" style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:14px;overflow:hidden;flex-shrink:0;">
+            <img id="fapm-avatar-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <span id="fapm-avatar-fallback">�</span>
+          </div>
+          <div>
+            <div id="fapm-author" style="font-size:12px;font-weight:600;color:#f3f4f6;">创作�</div>
+            <div id="fapm-updated" style="font-size:10px;color:#6b7280;"></div>
+          </div>
+        </div>
+        <button id="fapm-follow-btn" onclick="fapmToggleFollow()" style="padding:4px 10px;border-radius:12px;border:1px solid #374151;background:transparent;color:#9ca3af;font-size:11px;cursor:pointer;">+ 关注</button>
+      </div>
+
+      <!-- 模特图上传区 -->
+      <div style="padding:12px 16px;border-bottom:1px solid #252525;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:600;color:#d1d5db;">模特�</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </div>
+        <div onclick="openAssetModal('image')" style="border:1.5px dashed #374151;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;">
+          <div style="background:linear-gradient(135deg,#b45309,#92400e);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:32px;">🧥</div>
+          <button onclick="event.stopPropagation();openAssetModal('image')" style="position:absolute;bottom:6px;right:6px;width:22px;height:22px;border-radius:6px;border:none;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 替换衣物图上传区 -->
+      <div style="padding:12px 16px;border-bottom:1px solid #252525;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:600;color:#d1d5db;">替换衣物�</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </div>
+        <div onclick="openAssetModal('image')" style="border:1.5px dashed #374151;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;">
+          <div style="background:linear-gradient(135deg,#1e3a5f,#1e40af);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:32px;">👔</div>
+          <button onclick="event.stopPropagation();openAssetModal('image')" style="position:absolute;bottom:6px;right:6px;width:22px;height:22px;border-radius:6px;border:none;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:pointer;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 提示�?-->
+      <div style="padding:12px 16px;border-bottom:1px solid #252525;flex:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:600;color:#d1d5db;">提示�</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </div>
+        <textarea placeholder="让图一的人物穿上图二的衣服" style="width:100%;height:80px;background:#252525;border:1px solid #374151;border-radius:8px;color:#d1d5db;font-size:11px;padding:8px;resize:none;box-sizing:border-box;outline:none;font-family:inherit;" oninput="this.style.borderColor='#3b82f6'" onblur="this.style.borderColor='#374151'"></textarea>
+      </div>
+
+      <!-- 底部运�按钮 -->
+      <div style="padding:12px 16px;flex-shrink:0;">
+        <button onclick="showToast('�?正在运�应用...')" style="width:100%;padding:10px 0;border-radius:10px;border:none;background:linear-gradient(90deg,#10b981,#06b6d4);color:#fff;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="5,3 19,12 5,21"/></svg>
+          <span>R<span id="fapm-price-val">7</span></span>
+
+        </button>
+      </div>
+    </div>
+
+    <!-- ���主区�?-->
+    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:#111;">
+
+      <!-- 应用介绍（可折叠�?-->
+      <div id="fapm-intro-box" style="background:#1e1e1e;border-bottom:1px solid #2a2a2a;flex-shrink:0;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 20px 8px;gap:12px;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">应用介绍&amp;输入建�</div>
+            <div id="fapm-desc" style="font-size:12px;color:#d1d5db;line-height:1.6;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">应用描述</div>
+          </div>
+          <button onclick="toggleFapmIntro()" style="flex-shrink:0;width:24px;height:24px;border:none;background:transparent;cursor:pointer;color:#6b7280;display:flex;align-items:center;justify-content:center;margin-top:16px;">
+            <svg id="fapm-intro-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 大图展示区（����?-->
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:20px;">
+        <!-- 翻页左��?-->
+        <button onclick="fapmPrev()" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,0.1);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;z-index:5;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <!-- 主图 -->
+        <div id="fapm-main-img-box" style="max-width:420px;width:100%;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.6);background:linear-gradient(135deg,#1e3a5f,#1e40af);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative;">
+          <img id="fapm-main-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;">
+          <span id="fapm-main-emoji" style="font-size:72px;">👗</span>
+          <!-- 页码 -->
+          <div id="fapm-page-indicator" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:#fff;font-size:10px;padding:3px 10px;border-radius:10px;backdrop-filter:blur(4px);">1/4</div>
+        </div>
+        <!-- 翻页右��?-->
+        <button onclick="fapmNext()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,0.1);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;z-index:5;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- 底部：作�?评�Tab + 作品网格 -->
+      <div style="background:#111;border-top:1px solid #2a2a2a;flex-shrink:0;max-height:220px;display:flex;flex-direction:column;">
+        <!-- Tab + 发布作品按钮 -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px 0;flex-shrink:0;">
+          <div style="display:flex;gap:0;">
+            <button id="fapm-works-tab-btn" onclick="switchFapmTab('works')" style="padding:6px 12px;border:none;background:transparent;color:#f9fafb;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid #3b82f6;">作品 (<span id="fapm-works-count">7</span>)</button>
+            <button id="fapm-comments-tab-btn" onclick="switchFapmTab('comments')" style="padding:6px 12px;border:none;background:transparent;color:#6b7280;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;">评� (<span id="fapm-comments-count">14</span>)</button>
+          </div>
+          <button onclick="fapmPublishWork()" style="padding:6px 16px;border-radius:20px;border:none;background:#10b981;color:#fff;font-size:12px;font-weight:600;cursor:pointer;">发布作品</button>
+        </div>
+        <!-- 作品网格 -->
+        <div id="fapm-works-grid" style="flex:1;overflow-x:auto;overflow-y:hidden;padding:10px 20px;display:flex;gap:8px;"></div>
+        <!-- 评��?-->
+        <div id="fapm-comments-section" style="flex:1;overflow-y:auto;padding:10px 20px;display:none;">
+          <div style="display:flex;gap:10px;margin-bottom:14px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;">A</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:12px;font-weight:600;color:#f3f4f6;">阿��</span><span style="font-size:10px;color:#6b7280;">2小时�</span></div>
+              <div style="font-size:11px;color:#d1d5db;margin-top:2px;line-height:1.5;">效果���了，完全看不出是AI生成的！请问用的什么模型？</div>
+              <div style="display:flex;gap:12px;margin-top:4px;"><button onclick="showToast('❤️ 点赞')" style="font-size:10px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">👍 12</button><button onclick="showToast('💬 回�')" style="font-size:10px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">回�</button></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:14px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;">B</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:12px;font-weight:600;color:#f3f4f6;">青青草原</span><span style="font-size:10px;color:#6b7280;">5小时�</span></div>
+              <div style="font-size:11px;color:#d1d5db;margin-top:2px;line-height:1.5;">已使���效果惊艳！一���成太方便�</div>
+              <div style="display:flex;gap:12px;margin-top:4px;"><button onclick="showToast('❤️ 点赞')" style="font-size:10px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">👍 5</button><button onclick="showToast('💬 回�')" style="font-size:10px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">回�</button></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:14px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;">C</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:12px;font-weight:600;color:#f3f4f6;">设�����</span><span style="font-size:10px;color:#6b7280;">昨天</span></div>
+              <div style="font-size:11px;color:#d1d5db;margin-top:2px;line-height:1.5;">求问能否���批量处理？有几百张商品图需要换�</div>
+              <div style="display:flex;gap:12px;margin-top:4px;"><button onclick="showToast('❤️ 点赞')" style="font-size:10px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">👍 3</button><button onclick="showToast('💬 回�')" style="font-size:10px;color:#6b7280;border:none;background:transparent;cursor:pointer;padding:0;">回�</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════�?我的产品-移动�?══════�?-->
+
+
+<!-- ══�?移动�览（全屏覆盖�?══�?-->
+<div id="mob-preview-sheet" style="display:none;position:fixed;inset:0;z-index:200060;background:#0a0a0a;" onclick="if(event.target===this)mobClosePreview()">
+
+  <!-- 主内容区：可滚动 -->
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;">
+
+    <!-- 预�图区域（居中�?-->
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px 16px;overflow-y:auto;">
+      <div id="mob-preview-media" ondblclick="mobDoubleTapLike(event)" style="width:100%;max-width:420px;aspect-ratio:4/5;background:#2d3748;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;flex-shrink:0;">
+        <button onclick="mobClosePreview()" style="position:absolute;top:10px;right:10px;z-index:10;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.8);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</button>
+        <span id="mob-preview-emoji" style="font-size:48px;opacity:0.7;">🏙�</span>
+        <span id="mob-preview-label" style="position:absolute;font-size:13px;color:#94a3b8;">生成结果 1</span>
+        <!-- 抖音风格操作按钮（竖列） -->
+        <div style="position:absolute;right:8px;bottom:12px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:12px;">
+          <!-- 点赞 -->
+          <button id="mob-like-btn" onclick="mobToggleLike()" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg id="mob-like-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <span id="mob-like-count" style="font-size:10px;font-weight:500;text-shadow:0 1px 4px rgba(0,0,0,0.6);">128</span>
+          </button>
+          <!-- 评� -->
+          <button id="mob-comment-btn" onclick="mobOpenCommentSheet()" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <span id="mob-comment-count" style="font-size:10px;font-weight:500;text-shadow:0 1px 4px rgba(0,0,0,0.6);">32</span>
+          </button>
+          <!-- 下载 -->
+          <button onclick="showToast('📥 下载');" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </button>
+          <!-- 发布 -->
+          <button onclick="mobOpenPublish()" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <!-- 分享 -->
+          <button onclick="mobOpenShare()" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+          <!-- 再�生成 -->
+          <button onclick="var c=mobGetCurrCard();if(c)regenerateProduct({closest:function(){return c}});mobClosePreview();" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          </button>
+          <!-- 删除 -->
+          <button onclick="var c=mobGetCurrCard();if(c)deleteProduct({closest:function(){return c}});mobClosePreview();" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,0.6);padding:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+          </button>
+        </div>
+        <!-- 双击点赞动画容器 -->
+        <div id="mob-heart-container" style="position:absolute;inset:0;z-index:5;pointer-events:none;"></div>
+      </div>
+    </div>
+
+    <!-- 底部信息栏（固定�?-->
+    <div style="padding:12px 16px 28px;padding-left:44px;background:transparent;border-top:1px solid #1a1a2e;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;" onclick="event.stopPropagation()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="font-size:12px;color:#94a3b8;"><span style="color:#64748b;">�对话</span><span style="margin:0 4px;color:#334155;">·</span><span id="mob-preview-type-text">图片�</span></div>
+        <div id="mob-preview-count" style="font-size:11px;color:#475569;margin-left:4px;">�?1 �</div>
+      </div>
+      <div id="mob-thumb-strip" style="display:flex;align-items:center;gap:6px;">
+        <div id="mob-thumb-item" style="width:36px;height:36px;border-radius:6px;background:#2d3748;border:2px solid #84cc16;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+          <span id="mob-thumb-emoji" style="font-size:18px;line-height:1;">🏙�</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 左侧折叠信息面板 -->
+  <div id="mob-preview-drawer" style="position:fixed;top:0;left:-300px;width:300px;height:100%;background:#141414;border-right:1px solid #222;display:flex;flex-direction:column;z-index:200062;transition:left 0.3s cubic-bezier(0.4,0,0.2,1);" onclick="event.stopPropagation()">
+    <!-- 触发标�（嵌在抽屉右边缘�?-->
+    <div id="mob-drawer-trigger" onclick="event.stopPropagation();mobToggleDrawer()" style="position:absolute;right:-32px;top:45%;width:32px;height:56px;background:#2a2a2a;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #3a3a3a;border-left:none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </div>
+
+    <div style="padding:56px 20px 20px;flex:1;overflow-y:auto;display:flex;flex-direction:column;height:100%;">
+      <!-- 头部 -->
+      <div style="margin-bottom:20px;">
+        <span style="font-size:15px;font-weight:700;color:#f1f5f9;">作品信息</span>
+      </div>
+
+      <!-- ══�?产品名称 ══�?-->
+      <div id="mob-section-title" style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">产品名称</div>
+        <div id="mob-info-title" style="font-size:15px;font-weight:600;color:#e5e7eb;line-height:1.4;word-break:break-word;">�</div>
+      </div>
+
+      <!-- ══�?分类标� ══�?-->
+      <div id="mob-section-category" style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">分类标�</div>
+        <div id="mob-info-category" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">����</span>
+        </div>
+      </div>
+
+      <!-- ══�?使用价格 ══�?-->
+      <div id="mob-section-price" style="margin-bottom:18px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">使用价格</div>
+        <div id="mob-info-price" style="font-size:14px;font-weight:600;color:#f59e0b;">�</div>
+      </div>
+
+      <!-- ══�?花费 ══�?-->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">花费</div>
+        <span style="font-size:13px;color:#f59e0b;">�?<span id="mob-info-cost-display">0</span></span>
+      </div>
+
+      <!-- ══�?提示�?══�?-->
+      <div style="margin-bottom:20px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">提示�</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+          <div id="mob-info-prompt" style="font-size:14px;font-weight:600;color:#e5e7eb;line-height:1.5;word-break:break-word;flex:1;">�</div>
+          <button onclick="mobCopyPrompt()" style="flex-shrink:0;padding:6px 12px;border-radius:6px;border:none;background:#1e3a5f;color:#60a5fa;font-size:11px;cursor:pointer;white-space:nowrap;">复制提示�</button>
+        </div>
+      </div>
+
+      <!-- 分割�?-->
+      <div style="border-top:1px solid #1e1e1e;margin-bottom:18px;"></div>
+
+      <!-- ══�?来源 ══�?-->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">来源</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="mob-info-source-tag" style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;background:#1e3a5f;color:#60a5fa;font-size:12px;font-weight:500;">大模�</span>
+          <span id="mob-info-source" style="font-size:13px;color:#d1d5db;">Stable Diffusion XL</span>
+        </div>
+      </div>
+
+      <!-- ══�?使用模型 ══�?-->
+      <div style="margin-bottom:14px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">使用模型</div>
+        <div id="mob-info-model" style="font-size:13px;color:#e5e7eb;font-weight:500;">�</div>
+      </div>
+
+      <!-- ══�?参数配置 ══�?-->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">参数配置</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+          <div id="mob-info-params" style="font-size:13px;color:#d1d5db;line-height:1.4;word-break:break-all;flex:1;">�</div>
+          <button onclick="showToast('🎨 图片制作');" style="flex-shrink:0;padding:6px 12px;border-radius:6px;border:none;background:#1e3a5f;color:#60a5fa;font-size:11px;cursor:pointer;white-space:nowrap;">图片制作</button>
+        </div>
+      </div>
+
+      <!-- 分割�?-->
+      <div style="border-top:1px solid #1e1e1e;margin-bottom:18px;"></div>
+
+      <!-- ══�?任务消费 ══�?-->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">任务消费</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span id="mob-info-cost" style="font-size:15px;font-weight:700;color:#f59e0b;font-family:monospace;">0.01</span>
+        </div>
+      </div>
+
+      <!-- ══�?TaskId ══�?-->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:6px;">Task ID</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="mob-info-taskid" style="font-size:12px;color:#94a3b8;font-family:monospace;word-break:break-all;flex:1;">�</span>
+          <button onclick="mobCopyTaskId()" style="flex-shrink:0;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:4px;border:none;background:rgba(255,255,255,0.06);color:#64748b;cursor:pointer;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 分割�?-->
+      <div style="border-top:1px solid #1e1e1e;margin-bottom:18px;"></div>
+
+      <!-- ══�?创建时间 ══�?-->
+      <div style="margin-bottom:14px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:4px;">创建时间</div>
+        <div id="mob-info-created" style="font-size:13px;color:#d1d5db;">�</div>
+      </div>
+
+      <!-- ══�?过期时间 ══�?-->
+      <div style="margin-bottom:20px;">
+        <div style="font-size:11px;color:#525252;margin-bottom:4px;">过期时间</div>
+        <div id="mob-info-expires" style="font-size:13px;color:#d1d5db;">�</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══�?评�弹窗（抖音�格：图片上移+评�半屏�?══�?-->
+<div id="mob-comment-sheet" style="display:none;position:fixed;inset:0;z-index:200080;background:#000;flex-direction:column;" onclick="if(event.target===this)mobCloseCommentSheet()">
+  <!-- 顶部：缩小的图片预� + 关闭 -->
+  <div style="height:35vh;min-height:160px;background:#0a0a0a;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;border-bottom:1px solid #1f1f1f;">
+    <div style="max-width:60%;max-height:80%;border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
+      <div id="mob-comment-media" style="aspect-ratio:4/5;width:100%;max-width:180px;background:linear-gradient(135deg,#9333ea,#ec4899);display:flex;align-items:center;justify-content:center;font-size:40px;">
+        <span id="mob-comment-emoji">🏙�</span>
+      </div>
+    </div>
+    <button onclick="mobCloseCommentSheet()" style="position:absolute;top:12px;right:14px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;">×</button>
+    <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;color:#f1f5f9;text-shadow:0 1px 4px rgba(0,0,0,0.6);">💬 评�</div>
+  </div>
+
+  <!-- ���：评论列�?-->
+  <div id="mob-comment-list" style="flex:1;overflow-y:auto;padding:8px 16px;background:#0d0d0d;"></div>
+
+  <!-- 底部：固定输入栏 -->
+  <div style="flex-shrink:0;padding:10px 16px max(16px,env(safe-area-inset-bottom,16px));background:#141414;border-top:1px solid #2a2a2a;">
+    <div style="display:flex;gap:8px;align-items:center;">
+      <input id="mob-comment-input" placeholder="说点什�?.." style="flex:1;font-size:15px;border:1px solid #333;border-radius:20px;padding:10px 16px;background:#1f1f1f;color:#e5e7eb;outline:none;" onfocus="this.style.borderColor='#3b82f6'" onblur="this.style.borderColor='#333'">
+      <button onclick="mobPostComment()" style="padding:10px 22px;border-radius:20px;border:none;background:#3b82f6;color:#fff;font-size:14px;cursor:pointer;font-weight:600;white-space:nowrap;">发�</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══�?操作菜单 Action Sheet ══�?-->
+<div id="mob-action-sheet" style="display:none;position:fixed;inset:0;z-index:200070;background:rgba(0,0,0,0.5);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)mobCloseActions()">
+  <div style="width:100%;max-width:480px;background:#1a1a1a;border-radius:16px 16px 0 0;padding:8px 16px max(24px,env(safe-area-inset-bottom,24px));">
+    <!-- 拖拽指示�?-->
+    <div style="display:flex;align-items:center;justify-content:center;padding:4px 0 12px;">
+      <div style="width:36px;height:4px;border-radius:4px;background:#4b5563;"></div>
+    </div>
+
+    <!-- 分享 -->
+    <button onclick="mobCloseActions();setTimeout(openMyworksShare,150);" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">📤</span> 分享作品
+    </button>
+
+    <!-- 发布 -->
+    <button onclick="mobCloseActions();setTimeout(mobOpenPublish,150);" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">🚀</span> 发布作品
+    </button>
+
+    <!-- 再�生成 -->
+    <button onclick="var c=mobGetActionCard();if(c)regenerateProduct({closest:function(){return c}});mobCloseActions();" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">🔄</span> 再�生成
+    </button>
+
+    <!-- 下载 -->
+    <button onclick="showToast('📥 下载');mobCloseActions();" style="width:100%;padding:14px 0;border:none;background:transparent;color:#f3f4f6;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid #2a2a2a;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.08)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">⬇️</span> 下载
+    </button>
+
+    <!-- 删除 -->
+    <button onclick="var c=mobGetActionCard();if(c)deleteProduct({closest:function(){return c}});mobCloseActions();" style="width:100%;padding:14px 0;border:none;background:transparent;color:#ef4444;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left;transition:background 0.12s;" onpointerdown="this.style.background='rgba(239,68,68,0.12)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+      <span style="width:28px;text-align:center;font-size:18px;">🗑�</span> 删除
+    </button>
+
+    <!-- 取消 -->
+    <button onclick="mobCloseActions()" style="width:100%;margin-top:10px;padding:15px 0;border-radius:12px;border:none;background:#2a2a2a;color:#9ca3af;font-size:15px;cursor:pointer;font-weight:600;transition:background 0.12s;" onpointerdown="this.style.background='#3a3a3a'" onpointerup="this.style.background='#2a2a2a'" onpointerleave="this.style.background='#2a2a2a'">取消</button>
+  </div>
+</div>
+
+<!-- 手机���量操作栏 -->
+<div id="mob-batch-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200075;background:#1a1a1a;border-top:1px solid #2a2a2a;padding:10px 16px max(24px,env(safe-area-inset-bottom,24px));align-items:center;justify-content:space-between;transition:transform 0.2s;">
+  <button onclick="mobBatchSelectAll()" style="display:flex;align-items:center;gap:6px;border:none;background:transparent;color:#9ca3af;font-size:13px;cursor:pointer;padding:6px 10px;border-radius:8px;transition:background 0.12s;" onpointerdown="this.style.background='rgba(255,255,255,0.06)'" onpointerup="this.style.background='transparent'" onpointerleave="this.style.background='transparent'">
+    <span id="mob-batch-check-icon" style="width:18px;height:18px;border-radius:4px;border:2px solid #6b7280;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;"></span> 全�?
+  </button>
+  <div style="display:flex;gap:10px;">
+    <button onclick="showToast('📥 批量下载');mobCloseManage()" style="display:flex;align-items:center;gap:4px;border:none;background:#374151;color:#f3f4f6;font-size:12px;cursor:pointer;padding:8px 16px;border-radius:8px;transition:background 0.12s;" onpointerdown="this.style.background='#4b5563'" onpointerup="this.style.background='#374151'" onpointerleave="this.style.background='#374151'">⬇️ 下载</button>
+    <button onclick="mobBatchDelete()" style="display:flex;align-items:center;gap:4px;border:none;background:#ef4444;color:#fff;font-size:12px;cursor:pointer;padding:8px 16px;border-radius:8px;transition:background 0.12s;" onpointerdown="this.style.background='#dc2626'" onpointerup="this.style.background='#ef4444'" onpointerleave="this.style.background='#ef4444'">🗑�?删除</button>
+  </div>
+</div>
+
+<!-- ══�?内嵌移动�?JS ══�?-->
+<script>
+// ── Tab 切换 ──────────────────────────────────────────
+window.switchMobTab=function(tab){
+  document.querySelectorAll('.m-mob-tab').forEach(function(b){
+    if(b.getAttribute('data-tab')===tab){
+      b.style.background='#3b82f6'; b.style.color='#fff'; b.style.fontWeight='600';
+    } else {
+      b.style.background='transparent'; b.style.color='#6b7280'; b.style.fontWeight='400';
+    }
+  });
+  document.querySelectorAll('.mob-tab-content').forEach(function(c){ c.style.display='none'; });
+  var el=document.getElementById('mob-tab-'+tab);
+  if(el) el.style.display='block';
+  // 联动桌面�?filter
+  var curFilter=document.querySelector('.mob-filter-btn.active');
+  var filterType=curFilter?curFilter.getAttribute('data-filter')||'all':'all';
+  if(typeof filterMyWorks==='function') filterMyWorks();
+};
+
+// ── 类型过滤 ──────────────────────────────────────────
+window.filterMobType=function(type){
+  document.querySelectorAll('.mob-filter-btn').forEach(function(b){
+    var ft=b.getAttribute('data-filter');
+    if(ft===type){
+      b.style.borderColor='#3b82f6'; b.style.background='#3b82f6'; b.style.color='#fff';
+    } else {
+      b.style.borderColor='#333'; b.style.background='transparent'; b.style.color='#9ca3af';
+    }
+  });
+  // 过滤当前Tab的卡�?
+  var activeTab=document.querySelector('.m-mob-tab.active')||document.querySelector('.m-mob-tab[style*="background: #3b82f6"]');
+  var tabId=activeTab?activeTab.getAttribute('data-tab'):'works';
+  document.querySelectorAll('#mob-tab-'+tabId+' .mob-card').forEach(function(card){
+    if(type==='all'||card.getAttribute('data-type')===type){
+      card.style.display='';
+    } else {
+      card.style.display='none';
+    }
+  });
+};
+
+// ── 预� Bottom Sheet ────────────────────────────────
+window._mobCurrCard=null;
+
+window.mobGetCurrCard=function(){ return window._mobCurrCard; };
+
+window.mobOpenPreview=function(card){
+  window._mobCurrCard=card;
+  var name=card.getAttribute('data-name')||'';
+  var type=card.getAttribute('data-type')||'image';
+  var model=card.getAttribute('data-model')||'';
+  var params=card.getAttribute('data-params')||'';
+  var prompt=card.getAttribute('data-prompt')||'';
+  var source=card.getAttribute('data-source')||'';
+  var cost=card.getAttribute('data-cost')||'';
+  var taskId=card.getAttribute('data-taskid')||'';
+  var created=card.getAttribute('data-created')||'';
+  var expires=card.getAttribute('data-expires')||'';
+  var category=card.getAttribute('data-category')||'';
+  var price=card.getAttribute('data-price')||'';
+  var emojiEl=card.querySelector('.mob-card-img .text-4xl');
+  if(!emojiEl) emojiEl=card.querySelector('.mob-card-img span:nth-child(3)');
+  var emoji=emojiEl?emojiEl.textContent:'📦';
+  var typeLabels={image:'图片�?,video:'视��?,audio:'音��?,text:'文本�?};
+  var sourceTagMap={image:'大模�?,video:'大模�?,audio:'大模�?,text:'文本模型'};
+
+  // 判断���已发布：�?data-price 即为已发布，否则为草�?
+  var isPublished=!!card.getAttribute('data-price');
+  
+  // 已发布产品显�?产品名称/分类标�/使用价格，草稿隐�?
+  ['mob-section-title','mob-section-category','mob-section-price'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.style.display=isPublished?'':'none';
+  });
+
+  // 产品名称
+  var titleEl=document.getElementById('mob-info-title');
+  if(titleEl) titleEl.textContent=name||'����?;
+
+  // 分类标�
+  var catEl=document.getElementById('mob-info-category');
+  if(catEl){
+    var catColors={
+      商业:{bg:'#dbeafe',color:'#1d4ed8',icon:'💼'},
+      营销:{bg:'#fef3c7',color:'#b45309',icon:'📊'},
+      艺术:{bg:'#fce7f3',color:'#be185d',icon:'🎨'},
+      文�:{bg:'#fef3c7',color:'#b45309',icon:'✍️'},
+      视�:{bg:'#e0e7ff',color:'#4338ca',icon:'🎬'},
+      图片:{bg:'#d1fae5',color:'#059669',icon:'🖼�?},
+      摄影:{bg:'#e0e7ff',color:'#4338ca',icon:'📷'}
+    };
+    if(category&&catColors[category]){
+      var c=catColors[category];
+      catEl.innerHTML='<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;font-size:11px;background:'+c.bg+';color:'+c.color+';">'+c.icon+' '+category+'</span>';
+    } else if(category){
+      catEl.innerHTML='<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">'+category+'</span>';
+    } else {
+      catEl.innerHTML='<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;background:#e5e7eb;color:#6b7280;">����</span>';
+    }
+  }
+
+  // 使用价格
+  var priceEl=document.getElementById('mob-info-price');
+  if(priceEl){
+    var priceNum=parseFloat(price);
+    if(price==='免费'||price==='0'||priceNum===0){
+      priceEl.innerHTML='🆓 免费';
+    } else if(priceNum>0){
+      priceEl.innerHTML='�?<span style="font-family:monospace;">'+priceNum.toFixed(2)+'</span> /�?;
+    } else if(price){
+      priceEl.textContent=price;
+    } else {
+      priceEl.innerHTML='<span style="color:#6b7280;font-size:13px;">����</span>';
+    }
+  }
+
+  // 点赞/评�/花费
+  var likes=card.getAttribute('data-likes')||'0';
+  var comments=card.getAttribute('data-comments')||'0';
+  var likeCountEl=document.getElementById('mob-like-count');
+  var commentCountEl=document.getElementById('mob-comment-count');
+  var costDispEl=document.getElementById('mob-info-cost-display');
+  if(likeCountEl) likeCountEl.textContent=likes;
+  if(commentCountEl) commentCountEl.textContent=comments;
+  if(costDispEl) costDispEl.textContent=cost||'0';
+  window._mobLiked=false;
+  var icon=document.getElementById('mob-like-icon');
+  if(icon){icon.setAttribute('fill','none');icon.setAttribute('stroke','#fff');}
+  // 仅发布Tab显示点赞评�按钮（有data-likes属性）
+  var hasSocial=card.hasAttribute('data-likes');
+  var likeBtn=document.getElementById('mob-like-btn');
+  var commentBtn=document.getElementById('mob-comment-btn');
+  if(likeBtn) likeBtn.style.display=hasSocial?'flex':'none';
+  if(commentBtn) commentBtn.style.display=hasSocial?'flex':'none';
+
+  // 提示�?�?显示实际提示词，存入 hidden 用于复制
+  window._mobPromptText=prompt||'';
+  var promptEl=document.getElementById('mob-info-prompt');
+  if(promptEl) promptEl.textContent=prompt||name||'（无提示词）';
+
+  // 来源 �?蓝色标� + 模型名（PC���辑：data-source-name �?data-name 作为来源名称�?
+  var tagEl=document.getElementById('mob-info-source-tag');
+  if(tagEl) tagEl.textContent=sourceTagMap[type]||'大模�?;
+  var srcEl=document.getElementById('mob-info-source');
+  if(srcEl){
+    var srcName=card.getAttribute('data-source-name')||'';
+    srcEl.textContent=srcName||model||'����?;
+  }
+
+  // 使用模型
+  var modelEl=document.getElementById('mob-info-model');
+  if(modelEl) modelEl.textContent=model||'����?;
+
+  // 参数配置
+  var paramEl=document.getElementById('mob-info-params');
+  if(paramEl) paramEl.textContent=params||'Auto / 0:16 / 2k / 质量：中';
+
+  // 任务消费
+  var costEl=document.getElementById('mob-info-cost');
+  if(costEl) costEl.textContent=cost||'�?0.01';
+
+  // TaskId �?存到 hidden（PC���成随机id�?
+  if(!taskId) taskId='17796745558069535'+Math.floor(Math.random()*90+10);
+  window._mobTaskIdText=taskId;
+  var tidEl=document.getElementById('mob-info-taskid');
+  if(tidEl) tidEl.textContent=taskId;
+
+  // 创建时间/过期时间（PC���用当前时间作为回退�?
+  var now=new Date();
+  var fmtShort=function(d){
+    return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')+':'+d.getSeconds().toString().padStart(2,'0');
+  };
+  var createdEl=document.getElementById('mob-info-created');
+  if(createdEl) createdEl.textContent=created||fmtShort(now);
+  var expiresEl=document.getElementById('mob-info-expires');
+  if(expiresEl){
+    var exp=expires||new Date(now.getTime()+13*24*60*60*1000);
+    expiresEl.textContent=(typeof exp==='string')?exp:fmtShort(exp);
+  }
+
+  // 预��?
+  var media=document.getElementById('mob-preview-media');
+  var pe=document.getElementById('mob-preview-emoji');
+  if(pe) pe.textContent=emoji;
+  if(media){
+    if(type==='video') media.style.aspectRatio='16/9';
+    else if(type==='audio') media.style.aspectRatio='1/1';
+    else media.style.aspectRatio='4/5';
+  }
+
+  // 底部信息
+  var tEl=document.getElementById('mob-preview-type-text');
+  if(tEl) tEl.textContent=typeLabels[type]||'图片�?;
+  var cntEl=document.getElementById('mob-preview-count');
+  if(cntEl) cntEl.textContent='�?1 �?;
+  var te=document.getElementById('mob-thumb-emoji');
+  if(te) te.textContent=emoji;
+
+  document.getElementById('mob-preview-sheet').style.display='block';
+  document.body.style.overflow='hidden';
+
+  window._mobDrawerOpen=false;
+  var drawer=document.getElementById('mob-preview-drawer');
+  if(drawer) drawer.style.left='-300px';
+};
+
+// 复制提示�?
+window.mobCopyPrompt=function(){
+  var txt=window._mobPromptText||'';
+  if(!txt){ showToast('⚠️ 无提示词��?); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ showToast('�?提示词已复制'); }); }
+  else { showToast('⚠️ 复制功能不可�?); }
+};
+
+// 复制 TaskId
+window.mobCopyTaskId=function(){
+  var txt=window._mobTaskIdText||'';
+  if(!txt){ showToast('⚠️ 无Task ID��?); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ showToast('�?Task ID已��?); }); }
+  else { showToast('⚠️ 复制功能不可�?); }
+};
+
+// 打开发布弹窗（移动�提升 z-index 显示在�览层上方�?
+window.mobOpenPublish=function(){
+  if(typeof openEditWorkModal==='function') openEditWorkModal({ card: window._mwpCurrentCard });
+};
+
+// 打开分享弹窗（移动�预�底部按钮调用�?
+window.mobOpenShare=function(){
+  if(typeof openMyworksShare==='function') openMyworksShare();
+};
+
+// 辅助：��������?
+function setMobInfo(id,val){
+  var el=document.getElementById(id);
+  if(el) el.textContent=val||'�?;
+}
+
+// ── 左侧信息抽屉 ────────────────────────────────────
+window._mobDrawerOpen=false;
+window.mobToggleDrawer=function(){
+  window._mobDrawerOpen=!window._mobDrawerOpen;
+  var drawer=document.getElementById('mob-preview-drawer');
+  if(!drawer) return;
+  if(window._mobDrawerOpen){
+    drawer.style.left='0';
+  } else {
+    drawer.style.left='-300px';
+  }
+};
+
+window.mobClosePreview=function(){
+  document.getElementById('mob-preview-sheet').style.display='none';
+  document.body.style.overflow='';
+  window._mobDrawerOpen=false;
+};
+
+// 收藏灵感/Apps 预�
+window.mobOpenFavInspr=function(card){
+  window._mobCurrCard=card;
+  if(typeof openFavInsprPreview==='function') openFavInsprPreview(card);
+};
+window.mobOpenFavApps=function(card){
+  window._mobCurrCard=card;
+  if(typeof openFavAppsPreview==='function') openFavAppsPreview(card);
+};
+
+// ── 点赞/评�（抖音�格） ─────────────────────────
+window._mobLiked=false;
+window.mobToggleLike=function(){
+  window._mobLiked=!window._mobLiked;
+  var icon=document.getElementById('mob-like-icon');
+  var countEl=document.getElementById('mob-like-count');
+  if(!icon||!countEl) return;
+  var current=parseInt(countEl.textContent)||0;
+  if(window._mobLiked){
+    icon.setAttribute('fill','#ef4444');
+    icon.setAttribute('stroke','#ef4444');
+    countEl.textContent=current+1;
+    icon.style.transition='transform 0.2s';
+    icon.style.transform='scale(1.3)';
+    setTimeout(function(){icon.style.transform='scale(1)';},200);
+    showToast('❤️ 已点�?);
+  } else {
+    icon.setAttribute('fill','none');
+    icon.setAttribute('stroke','#fff');
+    countEl.textContent=Math.max(0,current-1);
+    showToast('💔 已取消点�?);
+  }
+};
+window.mobDoubleTapLike=function(e){
+  mobToggleLike();
+  var container=document.getElementById('mob-heart-container');
+  if(!container) return;
+  var rect=container.getBoundingClientRect();
+  var heart=document.createElement('div');
+  heart.textContent='❤️';
+  heart.style.cssText='position:absolute;font-size:64px;z-index:20;pointer-events:none;left:'+(e.clientX-rect.left-32)+'px;top:'+(e.clientY-rect.top-32)+'px;opacity:1;transform:scale(0.5);transition:all 0.6s cubic-bezier(0,0,0.2,1);';
+  container.appendChild(heart);
+  requestAnimationFrame(function(){
+    heart.style.transform='scale(1.5)';
+    heart.style.opacity='0';
+  });
+  setTimeout(function(){heart.remove();},700);
+};
+window._mobCommentsInited=false;
+window.mobOpenCommentSheet=function(){
+  document.getElementById('mob-comment-sheet').style.display='flex';
+  document.body.style.overflow='hidden';
+  // 同�预�图片到评论弹�?
+  var emojiEl=document.getElementById('mob-preview-emoji');
+  var commentEmoji=document.getElementById('mob-comment-emoji');
+  if(emojiEl&&commentEmoji) commentEmoji.textContent=emojiEl.textContent;
+  var commentMedia=document.getElementById('mob-comment-media');
+  var previewMedia=document.getElementById('mob-preview-media');
+  if(commentMedia&&previewMedia){
+    commentMedia.style.background=getComputedStyle(previewMedia).backgroundImage||getComputedStyle(previewMedia).background||'linear-gradient(135deg,#9333ea,#ec4899)';
+  }
+  // 首�打开生成示例评�
+  if(!window._mobCommentsInited){
+    window._mobCommentsInited=true;
+    var list=document.getElementById('mob-comment-list');
+    if(!list) return;
+    var sampleComments=[
+      {name:'阿��?,avatar:'A',color:'#6366f1',text:'效果���了，完全看不出是AI生成的！请问用的什么模型？',time:'2小时�?},
+      {name:'青青草原',avatar:'B',color:'#10b981',text:'已使���效果惊艳！一���成太方便�?🔥',time:'5小时�?},
+      {name:'设�����?,avatar:'C',color:'#f59e0b',text:'求问能否���批量处理？有几百张商品图需要换�?,time:'昨天'},
+      {name:'月光宝盒',avatar:'�?,color:'#8b5cf6',text:'这个配色���级了，求 prompt 🙏',time:'昨天'},
+      {name:'数码小王�?,avatar:'📱',color:'#3b82f6',text:'已经分享给团队了，大家都很喜���',time:'2天前'}
+    ];
+    sampleComments.forEach(function(c){
+      var item=document.createElement('div');
+      item.style.cssText='display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #1f1f1f;';
+      item.innerHTML='<span style="width:30px;height:30px;border-radius:50%;background:'+c.color+';display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;flex-shrink:0;">'+c.avatar+'</span><div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-weight:600;color:#e5e7eb;font-size:13px;">'+c.name+'</span><span style="color:#6b7280;font-size:11px;">'+c.time+'</span></div><div style="color:#9ca3af;font-size:13px;margin-top:3px;line-height:1.5;">'+c.text+'</div></div>';
+      list.appendChild(item);
+    });
+  }
+};
+window.mobCloseCommentSheet=function(){
+  document.getElementById('mob-comment-sheet').style.display='none';
+  document.body.style.overflow='';
+};
+window.mobPostComment=function(){
+  var input=document.getElementById('mob-comment-input');
+  if(!input||!input.value.trim()){showToast('⚠️ 请输入评论内�?);return;}
+  var text=input.value.trim();
+  input.value='';
+  var list=document.getElementById('mob-comment-list');
+  if(list){
+    var item=document.createElement('div');
+    item.style.cssText='display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #2a2a2a;font-size:13px;';
+    item.innerHTML='<span style="color:#3b82f6;font-weight:600;flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">�</span><div style="flex:1;min-width:0;"><div style="font-weight:600;color:#f3f4f6;font-size:12px;">�</div><div style="color:#d1d5db;margin-top:2px;">'+text+'</div></div><span style="color:#6b7280;font-size:11px;flex-shrink:0;">刚刚</span>';
+    list.appendChild(item);
+    list.scrollTop=list.scrollHeight;
+  }
+  showToast('💬 评�已发�?);
+};
+
+// ── Action Sheet ────────────────────────────────────
+window._mobActionCard=null;
+window.mobGetActionCard=function(){ return window._mobActionCard; };
+
+window.mobShowActions=function(btn){
+  var card=btn.closest('.mob-card');
+  if(!card) return;
+  window._mobActionCard=card;
+  document.getElementById('mob-action-sheet').style.display='flex';
+  document.body.style.overflow='hidden';
+};
+
+window.mobCloseActions=function(){
+  document.getElementById('mob-action-sheet').style.display='none';
+  document.body.style.overflow='';
+};
+
+// 手机版�理模�?
+window._mobManageMode=false;
+window.mobToggleManage=function(){
+  var btn=document.querySelector('#page-myassets-mobile .manage-btn');
+  window._mobManageMode=!window._mobManageMode;
+  var bar=document.getElementById('mob-batch-bar');
+  if(window._mobManageMode){
+    if(btn) btn.textContent='完成';
+    if(bar){bar.style.display='flex';}
+    document.querySelectorAll('#page-myassets-mobile .mob-card').forEach(function(c){
+      c.style.position='relative';
+      if(!c.querySelector('.mob-manage-check')){
+        var check=document.createElement('div');
+        check.className='mob-manage-check';
+        check.style.cssText='position:absolute;top:8px;right:42px;z-index:30;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;font-size:12px;color:#fff;';
+        check.innerHTML='<span style="opacity:0;transition:opacity 0.15s;">�</span>';
+        check.dataset.checked='0';
+        check.onclick=function(e){
+          e.stopPropagation();
+          var ch=this.querySelector('span');
+          if(this.dataset.checked==='0'){
+            this.dataset.checked='1';
+            this.style.borderColor='#3b82f6'; this.style.background='#3b82f6';
+            if(ch) ch.style.opacity='1';
+          } else {
+            this.dataset.checked='0';
+            this.style.borderColor='rgba(255,255,255,0.6)'; this.style.background='rgba(0,0,0,0.4)';
+            if(ch) ch.style.opacity='0';
+          }
+          mobUpdateBatchCount();
+        };
+        c.appendChild(check);
+      }
+    });
+    mobUpdateBatchCount();
+  } else {
+    if(btn) btn.textContent='管理';
+    if(bar){bar.style.display='none';}
+    document.querySelectorAll('#page-myassets-mobile .mob-manage-check').forEach(function(el){el.remove();});
+  }
+};
+
+// 更新批量操作栏选中计数
+window.mobUpdateBatchCount=function(){
+  var checked=document.querySelectorAll('#page-myassets-mobile .mob-manage-check[data-checked="1"]');
+  var total=document.querySelectorAll('#page-myassets-mobile .mob-card').length;
+  // 更新全选图�?
+  var icon=document.getElementById('mob-batch-check-icon');
+  if(icon){
+    if(checked.length===total&&total>0){
+      icon.style.background='#3b82f6'; icon.style.borderColor='#3b82f6'; icon.textContent='�?;
+    } else if(checked.length>0){
+      icon.style.background='#3b82f6'; icon.style.borderColor='#3b82f6'; icon.textContent='-';
+    } else {
+      icon.style.background='transparent'; icon.style.borderColor='#6b7280'; icon.textContent='';
+    }
+  }
+};
+
+// 全�?取消全�?
+window.mobBatchSelectAll=function(){
+  var allChecked=document.querySelectorAll('#page-myassets-mobile .mob-manage-check:not([data-checked="1"])');
+  if(allChecked.length===0){
+    // 全部已选中→取消全�?
+    document.querySelectorAll('#page-myassets-mobile .mob-manage-check').forEach(function(c){
+      c.dataset.checked='0';
+      c.style.borderColor='rgba(255,255,255,0.6)'; c.style.background='rgba(0,0,0,0.4)';
+      var ch=c.querySelector('span'); if(ch) ch.style.opacity='0';
+    });
+  } else {
+    // 全�?
+    document.querySelectorAll('#page-myassets-mobile .mob-manage-check').forEach(function(c){
+      c.dataset.checked='1';
+      c.style.borderColor='#3b82f6'; c.style.background='#3b82f6';
+      var ch=c.querySelector('span'); if(ch) ch.style.opacity='1';
+    });
+  }
+  mobUpdateBatchCount();
+};
+
+// 批量删除
+window.mobBatchDelete=function(){
+  var selected=document.querySelectorAll('#page-myassets-mobile .mob-manage-check[data-checked="1"]');
+  if(selected.length===0){showToast('⚠️ 请先选择要删除的作品');return;}
+  if(!confirm('���要删除选中�?'+selected.length+' ���品吗？�操作不可撤销�?)) return;
+  selected.forEach(function(c){
+    var card=c.closest('.mob-card');
+    if(card){card.style.transition='all 0.3s';card.style.transform='scale(0.9)';card.style.opacity='0';setTimeout(function(){card.remove();},300);}
+  });
+  showToast('🗑�?已删�?'+selected.length+' ����?);
+  setTimeout(mobUpdateBatchCount,350);
+};
+
+// 退出�理模�?
+window.mobCloseManage=function(){
+  if(window._mobManageMode) mobToggleManage();
+};
+
+// openMyworksShare / closeMyworksShare 见 script.js
+
+// 为手机卡片添加来源标识图�?
+function initMobSourceBadges(){
+  var sourceMap={
+    '文生�?:'�','文生视�':'�','文生音�':'�','文字创作':'�','self':'�','影像创作':'�',
+    '灵感广场':'💡','inspiration':'💡',
+    'apps':'🎮'
+  };
+  document.querySelectorAll('#page-myassets-mobile .mob-card').forEach(function(card){
+    var imgEl=card.querySelector('.mob-card-img');
+    if(!imgEl||imgEl.querySelector('.mob-source-badge')) return;
+    var src=card.getAttribute('data-source')||'';
+    var icon=sourceMap[src]||'�';
+    var label=
+      icon==='💡'?'灵感':
+      icon==='🎮'?'Apps':
+      '大模�?;
+    var badge=document.createElement('span');
+    badge.className='mob-source-badge';
+    badge.style.cssText='position:absolute;top:36px;left:8px;font-size:9px;color:#fff;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:4px;z-index:20;display:flex;align-items:center;gap:3px;';
+    badge.textContent=icon+' '+label;
+    imgEl.appendChild(badge);
+  });
+}
+document.addEventListener('DOMContentLoaded',initMobSourceBadges);
+
+// �?以下为其他功能��?
+
+</script>
+
+<!-- 灵感作品详情弹窗（RunningHub 风格�?-->
+
+<!-- 灵感作品详情弹窗（RunningHub 风格） -->
+<div id="insp-detail-modal" class="modal-overlay insp-detail-modal" onclick="if(event.target===this)closeInspirationDetail()">
+  <div class="insp-detail-modal__panel" role="dialog" aria-modal="true" aria-labelledby="idm-title">
+    <button type="button" class="insp-detail-modal__close" onclick="closeInspirationDetail()" aria-label="关闭">×</button>
+    <div class="insp-detail-modal__body">
+      <div class="insp-detail-modal__media">
+        <div id="idm-media" class="insp-detail-modal__media-inner">
+          <span id="idm-media-icon" class="insp-detail-modal__media-icon" aria-hidden="true"></span>
+        </div>
+        <div class="insp-detail-modal__media-bar">
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('▶ 播放预览')">▶ 播放</button>
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('⛶ 全屏预览')">⛶ 全屏</button>
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('⬇ 已开始下载')">⬇ 下载</button>
+        </div>
+      </div>
+      <div class="insp-detail-modal__side">
+        <div class="insp-detail-modal__head">
+          <div class="insp-detail-modal__tags">
+            <span id="idm-type-tag" class="insp-detail-modal__tag">图片</span>
+            <span id="idm-price-tag" class="insp-detail-modal__tag insp-detail-modal__tag--price">免费</span>
+          </div>
+          <h2 id="idm-title" class="insp-detail-modal__title">—</h2>
+          <div class="insp-detail-modal__stats">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="idm-views">0</span></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span id="idm-likes">0</span></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span id="idm-uses">0</span> 次使用</span>
+          </div>
+        </div>
+        <div class="insp-detail-modal__scroll">
+          <div class="insp-detail-modal__kv">
+            <span class="insp-detail-modal__kv-label">使用模型</span>
+            <span id="idm-model" class="insp-detail-modal__kv-value">—</span>
+          </div>
+          <div class="insp-detail-modal__kv">
+            <span class="insp-detail-modal__kv-label">使用价格</span>
+            <span id="idm-price" class="insp-detail-modal__kv-value insp-detail-modal__price">免费</span>
+          </div>
+          <div class="insp-detail-modal__kv insp-detail-modal__kv--source">
+            <span class="insp-detail-modal__kv-label">来源</span>
+            <div class="insp-detail-modal__source-wrap">
+              <span id="idm-source-tag" class="insp-detail-modal__source-tag" data-src="model">大模型</span>
+              <span id="idm-source-name" class="insp-detail-modal__source-name"></span>
+            </div>
+          </div>
+          <div class="insp-detail-modal__author">
+            <div id="idm-avatar" class="insp-detail-modal__avatar">👤</div>
+            <div class="insp-detail-modal__author-meta">
+              <span id="idm-author" class="insp-detail-modal__author-name">创作者</span>
+              <span class="insp-detail-modal__author-sub">创作者主页</span>
+            </div>
+            <button type="button" id="idm-follow-btn" class="insp-detail-modal__follow" onclick="toggleInspirationFollow()">+ 关注</button>
+          </div>
+          <div class="insp-detail-modal__section">
+            <div class="insp-detail-modal__section-title">提示词</div>
+            <div class="insp-detail-modal__prompt-box">
+              <p id="idm-prompt" class="insp-detail-modal__prompt-text">—</p>
+              <div class="insp-detail-modal__prompt-actions">
+                <button type="button" class="insp-detail-modal__ghost-btn" onclick="copyInspirationPrompt()">复制</button>
+                <button type="button" class="insp-detail-modal__ghost-btn" onclick="useInspirationDetail()">填入创作页</button>
+              </div>
+            </div>
+          </div>
+          <div class="insp-detail-modal__section">
+            <div class="insp-detail-modal__section-title">评论 <span id="idm-comment-count">0</span></div>
+            <div id="idm-comment-list" class="insp-detail-modal__comment-list"></div>
+            <div class="insp-detail-modal__comment-input">
+              <input type="text" id="idm-comment-input" class="insp-detail-modal__comment-field" placeholder="说点什么…" maxlength="500">
+              <button type="button" class="insp-detail-modal__ghost-btn" onclick="postInspirationComment()">发布</button>
+            </div>
+          </div>
+        </div>
+        <div class="insp-detail-modal__footer">
+          <button type="button" id="idm-fav-btn" class="insp-detail-modal__icon-btn" onclick="toggleInspirationFav(this)" title="收藏">☆</button>
+          <button type="button" class="insp-detail-modal__icon-btn" onclick="openInspirationShare()" title="分享">↗</button>
+          <button type="button" id="idm-use-btn" class="insp-detail-modal__cta" onclick="useInspirationDetail()">使用这个灵感</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="page-myassets-mobile" class="page-section" style="display:none;" aria-hidden="true"></section>
+<!-- 移动端「我的产品」由 script.js 通过 iframe 加载 page-myassets-mobile.html -->
+

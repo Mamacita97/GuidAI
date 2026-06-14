@@ -1,0 +1,227 @@
+<!-- ===== 全能图片2.0 工作区（RunningHub 参考页 1:1 结构）===== -->
+<div class="modal-overlay" id="omni-image-workspace-modal" aria-labelledby="oiws-title" role="dialog" aria-modal="true">
+  <div class="oiws-app-wrap">
+    <header class="oiws-common-header">
+      <button type="button" class="oiws-header-back" onclick="closeModal('omni-image-workspace-modal')" aria-label="返回">
+        <span class="oiws-back-icon" aria-hidden="true">←</span>
+      </button>
+      <div class="oiws-header-right">
+        <button type="button" class="oiws-header-item oiws-header-share" onclick="shareAiwsApp()">
+          <span class="oiws-header-gift" aria-hidden="true">🎁</span>
+          <span>分享有礼</span>
+        </button>
+        <button type="button" class="oiws-header-item" onclick="showToast('🔗 API 调用（演示）')">
+          <span class="oiws-header-api" aria-hidden="true">⬡</span>
+          <span>API调用</span>
+        </button>
+        <button type="button" class="oiws-header-item" onclick="showToast('👑 开通会员（演示）')">
+          <span class="oiws-header-vip" aria-hidden="true">♛</span>
+          <span>开通会员</span>
+        </button>
+        <span class="oiws-header-divider" aria-hidden="true"></span>
+        <button type="button" class="oiws-header-item oiws-header-login" onclick="showToast('请先登录（演示）')">登录</button>
+      </div>
+    </header>
+
+    <div class="oiws-details-wrap">
+      <aside class="oiws-side">
+        <div class="oiws-tab-switch">
+          <div class="oiws-tab-top">
+            <div class="oiws-tab-title" id="oiws-side-tab-title">全能图片2.0</div>
+            <div class="oiws-tab-header" role="tablist">
+              <button type="button" class="oiws-tab-item active" data-oiws-side="params" role="tab" aria-selected="true">输入参数</button>
+              <button type="button" class="oiws-tab-item" data-oiws-side="history" role="tab" aria-selected="false">历史记录</button>
+            </div>
+          </div>
+          <div class="oiws-tab-content">
+            <div class="oiws-side-panel" data-oiws-side-panel="params">
+              <div class="oiws-collect-warp">
+                <div class="oiws-use-count">
+                  <span class="oiws-use-icon" aria-hidden="true">👤</span>
+                  <span id="oiws-use-count">550.3K</span>
+                </div>
+                <button type="button" class="oiws-rh-btn oiws-rh-btn--round" onclick="showToast('⚙️ 工作流（演示）')" aria-label="工作流">
+                  <span class="oiws-btn-icon" aria-hidden="true">🔗</span>
+                  <span class="oiws-btn-text">工作流</span>
+                </button>
+                <button type="button" class="oiws-rh-btn oiws-rh-btn--round" onclick="toggleOiwsFav()" aria-label="收藏">
+                  <span class="oiws-btn-icon" aria-hidden="true">☆</span>
+                  <span class="oiws-btn-text" id="oiws-side-fav">591</span>
+                </button>
+                <button type="button" class="oiws-rh-btn oiws-rh-btn--round" onclick="toggleOiwsComments()" aria-label="评论">
+                  <span class="oiws-btn-icon" aria-hidden="true">💬</span>
+                  <span class="oiws-btn-text" id="oiws-side-comment">2400</span>
+                </button>
+              </div>
+              <div class="oiws-tips">
+                <div class="oiws-tips-title">创作小贴士</div>
+                <div class="oiws-tips-content">
+                  <div class="oiws-tips-item">
+                    <span class="oiws-tips-item-icon" aria-hidden="true">✓</span>
+                    <div class="oiws-tips-item-title" id="oiws-tip-success">近期运行成功率为98%</div>
+                  </div>
+                  <div class="oiws-tips-item">
+                    <span class="oiws-tips-item-icon oiws-tips-item-icon--time" aria-hidden="true">⏱</span>
+                    <div class="oiws-tips-item-title" id="oiws-tip-duration">平均运行时长在77s左右</div>
+                  </div>
+                </div>
+              </div>
+              <div class="oiws-user-info">
+                <button type="button" class="oiws-follow-btn" id="oiws-side-follow-btn" onclick="toggleOiwsFollow()">
+                  <span aria-hidden="true">+</span> 关注
+                </button>
+              </div>
+              <div class="oiws-block-box" id="oiws-params-form"></div>
+              <div class="oiws-side-tabs" role="tablist">
+                <button type="button" class="oiws-side-main-tab active" data-oiws-side-main="works" role="tab">作品</button>
+                <button type="button" class="oiws-side-main-tab" data-oiws-side-main="comments" role="tab">评论</button>
+              </div>
+              <div class="oiws-side-tab-panels">
+                <div class="oiws-side-tab-panel" data-oiws-side-main-panel="works"></div>
+                <div class="oiws-side-tab-panel hidden" data-oiws-side-main-panel="comments"></div>
+              </div>
+            </div>
+            <div class="oiws-side-panel hidden" data-oiws-side-panel="history">
+              <div class="oiws-side-history-empty">
+                <div class="oiws-empty-img" aria-hidden="true">📋</div>
+                <p>暂无历史记录</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="oiws-btn-group">
+          <div class="oiws-btn-group-l">
+            <button type="button" class="oiws-share-reward" onclick="shareAiwsApp()">
+              <span class="oiws-rh-tag">得RH币</span>
+              <span class="oiws-share-gift" aria-hidden="true">🎁</span>
+              <span>分享有礼</span>
+            </button>
+          </div>
+          <div class="oiws-btn-group-r">
+            <button type="button" class="oiws-run-btn" id="oiws-run-btn" onclick="runOiwsApp()" aria-label="运行">
+              <span class="oiws-run-label">运行</span>
+              <span class="oiws-run-lite" id="oiws-run-lite">lite</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="oiws-center">
+        <div class="oiws-desc">
+          <div class="oiws-ai-top">
+            <h1 class="oiws-title ellipsis" id="oiws-title" title="全能图片2.0">全能图片2.0</h1>
+            <div class="oiws-collect-share">
+              <div class="oiws-use-count oiws-use-count--inline">
+                <span class="oiws-use-icon" aria-hidden="true">👤</span>
+                <span id="oiws-center-use-count">550.3K</span>
+              </div>
+            </div>
+          </div>
+          <div class="oiws-tags" id="oiws-tags"></div>
+          <div class="oiws-btns">
+            <div class="oiws-btn-l">
+              <button type="button" class="oiws-rh-btn" onclick="toggleOiwsFav()">
+                <span class="oiws-btn-icon" aria-hidden="true">☆</span>
+                <span id="oiws-center-fav">591</span>
+              </button>
+              <button type="button" class="oiws-rh-btn oiws-rh-btn--round" onclick="toggleOiwsComments()">
+                <span class="oiws-btn-icon" aria-hidden="true">💬</span>
+                <span id="oiws-center-comment">2400</span>
+              </button>
+            </div>
+            <div class="oiws-btn-r">
+              <button type="button" class="oiws-meta-btn" onclick="showToast('🔗 API（演示）')">API</button>
+              <button type="button" class="oiws-meta-btn" onclick="showToast('⚙️ 工作流（演示）')">工作流</button>
+            </div>
+          </div>
+          <div class="oiws-tips oiws-tips--center">
+            <div class="oiws-tips-title">创作小贴士</div>
+            <div class="oiws-tips-content">
+              <div class="oiws-tips-item">
+                <span class="oiws-tips-item-icon" aria-hidden="true">✓</span>
+                <div class="oiws-tips-item-title" id="oiws-center-tip-success">近期运行成功率为98%</div>
+              </div>
+              <div class="oiws-tips-item">
+                <span class="oiws-tips-item-icon oiws-tips-item-icon--time" aria-hidden="true">⏱</span>
+                <div class="oiws-tips-item-title" id="oiws-center-tip-duration">平均运行时长在77s左右</div>
+              </div>
+            </div>
+          </div>
+          <div class="oiws-info">
+            <button type="button" class="oiws-follow-btn" id="oiws-center-follow-btn" onclick="toggleOiwsFollow()">
+              <span aria-hidden="true">+</span> 关注
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="oiws-main-wrapper">
+        <div class="oiws-main">
+          <div class="oiws-main-bottom">
+            <div class="oiws-main-bottom-title">
+              <div class="oiws-h6">应用介绍&amp;输入建议</div>
+              <span class="oiws-icon-arrow" aria-hidden="true"></span>
+            </div>
+            <div class="oiws-main-bottom-content" id="oiws-desc"></div>
+          </div>
+          <div class="oiws-banner">
+            <button type="button" class="oiws-banner-arrow oiws-banner-arrow--left disabled" id="oiws-banner-prev" onclick="oiwsBannerPrev()" aria-label="上一张" disabled>‹</button>
+            <button type="button" class="oiws-banner-arrow oiws-banner-arrow--right disabled" id="oiws-banner-next" onclick="oiwsBannerNext()" aria-label="下一张" disabled>›</button>
+            <span class="oiws-banner-total" id="oiws-banner-counter">1/1</span>
+            <div class="oiws-banner-media">
+              <img class="oiws-banner-img" id="oiws-banner-img" src="" alt="全能图片2.0" loading="lazy">
+            </div>
+          </div>
+          <div class="oiws-main-tabs" role="tablist">
+            <button type="button" class="oiws-main-tab active" data-oiws-main="works" role="tab">
+              <span class="oiws-tab-text">作品</span>
+            </button>
+            <button type="button" class="oiws-main-tab" data-oiws-main="comments" role="tab">
+              <span class="oiws-tab-text">评论</span>
+              <span class="oiws-tab-badge hidden" id="oiws-comment-badge">0</span>
+            </button>
+          </div>
+          <div class="oiws-main-panels">
+            <div class="oiws-main-panel" data-oiws-main-panel="works">
+              <div class="oiws-works-grid" id="oiws-works-grid"></div>
+              <div class="oiws-empty-wrap" id="oiws-works-empty">
+                <div class="oiws-empty-img" aria-hidden="true">📭</div>
+                <p class="oiws-empty-desc">暂无作品</p>
+              </div>
+            </div>
+            <div class="oiws-main-panel hidden" data-oiws-main-panel="comments">
+              <div class="oiws-comment-compose">
+                <textarea id="oiws-comment-input" rows="3" placeholder="写下你的评论…" maxlength="500"></textarea>
+                <button type="button" class="oiws-comment-submit" onclick="postOiwsComment()">发布评论</button>
+              </div>
+              <div class="oiws-comment-list" id="oiws-comment-list">
+                <div class="oiws-empty-wrap" id="oiws-comment-empty">
+                  <div class="oiws-empty-img" aria-hidden="true">💬</div>
+                  <p class="oiws-empty-desc">暂无评论</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="oiws-history">
+        <div class="oiws-history-inner">
+          <div class="oiws-history-head">
+            <div class="oiws-history-title">
+              <span class="oiws-history-title-icon" aria-hidden="true">📑</span>
+              历史记录
+            </div>
+            <button type="button" class="oiws-api-task-btn" onclick="showToast('API 任务（演示）')">API任务</button>
+          </div>
+          <div class="oiws-history-list">
+            <div class="oiws-empty-wrap oiws-empty-wrap--history">
+              <div class="oiws-empty-img" aria-hidden="true">🖼️</div>
+              <p class="oiws-empty-desc">暂无作品</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

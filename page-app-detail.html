@@ -1,0 +1,56 @@
+<section id="page-app-detail" class="page-section" data-return-page="chat">
+  <div class="mb-4">
+    <button type="button" id="apd-back-btn" onclick="closeAppDetail(event)" class="relative z-20 flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 transition pointer-events-auto cursor-pointer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      <span id="apd-back-label">返回</span>
+    </button>
+  </div>
+  <div class="flex items-start gap-4 mb-5">
+    <div class="apd-hero-icon" id="apd-hero-icon" style="background:linear-gradient(135deg,#f472b6,#f43f5e)">🎭</div>
+    <div class="flex-1 min-w-0">
+      <h1 class="text-lg font-bold text-gray-900 dark:text-white mb-1" id="apd-title">AI 换脸</h1>
+      <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed" id="apd-desc">无痕电影级换脸</p>
+      <div class="flex flex-wrap items-center gap-2 mt-2 text-[10px]">
+        <span class="px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-900/25 text-red-500" id="apd-heat">🔥 52.3k</span>
+        <span class="text-gray-400" id="apd-rating">👍 4.9</span>
+        <span class="text-gray-400" id="apd-uses">📊 52.3k次使用</span>
+      </div>
+    </div>
+    <button type="button" id="apd-fav-btn" onclick="toggleAppDetailFav()" class="text-xl text-gray-400 hover:text-yellow-500 shrink-0" title="收藏">☆</button>
+  </div>
+  <div class="apd-preview mb-5" id="apd-preview">
+    <div class="w-28 h-28 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg flex items-center justify-center text-gray-400 text-[10px]">原图</div>
+    <div class="text-lg text-gray-400">→</div>
+    <div class="w-28 h-28 bg-gradient-to-br from-purple-200 to-blue-200 dark:from-purple-800/30 dark:to-blue-800/30 rounded-lg flex items-center justify-center text-gray-400 text-[10px]">生成效果</div>
+  </div>
+  <div class="mb-4">
+    <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">功能说明</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed" id="apd-long-desc"></div>
+  </div>
+  <div class="mb-4">
+    <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">价格信息</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+    <div class="flex gap-4 text-xs bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+      <span>使用价格：<span class="text-purple-600 font-semibold" id="apd-price">⚡0.5/次</span></span>
+      <span class="text-gray-400">|</span>
+      <span>当前余额：⚡12.50</span>
+    </div>
+  </div>
+  <div class="mb-4">
+    <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">素材上传</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+    <div class="flex gap-3">
+      <div class="flex-1 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-blue-400 transition">
+        <div class="text-lg mb-1">📷</div>
+        <div class="text-xs font-medium" id="apd-up1">上传素材</div>
+        <div class="text-[9px] text-gray-400 mt-1">支持 jpg/png，≤10MB</div>
+      </div>
+      <div class="flex-1 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-blue-400 transition">
+        <div class="text-lg mb-1">📷</div>
+        <div class="text-xs font-medium" id="apd-up2">上传参考</div>
+        <div class="text-[9px] text-gray-400 mt-1">支持 jpg/png，≤10MB</div>
+      </div>
+    </div>
+    <button type="button" onclick="showToast('📁 从资产库选择素材')" class="w-full mt-2 text-[11px] px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">从资产库选择</button>
+  </div>
+  <button type="button" onclick="startAppDetailGenerate()" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition mb-3">✨ 立即生成</button>
+  <p class="text-center text-[10px] text-gray-400" id="apd-creator">👤 创作者：平台官方</p>
+</section>

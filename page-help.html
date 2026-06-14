@@ -1,0 +1,226 @@
+<section id="page-help" class="page-section">
+  <div class="flex items-center gap-2 mb-4">
+    <button onclick="showPage('profile')" class="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1"><span>←</span> 返回个人中心</button>
+  </div>
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6"></div>
+  <div class="text-center mb-6">
+    <h2 class="text-lg font-bold">❓ 帮助中心</h2>
+    <p class="text-xs text-gray-400 mt-1">查找使用指南、常见问题解答</p>
+  </div>
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-6"></div>
+
+  <!-- 搜索 -->
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mb-6 text-center">
+    <div class="relative max-w-md mx-auto">
+      <input class="help-search w-full text-xs border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 pl-10 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:border-blue-500" placeholder="🔍 搜索问题或关键词...">
+    </div>
+  </div>
+
+  <!-- ═══ 热门问题 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">📚 热门问题</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+      <div class="hot-q p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition flex items-center justify-between" onclick="showPage('article-detail')">
+        <span class="text-xs"><span class="mr-1">💰</span>如何充值？</span>
+        <span class="text-[10px] text-blue-500">查看详情 →</span>
+      </div>
+      <div class="hot-q p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition flex items-center justify-between" onclick="showPage('article-detail')">
+        <span class="text-xs"><span class="mr-1">🎨</span>如何使用多模型协作？</span>
+        <span class="text-[10px] text-blue-500">查看详情 →</span>
+      </div>
+      <div class="hot-q p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition flex items-center justify-between" onclick="showPage('article-detail')">
+        <span class="text-xs"><span class="mr-1">🖼️</span>如何发布付费灵感？</span>
+        <span class="text-[10px] text-blue-500">查看详情 →</span>
+      </div>
+      <div class="hot-q p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition flex items-center justify-between" onclick="showPage('article-detail')">
+        <span class="text-xs"><span class="mr-1">💳</span>如何提现？</span>
+        <span class="text-[10px] text-blue-500">查看详情 →</span>
+      </div>
+      <div class="hot-q p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition flex items-center justify-between" onclick="showPage('article-detail')">
+        <span class="text-xs"><span class="mr-1">🔑</span>如何获取API密钥？</span>
+        <span class="text-[10px] text-blue-500">查看详情 →</span>
+      </div>
+      <div class="hot-q p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition flex items-center justify-between" onclick="showPage('article-detail')">
+        <span class="text-xs"><span class="mr-1">🌐</span>联网搜索如何使用？</span>
+        <span class="text-[10px] text-blue-500">查看详情 →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 分类导航 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">📖 分类导航</div>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">🚀</div><div class="text-[11px] font-medium">入门指南</div><div class="text-[9px] text-gray-400">5篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">💬</div><div class="text-[11px] font-medium">聊天</div><div class="text-[9px] text-gray-400">8篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">🖼️</div><div class="text-[11px] font-medium">图片</div><div class="text-[9px] text-gray-400">6篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">🎬</div><div class="text-[11px] font-medium">视频</div><div class="text-[9px] text-gray-400">4篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">🎵</div><div class="text-[11px] font-medium">音频</div><div class="text-[9px] text-gray-400">3篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">🎮</div><div class="text-[11px] font-medium">Apps</div><div class="text-[9px] text-gray-400">5篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">💎</div><div class="text-[11px] font-medium">我的资产</div><div class="text-[9px] text-gray-400">4篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">🔑</div><div class="text-[11px] font-medium">API令牌</div><div class="text-[9px] text-gray-400">6篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">💳</div><div class="text-[11px] font-medium">钱包</div><div class="text-[9px] text-gray-400">3篇</div>
+      </div>
+      <div class="cat-card p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition text-center" onclick="showPage('article-list')">
+        <div class="text-lg mb-1">👥</div><div class="text-[11px] font-medium">邀请好友</div><div class="text-[9px] text-gray-400">2篇</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 热门文章 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">🔥 热门文章</div>
+    <div class="space-y-2.5">
+      <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="showPage('article-detail')">
+        <div class="flex items-center justify-between mb-1"><span class="text-xs font-medium">📄 GUID.AI快速入门指南</span><button onclick="event.stopPropagation();showPage('article-detail')" class="text-[10px] px-2 py-0.5 bg-blue-500 text-white rounded hover:bg-blue-600">阅读</button></div>
+        <div class="text-[10px] text-gray-400">新手必读！5分钟了解GUID.AI的核心功能和使用技巧</div>
+      </div>
+      <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="showPage('article-detail')">
+        <div class="flex items-center justify-between mb-1"><span class="text-xs font-medium">📄 多模型协作完整教程</span><button onclick="event.stopPropagation();showPage('article-detail')" class="text-[10px] px-2 py-0.5 bg-blue-500 text-white rounded hover:bg-blue-600">阅读</button></div>
+        <div class="text-[10px] text-gray-400">让多个AI模型同时回答问题，获得更全面的答案</div>
+      </div>
+      <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="showPage('article-detail')">
+        <div class="flex items-center justify-between mb-1"><span class="text-xs font-medium">📄 创作者变现指南</span><button onclick="event.stopPropagation();showPage('article-detail')" class="text-[10px] px-2 py-0.5 bg-blue-500 text-white rounded hover:bg-blue-600">阅读</button></div>
+        <div class="text-[10px] text-gray-400">如何发布付费灵感，获得70%分成收益</div>
+      </div>
+      <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="showPage('article-detail')">
+        <div class="flex items-center justify-between mb-1"><span class="text-xs font-medium">📄 API接入文档</span><button onclick="event.stopPropagation();showPage('article-detail')" class="text-[10px] px-2 py-0.5 bg-blue-500 text-white rounded hover:bg-blue-600">阅读</button></div>
+        <div class="text-[10px] text-gray-400">开发者必读：API密钥、接口调用、代码示例</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FAQ ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-sm font-semibold mb-4">❓ 常见问题（FAQ）</div>
+    <div class="space-y-2">
+      <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+        <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+          <span class="text-xs font-medium">如何注册GUID.AI账号？</span>
+          <span class="faq-icon text-gray-400 text-sm">▼</span>
+        </div>
+        <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+          <div class="text-[11px] text-gray-500 leading-relaxed pt-3">
+            GUID.AI采用「登录即注册」的方式，无需单独注册：<br><br>
+            1. 点击官网首页的「登录」按钮<br>
+            2. 选择「手机登录」或「邮箱登录」<br>
+            3. 输入手机号/邮箱，点击「获取验证码」<br>
+            4. 输入验证码，点击「登录/注册」<br>
+            5. 系统自动创建账号，直接进入灵感广场<br><br>
+            💡 提示：首次登录后，建议在个人中心完善个人信息和绑定第三方账号。
+          </div>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+        <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+          <span class="text-xs font-medium">忘记密码怎么办？</span>
+          <span class="faq-icon text-gray-400 text-sm">▼</span>
+        </div>
+        <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+          <div class="text-[11px] text-gray-500 leading-relaxed pt-3">
+            如果您忘记密码，可以通过以下方式重置：<br><br>
+            1. 在登录页面点击「忘记密码」<br>
+            2. 输入注册时使用的手机号或邮箱<br>
+            3. 获取验证码并验证身份<br>
+            4. 设置新密码<br><br>
+            💡 新密码建议使用8位以上字母+数字组合。
+          </div>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+        <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+          <span class="text-xs font-medium">如何切换模型？</span>
+          <span class="faq-icon text-gray-400 text-sm">▼</span>
+        </div>
+        <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+          <div class="text-[11px] text-gray-500 leading-relaxed pt-3">
+            切换模型非常简单：<br><br>
+            1. 在聊天/图片/视频/音频页面找到模型选择器<br>
+            2. 点击下拉菜单<br>
+            3. 从列表中选择你需要的模型<br>
+            4. 系统会自动切换，无需重新输入<br><br>
+            💡 不同模型的功能和价格可能不同，请根据需求选择。
+          </div>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+        <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+          <span class="text-xs font-medium">积分可以退款吗？</span>
+          <span class="faq-icon text-gray-400 text-sm">▼</span>
+        </div>
+        <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+          <div class="text-[11px] text-gray-500 leading-relaxed pt-3">
+            关于积分退款政策：<br><br>
+            • 未使用的积分可申请退款<br>
+            • 已使用的积分不支持退款<br>
+            • 活动赠送积分不支持退款<br>
+            • 退款将通过原支付渠道返回<br><br>
+            💡 如有退款需求，请通过「联系客服」提交申请。
+          </div>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+        <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+          <span class="text-xs font-medium">提现需要多久到账？</span>
+          <span class="faq-icon text-gray-400 text-sm">▼</span>
+        </div>
+        <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+          <div class="text-[11px] text-gray-500 leading-relaxed pt-3">
+            提现到账时间：<br><br>
+            • 支付宝：1-3个工作日<br>
+            • 微信支付：1-3个工作日<br>
+            • 银行卡：3-7个工作日<br><br>
+            提现审核通过后，平台会尽快处理您的提现申请。
+          </div>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden">
+        <div class="faq-header flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/30 transition" onclick="toggleFaq(this)">
+          <span class="text-xs font-medium">Skills功能如何使用？</span>
+          <span class="faq-icon text-gray-400 text-sm">▼</span>
+        </div>
+        <div class="faq-body hidden p-3 pt-0 border-t border-gray-100 dark:border-gray-700">
+          <div class="text-[11px] text-gray-500 leading-relaxed pt-3">
+            Skills功能让AI Agent具备图像/视频生成能力：<br><br>
+            1. 进入Skills页面<br>
+            2. 复制MCP服务器配置<br>
+            3. 将配置添加到你的MCP客户端（Claude/Cursor/Codex等）<br>
+            4. 在对话中通过MCP协议调用GUID.AI的功能<br><br>
+            💡 详细配置方法请查看Skills页面的文档。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 联系与反馈 ═══ -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-6"></div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6 text-center">
+    <div class="text-sm font-semibold mb-3">💬 仍然需要帮助？</div>
+    <div class="flex justify-center gap-3">
+      <button onclick="openModal('service-modal')" class="px-5 py-2.5 bg-blue-500 text-white text-xs font-medium rounded-lg hover:bg-blue-600 transition">💬 联系客服</button>
+      <button onclick="openModal('feedback-modal')" class="px-5 py-2.5 border border-gray-200 dark:border-gray-600 text-xs font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">📝 提交反馈</button>
+    </div>
+  </div>
+</section>

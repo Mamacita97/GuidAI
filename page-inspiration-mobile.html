@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="insp-mob-html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f0f12">
+<title>灵感 - GUID.AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<header class="insp-mob-header">
+  <a href="index.html" class="insp-mob-back" aria-label="返回首页">←</a>
+  <h1 class="insp-mob-header-title">灵感</h1>
+  <div class="insp-mob-header-actions">
+    <button type="button" class="insp-mob-icon-btn insp-mob-filter-open" aria-label="筛选">☰</button>
+  </div>
+</header>
+
+<section id="page-inspiration-mobile" class="inspiration-page inspiration-page--mobile">
+  <div class="insp-mob-announce-wrap">
+    <div class="insp-announce" id="insp-announce-bar">
+      <span class="insp-announce-tag">公告</span>
+      <div class="insp-announce-track">
+        <div class="insp-announce-marquee">
+          <span>🚀 Seedance 2.0 接入，视频生成成本下调 30%</span>
+          <span class="insp-announce-sep">|</span>
+          <span>⚡ 新增 Vidu 模型，支持 10s 高清生成</span>
+          <span class="insp-announce-sep">|</span>
+          <span>🎉 新用户注册送 ⚡ 体验额度</span>
+        </div>
+      </div>
+      <button type="button" class="insp-announce-close" onclick="closeInspirationAnnounce()" aria-label="关闭公告">×</button>
+    </div>
+  </div>
+
+  <div class="insp-mob-body">
+    <div class="insp-mob-intro">
+      <p class="insp-mob-intro-desc">探索优质提示词与创作案例，一键复用顶尖 AI 能力</p>
+    </div>
+
+    <div class="insp-mob-toolbar-row">
+      <div class="insp-search-wrap">
+        <span class="insp-search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="inspiration-search" class="insp-search-input" placeholder="搜索关键词、创作者…" autocomplete="off" enterkeyhint="search">
+      </div>
+      <select id="inspiration-sort" class="insp-sort-select" aria-label="排序" style="width:auto;min-width:96px;height:42px;">
+        <option value="new">最新</option>
+        <option value="hot">最热</option>
+        <option value="comment">评论</option>
+      </select>
+    </div>
+
+    <nav class="insp-mob-quick-tabs" aria-label="推荐">
+      <button type="button" class="insp-nav-item active" data-filter="recommend"><span class="insp-nav-icon">✨</span><span>推荐</span></button>
+      <button type="button" class="insp-nav-item" data-filter="hot"><span class="insp-nav-icon">🔥</span><span>热门</span></button>
+      <button type="button" class="insp-nav-item" data-filter="favorite"><span class="insp-nav-icon">⭐</span><span>收藏</span></button>
+      <button type="button" class="insp-nav-item" data-filter="following"><span class="insp-nav-icon">👤</span><span>关注</span></button>
+    </nav>
+
+    <div class="insp-mob-type-scroll" aria-label="类型">
+      <div class="insp-chips" data-chip-group="type">
+        <button type="button" class="insp-chip active" data-type="all">全部</button>
+        <button type="button" class="insp-chip" data-type="image">图片</button>
+        <button type="button" class="insp-chip" data-type="video">视频</button>
+        <button type="button" class="insp-chip" data-type="audio">音频</button>
+        <button type="button" class="insp-chip" data-type="text">文案</button>
+        <button type="button" class="insp-chip" data-type="comic">漫剧</button>
+      </div>
+    </div>
+
+    <div class="insp-mob-type-scroll" aria-label="属性">
+      <div class="insp-chips" data-chip-group="attr">
+        <button type="button" class="insp-chip active" data-attr="all">全部</button>
+        <button type="button" class="insp-chip" data-attr="free">免费</button>
+        <button type="button" class="insp-chip" data-attr="paid">付费</button>
+      </div>
+    </div>
+
+    <div class="insp-mob-topic-scroll" aria-label="专题">
+      <button type="button" class="insp-nav-item" data-official="comic"><span class="insp-nav-icon">🎬</span><span>漫剧工坊</span></button>
+      <button type="button" class="insp-nav-item" data-official="design"><span class="insp-nav-icon">🎨</span><span>设计魔方</span></button>
+      <button type="button" class="insp-nav-item" data-official="vision"><span class="insp-nav-icon">🌄</span><span>视界</span></button>
+    </div>
+
+    <!-- PC 筛选结构（供脚本绑定，移动端隐藏） -->
+    <div id="inspiration-filters" class="insp-filters" aria-hidden="true">
+      <div class="insp-chips" data-chip-group="type">
+        <button type="button" class="insp-chip active" data-type="all">全部</button>
+      </div>
+      <div class="insp-chips" data-chip-group="attr">
+        <button type="button" class="insp-chip active" data-attr="all">全部</button>
+      </div>
+    </div>
+
+    <div id="masonry-grid" class="insp-masonry" role="feed" aria-busy="false"></div>
+
+    <div class="insp-load-more-wrap">
+      <button type="button" class="insp-load-more load-more-gallery">加载更多</button>
+    </div>
+  </div>
+</section>
+
+<!-- 筛选底部抽屉 -->
+<div id="insp-mob-filter-backdrop" class="insp-mob-filter-backdrop" aria-hidden="true" onclick="toggleInspMobFilterSheet(false)"></div>
+<div id="insp-mob-filter-sheet" class="insp-mob-sheet" aria-hidden="true" role="dialog" aria-labelledby="insp-mob-filter-title">
+  <div class="insp-mob-sheet-head">
+    <h2 id="insp-mob-filter-title">筛选灵感</h2>
+    <button type="button" class="insp-mob-sheet-close" onclick="toggleInspMobFilterSheet(false)" aria-label="关闭">×</button>
+  </div>
+  <div class="insp-mob-sheet-body">
+    <div class="insp-mob-sheet-section">
+      <label>推荐</label>
+      <nav class="insp-nav insp-nav--inline">
+        <button type="button" class="insp-nav-item active" data-filter="recommend">为你推荐</button>
+        <button type="button" class="insp-nav-item" data-filter="hot">热门榜单</button>
+        <button type="button" class="insp-nav-item" data-filter="favorite">我的收藏</button>
+        <button type="button" class="insp-nav-item" data-filter="following">关注动态</button>
+      </nav>
+    </div>
+    <div class="insp-mob-sheet-section">
+      <label>类型</label>
+      <div class="insp-chips" data-chip-group="type">
+        <button type="button" class="insp-chip active" data-type="all">全部</button>
+        <button type="button" class="insp-chip" data-type="image">图片</button>
+        <button type="button" class="insp-chip" data-type="video">视频</button>
+        <button type="button" class="insp-chip" data-type="audio">音频</button>
+        <button type="button" class="insp-chip" data-type="text">文案</button>
+        <button type="button" class="insp-chip" data-type="comic">漫剧</button>
+      </div>
+    </div>
+    <div class="insp-mob-sheet-section">
+      <label>属性</label>
+      <div class="insp-chips" data-chip-group="attr">
+        <button type="button" class="insp-chip active" data-attr="all">全部</button>
+        <button type="button" class="insp-chip" data-attr="free">免费</button>
+        <button type="button" class="insp-chip" data-attr="paid">付费</button>
+      </div>
+    </div>
+    <div class="insp-mob-sheet-section">
+      <label>专题</label>
+      <nav class="insp-nav insp-nav--inline">
+        <button type="button" class="insp-nav-item" data-official="comic">漫剧工坊</button>
+        <button type="button" class="insp-nav-item" data-official="design">设计魔方</button>
+        <button type="button" class="insp-nav-item" data-official="vision">视界</button>
+      </nav>
+    </div>
+  </div>
+  <div class="insp-mob-sheet-foot">
+    <button type="button" id="insp-mob-filter-apply" class="insp-mob-sheet-apply">应用筛选</button>
+  </div>
+</div>
+
+<!-- 灵感详情弹窗 -->
+<div id="insp-detail-modal" class="modal-overlay insp-detail-modal" onclick="if(event.target===this)closeInspirationDetail()">
+  <div class="insp-detail-modal__panel" role="dialog" aria-modal="true" aria-labelledby="idm-title">
+    <button type="button" class="insp-detail-modal__close" onclick="closeInspirationDetail()" aria-label="关闭">×</button>
+    <div class="insp-detail-modal__body">
+      <div class="insp-detail-modal__media">
+        <div id="idm-media" class="insp-detail-modal__media-inner">
+          <span id="idm-media-icon" class="insp-detail-modal__media-icon" aria-hidden="true"></span>
+        </div>
+        <div class="insp-detail-modal__media-bar">
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('▶ 播放预览')">▶ 播放</button>
+          <button type="button" class="insp-detail-modal__media-btn" onclick="showToast('⛶ 全屏预览')">⛶ 全屏</button>
+        </div>
+      </div>
+      <div class="insp-detail-modal__side">
+        <div class="insp-detail-modal__head">
+          <div class="insp-detail-modal__tags">
+            <span id="idm-type-tag" class="insp-detail-modal__tag">图片</span>
+            <span id="idm-price-tag" class="insp-detail-modal__tag insp-detail-modal__tag--price">免费</span>
+          </div>
+          <h2 id="idm-title" class="insp-detail-modal__title">—</h2>
+          <div class="insp-detail-modal__stats">
+            <span>👁 <span id="idm-views">0</span></span>
+            <span>♥ <span id="idm-likes">0</span></span>
+            <span>↗ <span id="idm-uses">0</span> 次</span>
+          </div>
+        </div>
+        <div class="insp-detail-modal__scroll">
+          <div class="insp-detail-modal__kv">
+            <span class="insp-detail-modal__kv-label">使用模型</span>
+            <span id="idm-model" class="insp-detail-modal__kv-value">—</span>
+          </div>
+          <div class="insp-detail-modal__kv">
+            <span class="insp-detail-modal__kv-label">使用价格</span>
+            <span id="idm-price" class="insp-detail-modal__kv-value insp-detail-modal__price">免费</span>
+          </div>
+          <div class="insp-detail-modal__kv insp-detail-modal__kv--source">
+            <span class="insp-detail-modal__kv-label">来源</span>
+            <div class="insp-detail-modal__source-wrap">
+              <span id="idm-source-tag" class="insp-detail-modal__source-tag" data-src="model">大模型</span>
+              <span id="idm-source-name" class="insp-detail-modal__source-name"></span>
+            </div>
+          </div>
+          <div class="insp-detail-modal__author">
+            <div id="idm-avatar" class="insp-detail-modal__avatar">👤</div>
+            <div class="insp-detail-modal__author-meta">
+              <span id="idm-author" class="insp-detail-modal__author-name">创作者</span>
+            </div>
+            <button type="button" id="idm-follow-btn" class="insp-detail-modal__follow" onclick="toggleInspirationFollow()">+ 关注</button>
+          </div>
+          <div class="insp-detail-modal__section">
+            <div class="insp-detail-modal__section-title">提示词</div>
+            <div class="insp-detail-modal__prompt-box">
+              <p id="idm-prompt" class="insp-detail-modal__prompt-text">—</p>
+              <div class="insp-detail-modal__prompt-actions">
+                <button type="button" class="insp-detail-modal__ghost-btn" onclick="copyInspirationPrompt()">复制</button>
+                <button type="button" class="insp-detail-modal__ghost-btn" onclick="useInspirationDetail()">填入创作页</button>
+              </div>
+            </div>
+          </div>
+          <div class="insp-detail-modal__section">
+            <div class="insp-detail-modal__section-title">评论 <span id="idm-comment-count">0</span></div>
+            <div id="idm-comment-list" class="insp-detail-modal__comment-list"></div>
+            <div class="insp-detail-modal__comment-input">
+              <input type="text" id="idm-comment-input" class="insp-detail-modal__comment-field" placeholder="说点什么…" maxlength="500">
+              <button type="button" class="insp-detail-modal__ghost-btn" onclick="postInspirationComment()">发布</button>
+            </div>
+          </div>
+        </div>
+        <div class="insp-detail-modal__footer">
+          <button type="button" id="idm-fav-btn" class="insp-detail-modal__icon-btn" onclick="toggleInspirationFav(this)" title="收藏">☆</button>
+          <button type="button" class="insp-detail-modal__icon-btn" onclick="openInspirationShare()" title="分享">↗</button>
+          <button type="button" id="idm-use-btn" class="insp-detail-modal__cta" onclick="useInspirationDetail()">使用这个灵感</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="purchase-modal" style="display:none;">
+  <div class="modal-content p-5" style="max-width:360px;margin:16px;">
+    <div class="flex items-center justify-between mb-3"><span class="text-base font-semibold">💎 购买灵感</span><button onclick="closeModal('purchase-modal')" class="text-gray-400 text-xl">×</button></div>
+    <div class="text-sm font-medium mb-2" id="purchase-title">—</div>
+    <div class="flex justify-end gap-2"><button onclick="closeModal('purchase-modal')" class="text-xs px-4 py-1.5 border rounded-lg">取消</button><button class="confirm-pay text-xs px-4 py-1.5 bg-blue-500 text-white rounded-lg">确认支付</button></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+(function () {
+  if (typeof showToast !== 'function') {
+    window.showToast = function (msg) {
+      var t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+    };
+  }
+  if (typeof openModal !== 'function') {
+    window.openModal = function (id) {
+      var m = document.getElementById(id);
+      if (m) { m.style.display = 'flex'; m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    };
+  }
+  if (typeof closeModal !== 'function') {
+    window.closeModal = function (id) {
+      var m = document.getElementById(id);
+      if (m) { m.style.display = 'none'; m.classList.remove('open'); document.body.style.overflow = ''; }
+    };
+  }
+  if (typeof pressAnim !== 'function') window.pressAnim = function () {};
+})();
+</script>
+</body>
+</html>

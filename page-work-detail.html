@@ -1,0 +1,95 @@
+<section id="page-work-detail" class="page-section">
+  <!-- 顶栏 -->
+  <div class="flex items-center justify-between mb-4">
+    <button onclick="showPage('inspiration')" class="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 transition"><span>←</span> 返回</button>
+    <div class="flex items-center gap-2">
+      <button onclick="pressAnim(this);this.classList.toggle('text-yellow-500');showToast(this.classList.contains('text-yellow-500')?'⭐ 已收藏':'已取消收藏')" class="text-gray-400 hover:text-yellow-500 text-lg" id="wd-fav">☆</button>
+      <button onclick="pressAnim(this);showToast('📤 已复制分享链接')" class="text-gray-400 hover:text-gray-600 text-sm">📤</button>
+      <button onclick="showPage('inspiration')" class="text-gray-400 hover:text-gray-600 text-lg">×</button>
+    </div>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-5">
+    <!-- 左侧：图片 + 提示词 + 评论 -->
+    <div class="w-full lg:w-1/2 space-y-4">
+      <!-- 图片展示区 -->
+      <div class="relative">
+        <img id="wd-image" src="" class="w-full aspect-square object-cover rounded-2xl bg-gray-100 dark:bg-gray-800">
+        <div class="absolute bottom-3 left-3 flex gap-2">
+          <button onclick="showToast('▶ 播放')" class="text-[10px] px-2 py-1 bg-white/80 dark:bg-gray-700/80 rounded-lg hover:bg-white dark:hover:bg-gray-600">▶ 播放</button>
+          <button onclick="showToast('⛶ 全屏')" class="text-[10px] px-2 py-1 bg-white/80 dark:bg-gray-700/80 rounded-lg hover:bg-white dark:hover:bg-gray-600">⛶ 全屏</button>
+          <button onclick="showToast('⬇ 已下载')" class="text-[10px] px-2 py-1 bg-white/80 dark:bg-gray-700/80 rounded-lg hover:bg-white dark:hover:bg-gray-600">⬇ 下载</button>
+        </div>
+      </div>
+
+      <!-- 📝 提示词 -->
+      <div>
+        <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">提示词</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3">
+          <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed" id="wd-prompt">A futuristic cyberpunk cityscape at night, neon lights reflecting on wet streets, flying cars, detailed architecture, cinematic lighting, 8k, hyper-realistic --ar 16:9</p>
+          <div class="flex gap-2 mt-2">
+            <button onclick="pressAnim(this);showToast('📋 提示词已复制')" class="text-[10px] px-2 py-1 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">复制</button>
+            <button onclick="pressAnim(this);closeModal('template-modal');showPage('image');showToast('🚀 已跳转图片页面并填充提示词')" class="text-[10px] px-2 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">使用</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 💬 评论 -->
+      <div>
+        <div class="flex items-center gap-2 mb-2"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">评论 <span id="wd-comment-count">128</span></span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+        <div class="space-y-2 mb-2">
+          <div class="text-[11px] text-gray-600 dark:text-gray-400">用户1: 太酷了！ <button onclick="showToast('💬 回复用户1')" class="text-blue-500 hover:underline ml-2 text-[10px]">回复</button></div>
+          <div class="text-[11px] text-gray-600 dark:text-gray-400">用户2: 这个效果太棒了，用的什么模型？ <button onclick="showToast('💬 回复用户2')" class="text-blue-500 hover:underline ml-2 text-[10px]">回复</button></div>
+        </div>
+        <div class="flex gap-2">
+          <input placeholder="发表评论..." class="flex-1 text-xs border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-800">
+          <button onclick="pressAnim(this);showToast('💬 评论已发布')" class="text-xs px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：信息 + 操作 + 推荐 -->
+    <div class="w-full lg:w-1/2 space-y-4">
+      <!-- 标题 + 元信息 -->
+      <div>
+        <h2 class="text-lg font-bold mb-3" id="wd-title">赛博朋克城市夜景</h2>
+        <div class="text-xs text-gray-500 dark:text-gray-400 space-y-1.5 mb-3">
+          <div>👤 <span id="wd-author">青铜娃娃</span> 🖼️ <span id="wd-model">Midjourney</span></div>
+          <div id="wd-date">📅 2026-05-19</div>
+          <div id="wd-params">⚙️ 参数: 16:9, --s 100</div>
+        </div>
+        <div class="flex items-center gap-4 text-xs mb-4">
+          <span class="flex items-center gap-1 cursor-pointer hover:text-red-500" id="wd-like-btn" onclick="pressAnim(this);this.classList.toggle('text-red-500');showToast(this.classList.contains('text-red-500')?'❤️ 已点赞':'已取消点赞')">❤️ <span class="font-medium" id="wd-likes">1.2k</span></span>
+          <span class="flex items-center gap-1">👁️ <span id="wd-views">3.4k</span></span>
+          <span class="flex items-center gap-1 cursor-pointer hover:text-purple-600" onclick="pressAnim(this);showToast('🔄 已转发')">🔄 <span id="wd-shares">456</span></span>
+        </div>
+      </div>
+
+      <!-- 💎 使用此灵感 -->
+      <div id="wd-cta-area">
+        <button id="wd-use-btn" onclick="pressAnim(this);showPage('image');showToast('🚀 已跳转图片页面')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-semibold hover:from-green-600 hover:to-emerald-600 transition">🚀 免费使用此灵感</button>
+      </div>
+
+      <!-- 创作者 -->
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition" onclick="showToast('👤 跳转创作者主页')">
+        <div class="flex justify-between"><span class="text-[10px] text-gray-500">创作者</span><span class="text-[10px] text-gray-500">本月收益</span></div>
+        <div class="flex justify-between"><span class="text-xs font-semibold" id="wd-creator">青铜娃娃</span><span class="text-xs font-semibold text-purple-600">⚡234</span></div>
+      </div>
+
+      <!-- 相关推荐 -->
+      <div>
+        <div class="flex items-center gap-2 mb-3"><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div><span class="text-[11px] font-semibold text-gray-400 shrink-0">相关推荐</span><div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div></div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="showToast('📂 打开作品详情')">
+            <div class="aspect-square bg-gradient-to-br from-purple-300 to-blue-300 dark:from-purple-700 dark:to-blue-700 flex items-center justify-center text-white text-xs">相关1</div>
+            <div class="p-2"><div class="text-[10px] font-medium truncate">霓虹都市·赛博朋克</div><div class="text-[9px] text-gray-400">987次使用</div></div>
+          </div>
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition" onclick="showToast('📂 打开作品详情')">
+            <div class="aspect-square bg-gradient-to-br from-indigo-300 to-purple-300 dark:from-indigo-700 dark:to-purple-700 flex items-center justify-center text-white text-xs">相关2</div>
+            <div class="p-2"><div class="text-[10px] font-medium truncate">数字流体艺术</div><div class="text-[9px] text-gray-400">1.8k次使用</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

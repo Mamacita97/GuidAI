@@ -1,0 +1,48 @@
+<section id="page-wallet" class="page-section wallet-page">
+  <div class="wallet-page-shell">
+    <div class="wallet-page-topbar">
+      <div class="wallet-page-content wallet-page-topbar-inner">
+        <span class="wallet-page-title">💰 我的钱包</span>
+      </div>
+    </div>
+    <div class="wallet-page-scroll">
+      <div class="wallet-page-content">
+      <div class="wallet-balance-card">
+        <div class="wallet-balance-card-bg"></div>
+        <div class="wallet-balance-card-inner">
+          <div class="wallet-balance-label">可用余额</div>
+          <div class="wallet-balance-amount"><span class="wallet-balance-icon">⚡</span> 12.50</div>
+          <div class="wallet-balance-sub">RH 币 · 与网页端工作流消耗费率一致</div>
+          <button type="button" class="wallet-recharge-btn recharge-btn">充值</button>
+        </div>
+      </div>
+      <div class="wallet-stats-row">
+        <div class="wallet-stat-item"><div class="wallet-stat-label">累计充值</div><div class="wallet-stat-value">⚡ 1,520</div></div>
+        <div class="wallet-stat-item"><div class="wallet-stat-label">累计消费</div><div class="wallet-stat-value">⚡ 892</div></div>
+        <div class="wallet-stat-item"><div class="wallet-stat-label">本月消费</div><div class="wallet-stat-value">⚡ 156</div></div>
+      </div>
+      <div class="wallet-records-panel">
+        <div class="wallet-records-head">
+          <span class="wallet-records-title">账单明细</span>
+          <button type="button" class="wallet-export-btn export-btn">导出账单</button>
+        </div>
+        <div class="wallet-records-tabs" id="wallet-records-tabs" role="tablist">
+          <button type="button" class="wallet-records-tab active" data-filter="all">全部</button>
+          <button type="button" class="wallet-records-tab" data-filter="recharge">充值</button>
+          <button type="button" class="wallet-records-tab" data-filter="consume">消费</button>
+          <button type="button" class="wallet-records-tab" data-filter="income">收入</button>
+        </div>
+        <div class="wallet-records-date-tabs" id="wallet-records-date-tabs" role="tablist" aria-label="时间筛选">
+          <button type="button" class="wallet-records-date-tab active" data-range="all">全部时间</button>
+          <button type="button" class="wallet-records-date-tab" data-range="today">今天</button>
+          <button type="button" class="wallet-records-date-tab" data-range="yesterday">昨天</button>
+          <button type="button" class="wallet-records-date-tab" data-range="week">近一周</button>
+          <button type="button" class="wallet-records-date-tab" data-range="30d">近30天</button>
+        </div>
+        <div id="wallet-record-list" class="wallet-record-list"></div>
+        <button type="button" class="wallet-record-more" id="wallet-record-more">加载更多</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

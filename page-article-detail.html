@@ -1,0 +1,49 @@
+<section id="page-article-detail" class="page-section">
+  <div class="flex items-center gap-2 mb-4">
+    <button onclick="showPage('help')" class="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1"><span>←</span> 返回帮助中心</button>
+  </div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6">
+    <div class="text-base font-bold mb-1">📄 多模型协作完整教程</div>
+    <div class="text-[10px] text-gray-400 mb-3 flex items-center gap-3">
+      <span>最后更新：2026-05-19</span>
+      <span>阅读量：12,345</span>
+      <span>点赞：234</span>
+    </div>
+    <div class="border-t border-gray-100 dark:border-gray-700 my-3"></div>
+    <div class="text-xs leading-relaxed text-gray-700 dark:text-gray-300 space-y-3">
+      <div><strong>什么是多模型协作？</strong></div>
+      <div>多模型协作是GUID.AI的核心功能之一，它可以让多个顶尖AI模型同时回答同一个问题，然后由总结模型将各模型的回答整合成一份更全面、更可靠的答案。</div>
+      <div><strong>为什么使用多模型协作？</strong></div>
+      <div>• 多元视角：不同模型有不同的训练数据和侧重点<br>
+           • 交叉验证：减少单一模型的幻觉和错误<br>
+           • 最优答案：AI自动分析对比，生成最佳答案<br>
+           • 并行加速：多模型同时运算，极速响应</div>
+      <div><strong>如何使用？</strong></div>
+      <div>1. 进入聊天页面<br>
+           2. 点击「⚡多模型协作」按钮<br>
+           3. 选择参与回答的模型（最多5个）<br>
+           4. 选择总结模型<br>
+           5. 输入问题，点击发送<br>
+           6. 等待所有模型回答完成，查看整合结果</div>
+      <div><strong>适用场景</strong></div>
+      <div>• 复杂问题分析<br>
+           • 多角度方案对比<br>
+           • 重要决策支持<br>
+           • 代码审查与优化</div>
+    </div>
+    <div class="border-t border-gray-100 dark:border-gray-700 my-3"></div>
+    <div class="text-center text-xs text-gray-500 mb-3">这篇文章对您有帮助吗？</div>
+    <div class="flex justify-center gap-3">
+      <button onclick="showToast('👍 感谢您的反馈！')" class="px-4 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">👍 有帮助</button>
+      <button onclick="openModal('feedback-modal')" class="px-4 py-2 text-xs border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">👎 没有帮助</button>
+    </div>
+  </div>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+    <div class="text-xs font-semibold mb-2">📚 相关文章</div>
+    <div class="space-y-1 text-xs text-blue-500">
+      <div class="cursor-pointer hover:underline" onclick="showPage('article-detail')">• 如何切换模型？</div>
+      <div class="cursor-pointer hover:underline" onclick="showPage('article-detail')">• 联网搜索使用指南</div>
+      <div class="cursor-pointer hover:underline" onclick="showPage('article-detail')">• 深度思考功能说明</div>
+    </div>
+  </div>
+</section>

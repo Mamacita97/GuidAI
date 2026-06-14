@@ -1,0 +1,279 @@
+:root {
+  --share-bg: #0d1116;
+  --share-surface: #14181d;
+  --share-border: #2a2f35;
+  --share-text: #f4f4f5;
+  --share-muted: #a1a1aa;
+  --share-accent: #02dba3;
+  --share-accent-hover: #27e8b1;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--share-bg);
+  color: var(--share-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.share-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px max(24px, env(safe-area-inset-bottom));
+}
+
+.share-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.share-brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--share-text);
+  text-decoration: none;
+}
+
+.share-brand span { color: var(--share-accent); }
+
+.share-header-sub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--share-muted);
+}
+
+.share-card {
+  border: 1px solid var(--share-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--share-surface);
+  margin-bottom: 20px;
+}
+
+.share-card-cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #4c1d95, #1e3a8a);
+}
+
+.share-card-emoji {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  opacity: 0.35;
+}
+
+.share-card-body { padding: 14px 16px 16px; }
+
+.share-card-cat {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--share-accent);
+  margin-bottom: 6px;
+}
+
+.share-card-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.share-card-desc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--share-muted);
+}
+
+.share-label {
+  display: block;
+  font-size: 12px;
+  color: var(--share-muted);
+  margin-bottom: 8px;
+}
+
+.share-link-row {
+  display: flex;
+  gap: 8px;
+}
+
+.share-link-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--share-border);
+  border-radius: 8px;
+  background: var(--share-surface);
+  color: var(--share-text);
+  font-size: 12px;
+}
+
+.share-btn-primary {
+  flex-shrink: 0;
+  border: 0;
+  background: var(--share-accent);
+  color: #0d1116;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.share-btn-primary:hover { background: var(--share-accent-hover); }
+
+.share-qr-block {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.share-qr-box {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 10px;
+  border-radius: 12px;
+  border: 1px solid var(--share-border);
+  background: #fff;
+  overflow: hidden;
+}
+
+.share-qr-pattern {
+  position: absolute;
+  inset: 8px;
+  background:
+    linear-gradient(90deg, #111 2px, transparent 2px) 0 0 / 12px 12px,
+    linear-gradient(#111 2px, transparent 2px) 0 0 / 12px 12px;
+  opacity: 0.12;
+}
+
+.share-qr-logo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--share-accent);
+}
+
+.share-qr-hint {
+  margin: 0;
+  font-size: 11px;
+  color: var(--share-muted);
+}
+
+.share-section-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.share-channel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 8px;
+}
+
+.share-channel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--share-muted);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.share-channel-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+}
+
+.share-channel-icon.wechat { background: #07c160; }
+.share-channel-icon.x { background: #0f1419; font-size: 18px; }
+.share-channel-icon.weibo { background: #e6162d; font-size: 16px; font-weight: 700; }
+.share-channel-icon.qq { background: #12b7f5; font-weight: 700; }
+.share-channel-icon.link,
+.share-channel-icon.embed,
+.share-channel-icon.poster { background: #374151; }
+
+.share-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.share-open-app {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--share-accent);
+  color: #0d1116;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.share-open-app:hover { background: var(--share-accent-hover); }
+
+.share-btn-ghost {
+  border: 1px solid var(--share-border);
+  background: var(--share-surface);
+  color: var(--share-muted);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.share-btn-ghost:hover {
+  border-color: #4f5558;
+  color: var(--share-text);
+}
+
+.share-toast {
+  position: fixed;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(12px);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(20, 24, 29, 0.95);
+  border: 1px solid var(--share-border);
+  color: var(--share-text);
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 100;
+}
+
+.share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

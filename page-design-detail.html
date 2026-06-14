@@ -1,0 +1,77 @@
+<section id="page-design-detail" class="page-section">
+  <div class="flex items-center gap-2 mb-4">
+    <button onclick="showPage('inspiration')" class="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1"><span>←</span> 返回灵感广场</button>
+    <span class="text-gray-300">/</span>
+    <button onclick="showPage('series-detail')" class="text-xs text-blue-500 hover:underline flex items-center gap-1">返回系列详情页</button>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-5">
+    <!-- 左侧：图片预览区 -->
+    <div class="md:w-[55%] shrink-0">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden">
+        <div class="aspect-[4/3] bg-gradient-to-br from-blue-200 via-indigo-100 to-cyan-100 dark:from-blue-900/30 dark:via-indigo-900/30 dark:to-cyan-900/30 flex items-center justify-center text-gray-400 text-sm cursor-pointer" onclick="openModal('image-preview-modal')">
+          <div class="text-center"><div class="text-4xl mb-2">🎨</div><div>点击预览大图</div></div>
+        </div>
+        <div class="flex items-center justify-center gap-4 p-3 border-t border-gray-100 dark:border-gray-700">
+          <button onclick="openModal('image-preview-modal')" class="flex items-center gap-1 text-[10px] px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">🔍 放大</button>
+          <button onclick="showToast('💾 图片已保存')" class="flex items-center gap-1 text-[10px] px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">💾 下载</button>
+          <button onclick="showToast('📤 已复制分享链接')" class="flex items-center gap-1 text-[10px] px-3 py-1.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">📤 分享</button>
+        </div>
+      </div>
+      <!-- 设计说明 -->
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mt-4">
+        <div class="text-xs font-semibold mb-2">📝 设计说明</div>
+        <div class="border-t border-gray-100 dark:border-gray-700 mb-2"></div>
+        <div class="text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">国风与现代设计的完美融合，适用于品牌VI、海报、包装等场景。</div>
+      </div>
+      <!-- 评论区 -->
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 mt-4">
+        <div class="text-xs font-semibold mb-3">💬 评论区 (128)</div>
+        <div class="space-y-2 mb-3">
+          <div class="p-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg"><div class="flex items-center justify-between mb-1"><span class="text-[10px] font-medium">用户A</span><button onclick="showToast('💬 回复评论')" class="text-[9px] text-blue-500 hover:underline">回复</button></div><div class="text-[10px] text-gray-500">太美了！</div></div>
+        </div>
+        <div class="flex items-center gap-2 border-t border-gray-100 dark:border-gray-700 pt-2">
+          <input class="flex-1 text-[10px] border border-gray-200 dark:border-gray-600 rounded-lg px-2.5 py-1.5 bg-white dark:bg-gray-800 focus:outline-none focus:border-blue-500" placeholder="发表评论...">
+          <button onclick="showToast('✅ 评论已发布')" class="px-3 py-1.5 text-[10px] bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：信息面板 -->
+    <div class="flex-1 min-w-0">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-4">
+        <div class="text-base font-bold mb-3">国风美人 · 品牌VI设计</div>
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center gap-2"><span class="text-gray-400 w-16 shrink-0">👤 作者</span><span class="font-medium">青铜娃娃</span><span class="text-[9px] text-gray-400 ml-auto">🖼️ Midjourney</span></div>
+          <div class="flex items-center gap-2"><span class="text-gray-400 w-16 shrink-0">📅 日期</span><span>2026-05-19</span></div>
+          <div class="flex items-center gap-2"><span class="text-gray-400 w-16 shrink-0">⚙️ 参数</span><span class="font-mono text-[10px]">16:9, --s 100, --q 2</span></div>
+          <div class="flex items-center gap-3 pt-2 border-t border-gray-100 dark:border-gray-700 mt-2">
+            <span class="flex items-center gap-1 text-xs">❤️ <span class="font-medium">1.2k</span></span>
+            <span class="flex items-center gap-1 text-xs">👁️ <span class="font-medium">3.4k</span></span>
+            <span class="flex items-center gap-1 text-xs">🔄 <span class="font-medium">456</span></span>
+          </div>
+        </div>
+        <!-- 使用此设计 -->
+        <button onclick="useDesignImage()" class="w-full mt-4 py-2.5 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-semibold hover:from-green-600 hover:to-emerald-600 transition">✨ 使用此设计</button>
+        <!-- 创作者信息 -->
+        <div class="mt-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg text-xs">
+          <div class="flex items-center justify-between mb-1"><span>创作者: <strong>青铜娃娃</strong></span><span class="text-green-600">本月收益: ⚡234</span></div>
+        </div>
+      </div>
+      <!-- 相关推荐 -->
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+        <div class="text-xs font-semibold mb-2">👍 相关推荐</div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden cursor-pointer hover:shadow-sm transition" onclick="showToast('🖼️ 跳转设计作品')">
+            <div class="aspect-[4/3] bg-gradient-to-br from-purple-200 to-pink-200 dark:from-purple-800/30 dark:to-pink-800/30 flex items-center justify-center text-gray-400 text-xs">推荐 1</div>
+            <div class="p-1.5"><div class="text-[9px] font-medium truncate">国风美学</div></div>
+          </div>
+          <div class="border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden cursor-pointer hover:shadow-sm transition" onclick="showToast('🖼️ 跳转设计作品')">
+            <div class="aspect-[4/3] bg-gradient-to-br from-blue-200 to-cyan-200 dark:from-blue-800/30 dark:to-cyan-800/30 flex items-center justify-center text-gray-400 text-xs">推荐 2</div>
+            <div class="p-1.5"><div class="text-[9px] font-medium truncate">现代简约</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
